@@ -37,6 +37,6 @@
     "**/*.cjs",
     "**/*.mjs",
     ".next/types/**/*.ts"
-  ],
+, "prettier.config.js"  ],
   "exclude": ["node_modules"]
 }
