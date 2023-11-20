@@ -10,7 +10,7 @@ export const Section = ({ className, children, ...rest }: SectionProps) => {
   return (
     <section
       className={cn(
-        "w-full py-12 md:pt-16 lg:pt-32 bg-primary text-white",
+        "w-full py-12 md:py-24 lg:py-32 bg-primary text-white",
         className,
       )}
       {...rest}

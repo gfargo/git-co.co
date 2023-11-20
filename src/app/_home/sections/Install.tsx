@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export const InstallSection = () => {
   return (
-    <Section id="install" className="text-white bg-gradient-to-t from-[#709f8b] to-[#3d6455]">
+    <Section id="install" className="text-white bg-gradient-to-t from-[#709f8b] to-[#3d6455] md:pb-0 lg:pb-0">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center gap-2">
 
