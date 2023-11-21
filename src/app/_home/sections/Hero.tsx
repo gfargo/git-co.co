@@ -14,7 +14,7 @@ export const HeroSection = () => {
           <div className="flex flex-col w-full gap-4 justify-start items-start">
             
             <div className="flex flex-row items-center">
-              <h1 className="lg:leading-tighter text-2xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem] drop-shadow-xl min-h-[144px] lg:min-h-[160px]">
+              <h1 className="lg:leading-tighter text-2xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem] drop-shadow-xl min-h-[96px] md:min-h-[144px] xl:min-h-[160px] 2xl:min-h-[180px]">
                 <span className="sr-only">
                   AI-Powered Git Automation for the Command Line
                 </span>
@@ -22,7 +22,7 @@ export const HeroSection = () => {
                   nextLetterTime={50}
                   waitAtStart={300}
                   content={["AI-Powered", "Git Automation", "for Command Line"]}
-                  letterWrapClass="animate fade-in"
+                  letterWrapClass="animate fade-in fade-in-1"
                 />
               </h1>
             </div>

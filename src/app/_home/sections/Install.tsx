@@ -7,18 +7,17 @@ export const InstallSection = () => {
   return (
     <Section id="install" className="text-white bg-gradient-to-t from-[#709f8b] to-[#3d6455] md:pb-0 lg:pb-0">
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center gap-2">
-
+        <div className="flex flex-col items-center gap-6">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center drop-shadow">
             install
           </h2>
-          <p className="text-center text-xl font-extralight flex items-center">
-            Install <span className="font-bold px-1">coco</span> with your favorite package manager.
+          <p className="text-center text-xl font-extralight items-center">
+            Install <span className="inline font-semibold">coco</span> with your favorite package manager.
           </p>
         </div>
-        <div className="mx-auto max-w-xl grid gap-6 sm:grid-cols-1 md:gap-8 lg:max-w-3xl py-8">
+        <div className="mx-auto max-w-xl grid gap-6 sm:grid-cols-1 md:gap-8 lg:max-w-3xl py-6 relative">
           <Tabs
-            defaultValue="project"
+            defaultValue="global"
             className="flex flex-col justify-center gap-3 items-center"
           >
             <TabsContent value="project">
@@ -30,9 +29,9 @@ export const InstallSection = () => {
             <TabsContent value="service">
               <CopyCommand command="npx git-coco" />
             </TabsContent>
-            <TabsList className="mx-auto ">
-              <TabsTrigger value="project">Project Level</TabsTrigger>
-              <TabsTrigger value="global">System Wide</TabsTrigger>
+            <TabsList className="mx-auto">
+              <TabsTrigger value="project">Project</TabsTrigger>
+              <TabsTrigger value="global">System</TabsTrigger>
               <TabsTrigger value="service">CI/CD</TabsTrigger>
             </TabsList>
           </Tabs>

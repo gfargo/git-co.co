@@ -1,7 +1,7 @@
 "use client";
 
 import { CopyIcon } from "@radix-ui/react-icons";
-import copy from 'copy-to-clipboard';
+import copy from "copy-to-clipboard";
 
 import { Button } from "../ui/button";
 
@@ -27,11 +27,11 @@ export const CopyCommand = ({ command, className }: CopyCommandProps) => {
   return (
     <div
       className={cn(
-        "relative inline-flex min-w-[32rem] p-4 bg-secondary rounded text-white shadow-lg transition-shadow duration-300",
+        "relative flex w-80 p-4 pr-16 md:w-auto lg:min-w-[400px] lg:max-w-md xl:pr-4 bg-secondary rounded text-white shadow-lg transition-shadow duration-300",
         className,
       )}
     >
-      <code className="block">{command}</code>
+      <code className="inline-block truncate max-w-full">{command}</code>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -43,7 +43,7 @@ export const CopyCommand = ({ command, className }: CopyCommandProps) => {
             <CopyIcon />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="p-1 ">
+        <DropdownMenuContent className="p-1">
           <DropdownMenuItem onClick={handleCopy}>npm</DropdownMenuItem>
           <DropdownMenuItem onClick={handleCopy}>yarn</DropdownMenuItem>
         </DropdownMenuContent>
