@@ -1,4 +1,4 @@
-import { GithubIcon, TerminalIcon } from "lucide-react";
+import { GithubIcon, PackageIcon, TerminalIcon } from "lucide-react";
 import Link from "next/link";
 
 export const Header: React.FC = () => {
@@ -28,12 +28,21 @@ export const Header: React.FC = () => {
           >
             faq
           </Link>
-          <Link
-            className="text-sm font-medium hover:underline underline-offset-4"
-            href="https://github.com/gfargo/coco/"
-          >
-            <GithubIcon className="w-5 h-5" />
-          </Link>
+          <div className="flex gap-4">
+            <Link
+              className="text-sm font-medium hover:underline underline-offset-4"
+              href="https://github.com/gfargo/coco/"
+            >
+              <GithubIcon className="w-5 h-5" />
+            </Link>
+            
+            <Link
+              className="text-sm font-medium hover:underline underline-offset-4"
+              href="https://www.npmjs.com/package/git-coco"
+            >
+              <PackageIcon className="w-5 h-5" />
+            </Link>
+          </div>
         </nav>
       </div>
     </header>
