@@ -68,7 +68,7 @@ export const FaqSection = () => {
       answer: (
         <div className="space-y-4">
           <p>
-            <code>coco</code> anaylzes your staged changes creating a list of
+            <code>coco</code> analyzes your staged changes creating a list of
             diffs and summarizations. This context is then provided to the
             language model when being prompted for a commit message.
           </p>
