@@ -27,7 +27,7 @@ export const CopyCommand = ({ command, className }: CopyCommandProps) => {
   return (
     <div
       className={cn(
-        "relative flex w-80 p-4 pr-16 md:w-auto lg:min-w-[400px] lg:max-w-md xl:pr-4 bg-secondary rounded text-white shadow-lg transition-shadow duration-300",
+        "relative flex w-80 p-4 pr-16 md:w-auto lg:min-w-[400px] lg:max-w-md xl:pr-4 bg-secondary rounded text-white shadow hover:shadow-lg transition-shadow duration-300",
         className,
       )}
     >
