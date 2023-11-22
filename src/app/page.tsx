@@ -13,7 +13,7 @@ export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-primary">
       <Header />
-      <main className="w-full flex-1 pb-2">
+      <main className="w-full flex-1 pb-2 overflow-hidden">
         <HeroSection />
         <FeaturesSection />
         <InstallSection />

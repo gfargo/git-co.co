@@ -1,8 +1,10 @@
+import Link from "next/link";
+import Image from "next/image";
 import { Section } from "@/components/Section";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
+import terminalScreenshot from "@/assets/coco-terminal.png";
+import { Fragment } from "react";
 
 type milestone = {
   title: string;
@@ -83,63 +85,81 @@ export const RoadmapSection = () => {
   };
 
   return (
-    <Section id="roadmap" className="bg-white text-black lg:pb-12">
-      <div className="w-full max-w-xl mx-auto">
-        <h2 className="text-3xl sm:text-5xl font-bold mb-12 text-center text-primary">
-          roadmap
-        </h2>
+    <Section id="roadmap" className="bg-white text-black lg:pb-8 relative">
+      <h2 className="text-3xl sm:text-5xl font-bold mb-16 text-center text-primary">
+        roadmap
+      </h2>
 
-        <div className="grid grid-cols-6 space-y-2 px-4">
-          {milestones.map(({ description, status, title, icon }, index) => {
-            return (
-              <>
-                <div className="col-span-6 flex items-center space-x-4">
-                  <div className={cn("rounded-full h-10 w-10 flex items-center justify-center bg-zinc-200 dark:bg-zinc-800 flex-shrink-0 drop-shadow-sm", {
-                    'bg-oxley-100': status === 'done',
-                  })}>
-                    <span aria-label="Done" className="text-sm drop-shadow" role="img">
-                      {icon ?? getStatusIcon(status)}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold leading-tight">{title}</h3>
-                    <p className="text-zinc-500 dark:text-zinc-400 text-sm">
-                      {description}
-                    </p>
-                  </div>
-                </div>
-
-                {index !== milestones.length - 1 ? (
-                  <>
-                    <Separator
-                      orientation="vertical"
-                      className="h-6 w-1.5 col-span-1 px-0.5 mx-4 bg-primary hidden md:block drop-shadow-sm"
-                    />
-                    <Separator
-                      orientation="horizontal"
+      <div className="flex container lg:gap-6 justify-center">
+        <div className="md:flex-shrink-0 lg:translate-x-1/4 relative">
+          <div className="grid grid-cols-6 space-y-4 md:space-y-2">
+            {milestones.map(({ description, status, title, icon }, index) => {
+              return (
+                <Fragment key={`${index}-${status}`}>
+                  <div className="col-span-6 flex items-center space-x-4">
+                    <div
                       className={cn(
-                        "bg-primary md:hidden opacity-50 my-8 col-start-2 col-span-3",
+                        "rounded-full h-10 w-10 flex items-center justify-center bg-zinc-200 dark:bg-zinc-800 flex-shrink-0 drop-shadow-sm",
+                        {
+                          "bg-oxley-100": status === "done",
+                        },
                       )}
-                    />
-                  </>
-                ) : null}
-              </>
-            );
-          })}
-        </div>
+                    >
+                      <span
+                        aria-label="Done"
+                        className="text-sm drop-shadow"
+                        role="img"
+                      >
+                        {icon ?? getStatusIcon(status)}
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold leading-tight">
+                        {title}
+                      </h3>
+                      <p className="text-zinc-500 dark:text-zinc-400 text-sm">
+                        {description}
+                      </p>
+                    </div>
+                  </div>
 
-        <div className="mt-12">
-          <p className="text-center font-extralight items-center px-4">
-            feel free to suggest a roadmap item on{" "}
-            <Link
-              href="https://github.com/gfargo/coco/issues/new"
-              className="text-primary hover:underline"
-            >
-              github
-            </Link>
-            , we love feedback!
-          </p>
+                  {index !== milestones.length - 1 ? (
+                    <>
+                      <Separator
+                        orientation="vertical"
+                        className="h-6 w-1.5 col-span-1 px-0.5 mx-4 bg-primary hidden md:block drop-shadow-sm"
+                      />
+                      <Separator
+                        orientation="horizontal"
+                        className={cn(
+                          "bg-primary md:hidden opacity-50 my-8 col-start-2 col-span-3",
+                        )}
+                      />
+                    </>
+                  ) : null}
+                </Fragment>
+              );
+            })}
+          </div>
         </div>
+        <Image
+          src={terminalScreenshot}
+          alt="example of commit message generated by coco"
+          width={640}
+          className="-mt-12 translate-x-1/4 hidden lg:block"
+        />
+      </div>
+      <div className="mt-12">
+        <p className="text-center font-extralight items-center px-4">
+          feel free to suggest a roadmap item on{" "}
+          <Link
+            href="https://github.com/gfargo/coco/issues/new"
+            className="text-primary hover:underline"
+          >
+            github
+          </Link>
+          , we love feedback!
+        </p>
       </div>
     </Section>
   );
