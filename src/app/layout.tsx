@@ -8,7 +8,7 @@ const inter = Inter({
   variable: "--font-sans",
 });
 
-const baseUrl = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || "https://git-co.co";
+const baseUrl = "https://git-co.co";
 
 export const metadata = {
   title: "coco",
