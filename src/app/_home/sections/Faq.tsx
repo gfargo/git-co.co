@@ -1,13 +1,13 @@
-import { Section } from "@/components/Section";
-import { SearchIcon } from "lucide-react";
+import { Section } from "@/components/Section"
+import { SearchIcon } from "lucide-react"
 import {
   AccordionTrigger,
   AccordionContent,
   AccordionItem,
-  Accordion,
-} from "@/components/ui/accordion";
-import { Input } from "@/components/ui/input";
-import Link from "next/link";
+  Accordion
+} from "@/components/ui/accordion"
+import { Input } from "@/components/ui/input"
+import Link from "next/link"
 
 export const FaqSection = () => {
   const questions = [
@@ -24,24 +24,24 @@ export const FaqSection = () => {
             facilitate the creation of detailed commit messages and changelogs.
           </p>
         </div>
-      ),
+      )
     },
     {
       question: "why should I use it?",
       answer: (
         <div>
           <p>
-            It's finally time to acknowledge the bad habit that is
+            It&apos;s finally time to acknowledge the bad habit that is
             <br />
             <br />
             <pre className="bg-secondary rounded p-2 text-sm text-white">
-              <code>git commit -m "fixed bug"</code>
+              <code>git commit -m &quot;fixed bug&quot;</code>
             </pre>
             <br />
             <div className="text-center">or</div>
             <br />
             <pre className="bg-secondary rounded p-2 text-sm text-white">
-              <code>git commit -m "updates"</code>
+              <code>git commit -m &quot;updates&quot;</code>
             </pre>
             <br />
             <code>coco</code> can write concise articulate context-rich commit
@@ -57,11 +57,11 @@ export const FaqSection = () => {
             .
             <br />
             <br />
-            With the help of robots, it's time to stop writing bad commit
+            With the help of robots, it&apos;s time to stop writing bad commit
             messages.
           </p>
         </div>
-      ),
+      )
     },
     {
       question: "how does it work?",
@@ -78,7 +78,7 @@ export const FaqSection = () => {
             summarized until the token limit is no longer exceeded.
           </p>
         </div>
-      ),
+      )
     },
     {
       question: "how do I use my own prompt?",
@@ -92,7 +92,7 @@ export const FaqSection = () => {
             >
               <code>/src/lib/langchain/prompts/commitDefault.ts</code>
             </Link>{" "}
-            as it's default commit prompt.
+            as it&apos;s default commit prompt.
           </p>
           <p>
             You can override this by adding a <code>prompt</code> key to your
@@ -106,9 +106,9 @@ export const FaqSection = () => {
             <code>.coco.config.json</code>
           </p>
         </div>
-      ),
-    },
-  ];
+      )
+    }
+  ]
 
   return (
     <Section id="faq" className="bg-white text-black">
@@ -138,7 +138,7 @@ export const FaqSection = () => {
               const id = question.question
                 .replace(/\s/g, "-")
                 .replace(/[^a-zA-Z0-9-_]/g, "")
-                .toLowerCase();
+                .toLowerCase()
 
               return (
                 <AccordionItem key={id} value={id}>
@@ -152,11 +152,11 @@ export const FaqSection = () => {
                     {question.answer}
                   </AccordionContent>
                 </AccordionItem>
-              );
+              )
             })}
           </Accordion>
         </div>
       </div>
     </Section>
-  );
-};
+  )
+}

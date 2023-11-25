@@ -1,23 +1,23 @@
-import { Section } from "@/components/Section";
-import { GitCommitHorizontalIcon, ScrollTextIcon } from "lucide-react";
+import { Section } from "@/components/Section"
+import { GitCommitHorizontalIcon, ScrollTextIcon } from "lucide-react"
 
-import cocoCommitImage from "@/assets/coco-basic-commit.png";
-import cocoCommitHeaderUpdateGif from "@/assets/gifs/commit-basic-header-update.gif";
-import cocoCommitBigGif from "@/assets/gifs/commit-big.gif";
-import cocoCommitRandom from "@/assets/gifs/commit-random-assortment.gif";
-import cocoCommitWithStatus from "@/assets/gifs/commit-with-status.gif";
+import cocoCommitImage from "@/assets/coco-basic-commit.png"
+import cocoCommitHeaderUpdateGif from "@/assets/gifs/commit-basic-header-update.gif"
+import cocoCommitBigGif from "@/assets/gifs/commit-big.gif"
+import cocoCommitRandom from "@/assets/gifs/commit-random-assortment.gif"
+import cocoCommitWithStatus from "@/assets/gifs/commit-with-status.gif"
 
-import cocoChangelogImage from "@/assets/coco-changelog.png";
-import cocoChangelogRangeGif from "@/assets/gifs/changelog-range.gif";
+import cocoChangelogImage from "@/assets/coco-changelog.png"
+import cocoChangelogRangeGif from "@/assets/gifs/changelog-range.gif"
 
-import Image from "next/image";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Image from "next/image"
+import { Separator } from "@/components/ui/separator"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export const FeaturesSection = () => {
-  const imageClass = " border-8 border-[#1e1f28] space-y-4 max-w-full";
+  const imageClass = " border-8 border-[#1e1f28] space-y-4 max-w-full"
   const tabContentClass =
-    "mx-auto order-2 md:order-1 overflow-hidden rounded-xl object-cover object-center justify-center bg-[#1e1f28]";
+    "mx-auto order-2 md:order-1 overflow-hidden rounded-xl object-cover object-center justify-center bg-[#1e1f28]"
 
   return (
     <Section id="features" className="bg-white text-secondary">
@@ -120,5 +120,5 @@ export const FeaturesSection = () => {
         </div>
       </div>
     </Section>
-  );
-};
+  )
+}

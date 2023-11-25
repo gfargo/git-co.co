@@ -1,13 +1,13 @@
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer"
+import { Header } from "@/components/Header"
 
-import { CommunitySection } from "./_home/sections/Community";
-import { HeroSection } from "./_home/sections/Hero";
-import { FeaturesSection } from "./_home/sections/Features";
-import { InstallSection } from "./_home/sections/Install";
-import { FeedbackSection } from "./_home/sections/Feedback";
-import { FaqSection } from "./_home/sections/Faq";
-import { RoadmapSection } from "./_home/sections/Roadmap";
+import { CommunitySection } from "./_home/sections/Community"
+import { HeroSection } from "./_home/sections/Hero"
+import { FeaturesSection } from "./_home/sections/Features"
+import { InstallSection } from "./_home/sections/Install"
+import { FeedbackSection } from "./_home/sections/Feedback"
+import { FaqSection } from "./_home/sections/Faq"
+import { RoadmapSection } from "./_home/sections/Roadmap"
 
 export default function HomePage() {
   return (
@@ -24,5 +24,5 @@ export default function HomePage() {
       </main>
       <Footer />
     </div>
-  );
+  )
 }
