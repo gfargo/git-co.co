@@ -1,6 +1,6 @@
-import { CopyCommand } from "@/components/CopyCommand";
-import { Section } from "@/components/Section";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CopyCommand } from "@/components/CopyCommand"
+import { Section } from "@/components/Section"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export const InstallSection = () => {
   return (
@@ -33,7 +33,9 @@ export const InstallSection = () => {
               <CopyCommand command="npx git-coco" />
             </TabsContent>
             <TabsList className="mx-auto bg-oxley-400">
-              <TabsTrigger value="project" className="cursor-pointer">Project</TabsTrigger>
+              <TabsTrigger value="project" className="cursor-pointer">
+                Project
+              </TabsTrigger>
               <TabsTrigger value="global">System</TabsTrigger>
               <TabsTrigger value="service">CI/CD</TabsTrigger>
             </TabsList>
@@ -41,5 +43,5 @@ export const InstallSection = () => {
         </div>
       </div>
     </Section>
-  );
-};
+  )
+}

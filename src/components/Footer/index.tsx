@@ -1,5 +1,5 @@
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
+import { GitHubLogoIcon } from "@radix-ui/react-icons"
+import Link from "next/link"
 
 export const Footer: React.FC = () => {
   return (
@@ -13,5 +13,5 @@ export const Footer: React.FC = () => {
         </Link>
       </nav>
     </footer>
-  );
-};
+  )
+}

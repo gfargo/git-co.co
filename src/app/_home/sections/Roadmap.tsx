@@ -1,17 +1,17 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Section } from "@/components/Section";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
-import terminalScreenshot from "@/assets/coco-terminal.png";
-import { Fragment } from "react";
+import Link from "next/link"
+import Image from "next/image"
+import { Section } from "@/components/Section"
+import { Separator } from "@/components/ui/separator"
+import { cn } from "@/lib/utils"
+import terminalScreenshot from "@/assets/coco-terminal.png"
+import { Fragment } from "react"
 
 type milestone = {
-  title: string;
-  description: string;
-  status: "done" | "in-progress" | "pending" | "planned";
-  icon: string;
-};
+  title: string
+  description: string
+  status: "done" | "in-progress" | "pending" | "planned"
+  icon: string
+}
 
 export const RoadmapSection = () => {
   const milestones = [
@@ -20,69 +20,69 @@ export const RoadmapSection = () => {
       description:
         "generate commit message for staged files with a single command.",
       status: "done",
-      icon: "💡",
+      icon: "💡"
     },
     {
       title: "interactive v.s. stdout mode",
       description:
         "interactively commit staged work or output commit to stdout.",
       status: "done",
-      icon: "🎨",
+      icon: "🎨"
     },
     {
       title: "commit all the files!",
       description:
         "support any number of staged changes through recursive summarization.",
       status: "done",
-      icon: "🚛",
+      icon: "🚛"
     },
     {
       title: "langchain",
       description:
         "better future interop with additional LLMs through langchain.",
       status: "done",
-      icon: "🦜",
+      icon: "🦜"
     },
     {
       title: "changelog generation",
       description:
         "generate changelogs from current branch, or provided range of commits.",
       status: "in-progress",
-      icon: "📝",
+      icon: "📝"
     },
     {
       title: "coco init",
       description: "interactive setup for coco for a project or on a system.",
       status: "in-progress",
-      icon: "🏗️",
+      icon: "🏗️"
     },
     {
       title: "commitlint & commitizen",
       description:
         "add support for linting generated content via pre-existing tools.",
-      status: "planned",
+      status: "planned"
     },
     {
       title: "conventional commits",
       description:
         "generate commit messages that follow the rules of conventional commits.",
-      status: "planned",
-    },
-  ] as milestone[];
+      status: "planned"
+    }
+  ] as milestone[]
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "done":
-        return "🎉";
+        return "🎉"
       case "in-progress":
-        return "🔨";
+        return "🔨"
       case "pending":
-        return "⏳";
+        return "⏳"
       case "planned":
       default:
-        return "💭";
+        return "💭"
     }
-  };
+  }
 
   return (
     <Section id="roadmap" className="bg-white text-black lg:pb-8 relative">
@@ -99,10 +99,11 @@ export const RoadmapSection = () => {
                   <div className="col-span-6 flex items-center space-x-4">
                     <div
                       className={cn(
-                        "rounded-full h-10 w-10 flex items-center justify-center bg-zinc-200 dark:bg-zinc-800 flex-shrink-0 drop-shadow-sm",
+                        "rounded-full h-10 w-10 flex items-center justify-center bg-oxley-50 dark:bg-zinc-800 flex-shrink-0 drop-shadow-sm",
                         {
-                          "bg-oxley-100": status === "done",
-                        },
+                          "bg-oxley-200": status === "done",
+                          "bg-oxley-100": status === "in-progress"
+                        }
                       )}
                     >
                       <span
@@ -132,13 +133,13 @@ export const RoadmapSection = () => {
                       <Separator
                         orientation="horizontal"
                         className={cn(
-                          "bg-primary md:hidden opacity-50 my-8 col-start-2 col-span-3",
+                          "bg-primary md:hidden opacity-50 my-8 col-start-2 col-span-3"
                         )}
                       />
                     </>
                   ) : null}
                 </Fragment>
-              );
+              )
             })}
           </div>
         </div>
@@ -162,5 +163,5 @@ export const RoadmapSection = () => {
         </p>
       </div>
     </Section>
-  );
-};
+  )
+}
