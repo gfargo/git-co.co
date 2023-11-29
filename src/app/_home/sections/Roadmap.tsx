@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 import terminalScreenshot from "@/assets/coco-terminal.png"
 import { Fragment } from "react"
+import { CheckIcon } from "@radix-ui/react-icons"
 
 type milestone = {
   title: string
@@ -102,16 +103,20 @@ export const RoadmapSection = () => {
                         "relative rounded-full flex-shrink-0 drop-shadow-sm group"
                       )}
                     >
-                      
                       {status === "done" ? (
-                        <div className="absolute -inset-1 bg-gradient-to-r from-oxley-500 to-oxley-200 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                        <>
+                          <div className="absolute -inset-1 bg-gradient-to-r from-yellow-100 to-yellow-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                          <div className="border-oxley-300 border h-3 w-3 absolute -top-0 -right-0 bg-white flex flex-col items-center justify-center rounded-full z-10">
+                            <CheckIcon className="text-oxley-300 " />
+                          </div>
+                        </>
                       ) : null}
 
                       <div
                         className={cn(
                           "rounded-full flex items-center justify-center h-10 w-10 bg-oxley-50 dark:bg-zinc-800 flex-shrink-0 drop-shadow-sm",
                           {
-                            "bg-oxley-200 border-oxley-400 border": status === "done",
+                            "bg-oxley-200": status === "done",
                             "bg-oxley-100": status === "in-progress"
                           }
                         )}
