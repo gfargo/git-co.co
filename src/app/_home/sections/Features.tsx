@@ -64,7 +64,7 @@ export const FeaturesSection = () => {
                 <GitCommitHorizontalIcon className="inline" /> Commits
               </h2>
               <p className="text-base text-zinc-500 dark:text-zinc-400">
-                generate commit messages with ease.
+                generate informative commit messages with ease.
               </p>
               <TabsList>
                 <TabsTrigger value="basic">Basic</TabsTrigger>
@@ -90,7 +90,7 @@ export const FeaturesSection = () => {
                 <ScrollTextIcon className="inline" /> Changelogs
               </h2>
               <p className="text-base text-zinc-500 dark:text-zinc-400">
-                generate changelogs from your current branch or from a range of
+                generate detailed changelogs from your current branch or from a range of
                 commits.
               </p>
 
