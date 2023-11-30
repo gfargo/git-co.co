@@ -16,7 +16,7 @@ export const FaqSection = () => {
       answer: (
         <div className="space-y-4">
           <p>
-            coco command line tool that aims to automate away the tedium of
+            coco command line tool automates away the tedium of
             writing git commit messages.
           </p>
           <p>

@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
 import terminalScreenshot from "@/assets/coco-terminal.png"
 import { Fragment } from "react"
+import { CheckIcon } from "@radix-ui/react-icons"
 
 type milestone = {
   title: string
@@ -47,25 +48,25 @@ export const RoadmapSection = () => {
       title: "changelog generation",
       description:
         "generate changelogs from current branch, or provided range of commits.",
-      status: "in-progress",
+      status: "done",
       icon: "📝"
     },
     {
       title: "coco init",
       description: "interactive setup for coco for a project or on a system.",
-      status: "in-progress",
-      icon: "🏗️"
-    },
-    {
-      title: "commitlint & commitizen",
-      description:
-        "add support for linting generated content via pre-existing tools.",
-      status: "planned"
+      status: "done",
+      icon: "🚀"
     },
     {
       title: "conventional commits",
       description:
         "generate commit messages that follow the rules of conventional commits.",
+      status: "in-progress"
+    },
+    {
+      title: "commitlint & commitizen",
+      description:
+        "add support for linting generated content via pre-existing tools.",
       status: "planned"
     }
   ] as milestone[]
@@ -75,7 +76,7 @@ export const RoadmapSection = () => {
       case "done":
         return "🎉"
       case "in-progress":
-        return "🔨"
+        return "🛠️"
       case "pending":
         return "⏳"
       case "planned":
@@ -99,21 +100,37 @@ export const RoadmapSection = () => {
                   <div className="col-span-6 flex items-center space-x-4">
                     <div
                       className={cn(
-                        "rounded-full h-10 w-10 flex items-center justify-center bg-oxley-50 dark:bg-zinc-800 flex-shrink-0 drop-shadow-sm",
-                        {
-                          "bg-oxley-200": status === "done",
-                          "bg-oxley-100": status === "in-progress"
-                        }
+                        "relative rounded-full flex-shrink-0 drop-shadow-sm group"
                       )}
                     >
-                      <span
-                        aria-label="Done"
-                        className="text-sm drop-shadow"
-                        role="img"
+                      {status === "done" ? (
+                        <>
+                          <div className="absolute -inset-1 bg-gradient-to-r from-yellow-100 to-yellow-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                          <div className="border-oxley-300 border h-3 w-3 absolute -top-0 -right-0 bg-white flex flex-col items-center justify-center rounded-full z-10">
+                            <CheckIcon className="text-oxley-300 " />
+                          </div>
+                        </>
+                      ) : null}
+
+                      <div
+                        className={cn(
+                          "rounded-full flex items-center justify-center h-10 w-10 bg-oxley-50 dark:bg-zinc-800 flex-shrink-0 drop-shadow-sm",
+                          {
+                            "bg-oxley-200": status === "done",
+                            "bg-oxley-100": status === "in-progress"
+                          }
+                        )}
                       >
-                        {icon ?? getStatusIcon(status)}
-                      </span>
+                        <span
+                          aria-label="Done"
+                          className="text-sm drop-shadow z-10"
+                          role="img"
+                        >
+                          {icon ?? getStatusIcon(status)}
+                        </span>
+                      </div>
                     </div>
+
                     <div>
                       <h3 className="text-xl font-semibold leading-tight">
                         {title}

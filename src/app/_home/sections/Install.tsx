@@ -14,30 +14,32 @@ export const InstallSection = () => {
             install
           </h2>
           <p className="text-center text-xl font-extralight items-center">
-            Install <span className="inline font-semibold">coco</span> with your
-            favorite package manager.
+            Use the <code>init</code> command to both install and configure{" "}
+            <span className="inline font-semibold">coco</span> for your use case.
           </p>
         </div>
         <div className="mx-auto max-w-xl grid gap-6 sm:grid-cols-1 md:gap-8 lg:max-w-3xl py-6 relative">
           <Tabs
-            defaultValue="global"
+            defaultValue="wizard"
             className="flex flex-col justify-center gap-4 items-center"
           >
             <TabsContent value="project">
-              <CopyCommand command="npm install --save-dev git-coco" />
+              <CopyCommand command="npx git-coco@latest init --l project" />
             </TabsContent>
             <TabsContent value="global">
-              <CopyCommand command="npm install -g git-coco" />
+              <CopyCommand command="npx git-coco@latest init --l global" />
             </TabsContent>
             <TabsContent value="service">
-              <CopyCommand command="npx git-coco" />
+              <CopyCommand command="npx git-coco@latest" />
             </TabsContent>
-            <TabsList className="mx-auto bg-oxley-400">
-              <TabsTrigger value="project" className="cursor-pointer">
-                Project
-              </TabsTrigger>
-              <TabsTrigger value="global">System</TabsTrigger>
+            <TabsContent value="wizard">
+              <CopyCommand command="npx git-coco@latest init" />
+            </TabsContent>
+            <TabsList className="mx-auto gap-1 bg-oxley-400">
+              <TabsTrigger value="project">Project</TabsTrigger>
+              <TabsTrigger value="global">Global</TabsTrigger>
               <TabsTrigger value="service">CI/CD</TabsTrigger>
+              <TabsTrigger value="wizard">Wizard 🧙</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
