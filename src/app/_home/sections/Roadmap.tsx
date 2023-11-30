@@ -58,6 +58,13 @@ export const RoadmapSection = () => {
       icon: "🚀"
     },
     {
+      title: "ollama",
+      description:
+        "add support for using large language models locally. more faster, much private.",
+      status: "in-progress",
+      icon: "🦙"
+    },
+    {
       title: "conventional commits",
       description:
         "generate commit messages that follow the rules of conventional commits.",
@@ -65,8 +72,7 @@ export const RoadmapSection = () => {
     },
     {
       title: "commitlint & commitizen",
-      description:
-        "add support for linting generated content via pre-existing tools.",
+      description: "lint generated content via pre-existing tools.",
       status: "planned"
     }
   ] as milestone[]
