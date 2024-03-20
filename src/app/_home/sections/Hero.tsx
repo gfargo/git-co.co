@@ -5,6 +5,7 @@ import cocoCoverImage from "@/assets/coco-cover.png"
 import { Section } from "@/components/Section"
 import { GitCommitVerticalIcon } from "lucide-react"
 import CursorImitator from "@/components/TypedContent"
+import { SmoothScrollAnchor } from "@/components/SmoothScrollAnchor"
 
 export const HeroSection = () => {
   return (
@@ -31,13 +32,9 @@ export const HeroSection = () => {
               detailed commits, changelogs, and more!
             </p>
 
-            <Link
-              className="inline-flex h-9 items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium text-[#5E8F78] shadow transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white disabled:pointer-events-none disabled:opacity-50"
-              href="#install"
-              
-            >
+            <SmoothScrollAnchor id="install" >
               install
-            </Link>
+            </SmoothScrollAnchor>
           </div>
           <div className="-order-1 lg:order-1">
             <Image src={cocoCoverImage} alt="git coco cover image" priority />
