@@ -15,7 +15,8 @@ export const InstallSection = () => {
           </h2>
           <p className="text-center text-xl font-extralight items-center">
             Use the <code>init</code> command to both install and configure{" "}
-            <span className="inline font-semibold">coco</span> for your use case.
+            <span className="inline font-semibold">coco</span> for your use
+            case.
           </p>
         </div>
         <div className="mx-auto max-w-xl grid gap-6 sm:grid-cols-1 md:gap-8 lg:max-w-3xl py-6 relative">
@@ -29,16 +30,12 @@ export const InstallSection = () => {
             <TabsContent value="global">
               <CopyCommand command="npx git-coco@latest init --l global" />
             </TabsContent>
-            <TabsContent value="service">
-              <CopyCommand command="npx git-coco@latest" />
-            </TabsContent>
             <TabsContent value="wizard">
               <CopyCommand command="npx git-coco@latest init" />
             </TabsContent>
             <TabsList className="mx-auto gap-1 bg-oxley-400">
               <TabsTrigger value="project">Project</TabsTrigger>
               <TabsTrigger value="global">Global</TabsTrigger>
-              <TabsTrigger value="service">CI/CD</TabsTrigger>
               <TabsTrigger value="wizard">Wizard 🧙</TabsTrigger>
             </TabsList>
           </Tabs>

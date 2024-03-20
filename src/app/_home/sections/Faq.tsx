@@ -16,8 +16,8 @@ export const FaqSection = () => {
       answer: (
         <div className="space-y-4">
           <p>
-            coco command line tool automates away the tedium of
-            writing git commit messages.
+            <code className="text-primary">coco</code> command line tool
+            automates away the tedium of writing git commit messages.
           </p>
           <p>
             It utilizes langchain and supported large language models (llms) to
@@ -44,8 +44,9 @@ export const FaqSection = () => {
               <code>git commit -m &quot;updates&quot;</code>
             </pre>
             <br />
-            <code>coco</code> can write concise articulate context-rich commit
-            messages and changelogs using the power of large language models &{" "}
+            <code className="text-primary">coco</code> can write concise
+            articulate context-rich commit messages and changelogs using the
+            power of large language models &{" "}
             <Link
               className="underline"
               href="https://www.langchain.com/"
@@ -68,12 +69,13 @@ export const FaqSection = () => {
       answer: (
         <div className="space-y-4">
           <p>
-            <code>coco</code> analyzes your staged changes creating a list of
-            diffs and summarizations. This context is then provided to the
-            language model when being prompted for a commit message.
+            <code className="text-primary">coco</code> analyzes your staged
+            changes creating a list of diffs and summarizations. This context is
+            then provided to the language model when being prompted for a commit
+            message.
           </p>
           <p>
-            summarization occurs when the staged diffs exceed the token limit of
+            Summarization occurs when the staged diffs exceed the token limit of
             the language model. In this case, the staged diffs are recursively
             summarized until the token limit is no longer exceeded.
           </p>
@@ -81,22 +83,22 @@ export const FaqSection = () => {
       )
     },
     {
-      question: "how do I use my own prompt?",
+      question: "can I customize the prompt?",
       answer: (
         <div className="flex flex-col gap-2">
           <p>
-            Out of the box, coco loads{" "}
+            <strong className="font-semibold">Yes!</strong> By default,{" "}
+            <code className="text-primary">coco</code> loads{" "}
             <Link
               className="underline"
               href="https://github.com/gfargo/coco/blob/main/src/lib/langchain/prompts/commitDefault.ts#L3-L15"
             >
               <code>/src/lib/langchain/prompts/commitDefault.ts</code>
-            </Link>{" "}
-            as it&apos;s default commit prompt.
+            </Link>
           </p>
           <p>
-            You can override this by adding a <code>prompt</code> key to your
-            config.
+            This can be overridden by adding a{" "}
+            <code className="text-gray-700">prompt</code> key to your config.
           </p>
           <pre className="bg-secondary rounded p-2 text-sm text-white">
             {`{\n\t"prompt": "Write git commit message from the provided file diffs: \n\n\t'''{summary}'''\n\n\tCommit:",
@@ -104,6 +106,57 @@ export const FaqSection = () => {
           </pre>
           <p>
             <code>.coco.config.json</code>
+          </p>
+        </div>
+      )
+    },
+    {
+      question: "how do I use my own language model?",
+      answer: (
+        <div className="flex flex-col gap-2">
+          <p>
+            <code className="text-primary">coco</code> will load OpenAI&apos;s
+            latest model by default however, if you&apos;d like you can
+            customize the default options or bring your own model.
+          </p>
+          <p>
+            Find out more about how to use your own language model in the{` `}
+            <a
+              className="text-primary hover:underline"
+              href="https://github.com/gfargo/coco/wiki"
+              target="_blank"
+            >
+              wiki
+            </a>
+            .
+          </p>
+          <ul className="list-disc pl-4">
+            <li>
+              <a
+                className="text-primary hover:underline"
+                href="https://github.com/gfargo/coco/wiki/Using-Ollama"
+                target="_blank"
+              >
+                Using Ollama
+              </a>
+            </li>
+          </ul>
+        </div>
+      )
+    },
+    {
+      question: "can I use coco within my CI/CD pipeline?",
+      answer: (
+        <div className="flex flex-col gap-2">
+          <p>Yes!</p>
+          <p>
+            <code className="text-primary">coco</code> can be used within your
+            CI/CD pipeline. Depending on your use case, you may want to use the{" "}
+            <code>commit</code> command to automatically write commit messages.
+          </p>
+          <p>
+            or maybe replace the previous <code>npx auto-changelog -p</code>{" "}
+            with <code>npx git-coco changelog</code> command.
           </p>
         </div>
       )
