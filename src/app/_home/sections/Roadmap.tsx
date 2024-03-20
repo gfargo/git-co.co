@@ -53,7 +53,7 @@ export const RoadmapSection = () => {
     },
     {
       title: "coco init",
-      description: "interactive setup for coco for a project or on a system.",
+      description: "interactive setup for coco for a project or globally on a system.",
       status: "done",
       icon: "🚀"
     },
@@ -61,20 +61,26 @@ export const RoadmapSection = () => {
       title: "ollama",
       description:
         "add support for using large language models locally. more faster, much private.",
-      status: "in-progress",
+      status: "done",
       icon: "🦙"
+    },
+    {
+      title: "agents",
+      description: "provide clearer separation of concerns through multi-agent approach.",
+      icon: "🕴️",
+      status: "planned"
     },
     {
       title: "conventional commits",
       description:
         "generate commit messages that follow the rules of conventional commits.",
-      status: "in-progress"
+      status: "panned"
     },
     {
       title: "commitlint & commitizen",
       description: "lint generated content via pre-existing tools.",
       status: "planned"
-    }
+    },
   ] as milestone[]
 
   const getStatusIcon = (status: string) => {
