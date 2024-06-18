@@ -111,6 +111,23 @@ export const FaqSection = () => {
       )
     },
     {
+      question: "configuring `coco.config.json`?",
+      answer: (
+        <div className="flex flex-col gap-2">
+          <p>
+            The <code className="text-primary">coco.config.json</code> file is
+            used to configure <code className="text-primary">coco</code> to your
+            liking, take a look at the{" "}
+            <Link className="underline" href="/schema.json">
+              schema.json
+            </Link>
+            {` `}
+            for more information about the available options.
+          </p>
+        </div>
+      )
+    },
+    {
       question: "how do I use my own language model?",
       answer: (
         <div className="flex flex-col gap-2">
