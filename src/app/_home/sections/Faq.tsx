@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import ThreeJSBackground from "@/components/ThreeJSBackground"
 
 export const FaqSection = () => {
   const questions = [
@@ -227,6 +228,7 @@ export const FaqSection = () => {
           </Accordion>
         </div>
       </div>
+      <ThreeJSBackground />
     </Section>
   )
 }
