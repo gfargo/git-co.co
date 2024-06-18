@@ -70,7 +70,7 @@ export const RoadmapSection = () => {
       description:
         "provide clearer separation of concerns through multi-agent approach.",
       icon: "🕴️",
-      status: "planned"
+      status: "in-progress"
     },
     {
       title: "conventional commits",
@@ -82,7 +82,13 @@ export const RoadmapSection = () => {
       title: "commitlint & commitizen",
       description: "lint generated content via pre-existing tools.",
       status: "planned"
-    }
+    },
+    {
+      title: "and much more!",
+      icon: "💫",
+      description: "we're always thinking of new ways coco can improve your git workflow.",
+      status: "pending",
+    },
   ] as milestone[]
 
   const getStatusIcon = (status: string) => {
