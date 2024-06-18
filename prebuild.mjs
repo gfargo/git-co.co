@@ -24,7 +24,7 @@ https
 
     fileStream.on("finish", () => {
       fileStream.close()
-      console.log("Schema downloaded successfully")
+      console.log("schema downloaded successfully")
     })
   })
   .on("error", (error) => {

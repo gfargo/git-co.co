@@ -32,9 +32,7 @@ export const HeroSection = () => {
               detailed commits, changelogs, and more!
             </p>
 
-            <SmoothScrollAnchor id="install" >
-              install
-            </SmoothScrollAnchor>
+            <SmoothScrollAnchor id="install">install</SmoothScrollAnchor>
           </div>
           <div className="-order-1 lg:order-1">
             <Image src={cocoCoverImage} alt="git coco cover image" priority />
