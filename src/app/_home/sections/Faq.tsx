@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
+import ThreeJSBackground from "@/components/ThreeJSBackground"
+import Image from "next/image"
 
 export const FaqSection = () => {
   const questions = [
@@ -181,12 +183,17 @@ export const FaqSection = () => {
   ]
 
   return (
-    <Section id="faq" className="bg-white text-black">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center mb-6">
-          <h2 className="text-3xl sm:text-5xl font-bold mb-2 text-center text-primary">
+    <Section
+      id="faq"
+      className="from-gray-700 to-gray-950 bg-gradient-to-b relative overflow-y-clip"
+    >
+      <div className="container px-4 md:px-6 z-10 relative">
+        <div className="flex flex-col items-center mb-6 ">
+          <h2 className="text-3xl sm:text-5xl font-bold mb-2 text-center ">
             <span className="sr-only">Frequently Asked Questions</span>
-            <span className="inline-block relative">faq</span>
+            <span className="relative bg-gradient-to-b from-white  to-gray-100 inline-block text-transparent bg-clip-text">
+              faq
+            </span>
           </h2>
 
           {/* hidden for now */}
@@ -202,7 +209,7 @@ export const FaqSection = () => {
             />
           </div>
         </div>
-        <div className="w-full max-w-xl mx-auto">
+        <div className="w-full max-w-2xl mx-auto bg-gray-900/60 p-10 rounded-lg shadow-inner">
           <Accordion className="w-full" collapsible type="single">
             {questions.map((question, index) => {
               const id = question.question
@@ -227,6 +234,9 @@ export const FaqSection = () => {
           </Accordion>
         </div>
       </div>
+
+      <ThreeJSBackground />
+      <Image src='/mascott/mascott_${randomLetter}.png' alt="mascott" width={200} height={200} className="hidden" />
     </Section>
   )
 }
