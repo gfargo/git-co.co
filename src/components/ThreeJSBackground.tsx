@@ -2,18 +2,13 @@
 
 import React, { useRef, useState, useEffect } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import {
-  MeshDistortMaterial,
-  Sparkles,
-  SpotLight,
-  Stars
-} from "@react-three/drei"
-import { Mesh, TextureLoader, Vector3 } from "three"
+import { Sparkles, Stars } from "@react-three/drei"
+import { Mesh, Texture, TextureLoader, Vector3 } from "three"
 
 const MascottPlane = () => {
   const mesh = useRef<Mesh>(null!)
   const { camera } = useThree()
-  const [texture, setTexture] = useState(null)
+  const [texture, setTexture] = useState<Texture | null>(null)
   const initialPosition = useRef(
     new Vector3(
       Math.random() * -1 - 1,
