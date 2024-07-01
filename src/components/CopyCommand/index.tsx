@@ -12,17 +12,37 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
+import { toast } from "../ui/use-toast"
 
 type CopyCommandProps = {
   command: string
   className?: string
 }
 
+type PackageService = "npm" | "yarn" | "pnpm"
+
 export const CopyCommand = ({ command, className }: CopyCommandProps) => {
-  const handleCopy = () => {
-    console.log("copying", command)
-    const result = copy(command)
-    console.log("result", result)
+  const handleCopy = (service: PackageService) => {
+    let copiedCommand = ""
+    switch (service) {
+      case "yarn":
+        copiedCommand = command.replace("npx", "yarn dlx")
+        break
+      case "pnpm":
+        copiedCommand = command.replace("npx", "pnpm dlx")
+        break
+      case "npm":
+      default:
+        copiedCommand = command
+        break
+    }
+
+    const result = copy(copiedCommand)
+    toast({
+      description: result
+        ? "Copied to clipboard"
+        : "Failed to copy to clipboard"
+    })
   }
   return (
     <div
@@ -44,8 +64,15 @@ export const CopyCommand = ({ command, className }: CopyCommandProps) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="p-1">
-          <DropdownMenuItem onClick={handleCopy}>npm</DropdownMenuItem>
-          <DropdownMenuItem onClick={handleCopy}>yarn</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleCopy("npm")}>
+            npm
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleCopy("pnpm")}>
+            pnpm
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleCopy("yarn")}>
+            yarn
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

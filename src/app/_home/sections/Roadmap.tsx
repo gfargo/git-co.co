@@ -61,7 +61,7 @@ export const RoadmapSection = () => {
     {
       title: "ollama",
       description:
-        "add support for using large language models locally. more faster, much private.",
+        "use your own local LLM with Ollama! more faster, much private.",
       status: "done",
       icon: "🦙"
     },
