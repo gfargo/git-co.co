@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { Sparkles, Stars } from "@react-three/drei"
+import { Sparkles, Stars, Float, Billboard } from "@react-three/drei"
 import { Mesh, Texture, TextureLoader, Vector3 } from "three"
 
 const MascottPlane = () => {
@@ -33,43 +33,47 @@ const MascottPlane = () => {
       time.current += delta
 
       // Apply floating effect
-      mesh.current.position.x =
-        initialPosition.current.x + Math.sin(time.current) * 0.1
-      mesh.current.position.y =
-        initialPosition.current.y + Math.sin(time.current * 0.1) * 0.1
-      mesh.current.position.z =
-        initialPosition.current.z + Math.sin(time.current * 0.2) * 0.05
+      // mesh.current.position.x =
+      //   initialPosition.current.x + Math.sin(time.current) * 0.1
+      // mesh.current.position.y =
+      //   initialPosition.current.y + Math.sin(time.current * 0.1) * 0.1
+      // mesh.current.position.z =
+      //   initialPosition.current.z + Math.sin(time.current * 0.2) * 0.05
 
       // Rotate
-      mesh.current.rotation.x += 0.01
-      mesh.current.rotation.y += 0.01
+      // mesh.current.rotation.x += 0.01
+      // mesh.current.rotation.y += 0.01
 
       // Ensure the plane is always facing the camera
-      mesh.current.lookAt(camera.position)
+      // mesh.current.lookAt(camera.position)
     }
   })
 
   return (
-    <mesh ref={mesh} position={initialPosition.current}>
-      <planeGeometry args={[1, 1]} />
-      {texture && <meshStandardMaterial map={texture} transparent />}
-      <Sparkles
-        speed={0.2}
-        castShadow
-        noise={Math.cos(-time.current) * 0.1}
-        scale={1.25}
-        count={50}
-        color={"#709e8a"}
-      />
-      <Sparkles
-        speed={0.2}
-        castShadow
-        noise={0.2}
-        scale={1.5}
-        count={50}
-        color={"#709e8a"}
-      />
-    </mesh>
+    <Billboard>
+      <Float speed={0.5} floatIntensity={5} rotationIntensity={1.2} >
+        <mesh ref={mesh} position={initialPosition.current}>
+          <planeGeometry args={[1, 1]} />
+          {texture && <meshStandardMaterial map={texture} transparent />}
+          <Sparkles
+            speed={0.2}
+            castShadow
+            noise={Math.cos(-time.current) * 0.1}
+            scale={1.25}
+            count={50}
+            color={"#709e8a"}
+          />
+          <Sparkles
+            speed={0.2}
+            castShadow
+            noise={0.2}
+            scale={1.5}
+            count={50}
+            color={"#709e8a"}
+          />
+        </mesh>
+      </Float>
+    </Billboard>
   )
 }
 
