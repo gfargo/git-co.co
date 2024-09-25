@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
 import { toast } from "../ui/use-toast"
+import { MagnetIcon, ShellIcon } from "lucide-react"
 
 type CopyCommandProps = {
   command: string
@@ -39,9 +40,17 @@ export const CopyCommand = ({ command, className }: CopyCommandProps) => {
 
     const result = copy(copiedCommand)
     toast({
-      description: result
-        ? "Copied to clipboard"
-        : "Failed to copy to clipboard"
+      title: "Copied to clipboard 📋",
+      description: result ? (
+        <div className="flex items-center mt-1">
+          <ShellIcon className="w-4 h-4 mr-2 text-muted-foreground/75" />
+          <code className="truncate overflow-ellipsis whitespace-nowrap">
+            {copiedCommand}
+          </code>
+        </div>
+      ) : (
+        "Failed to copy to clipboard"
+      )
     })
   }
   return (

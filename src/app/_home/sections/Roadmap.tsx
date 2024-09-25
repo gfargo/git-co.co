@@ -45,7 +45,7 @@ export const RoadmapSection = () => {
       icon: "🦜"
     },
     {
-      title: "changelog generation",
+      title: "coco changelog",
       description:
         "generate changelogs from current branch, or provided range of commits.",
       status: "done",
@@ -66,17 +66,31 @@ export const RoadmapSection = () => {
       icon: "🦙"
     },
     {
-      title: "agents",
+      title: "getting started video",
       description:
-        "provide clearer separation of concerns through multi-agent approach.",
-      icon: "🕴️",
+        "learn how to use coco with a short video tutorial.",
+      icon: "📹",
+      status: "in-progress"
+    },
+    {
+      title: "coco recap",
+      description:
+        "summarize staged changes... yesterday's work... or any date range!",
+      icon: "📅",
+      status: "in-progress"
+    },
+    {
+      title: "changelog 2.0",
+      description:
+        "improved CLI flags, additional args, links to commits, authors and more!",
+      // icon: "🕴️",
       status: "in-progress"
     },
     {
       title: "conventional commits",
       description:
         "generate commit messages that follow the rules of conventional commits.",
-      status: "panned"
+      status: "planned"
     },
     {
       title: "commitlint & commitizen",
