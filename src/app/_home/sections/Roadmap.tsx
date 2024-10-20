@@ -73,6 +73,12 @@ export const RoadmapSection = () => {
       status: "done"
     },
     {
+      'title': 'coco review',
+      'description': 'generate a step by step code review from work in progress or a target branch.',
+      'status': 'done',
+      'icon': '🔍'
+    },
+    {
       title: "getting started video",
       description:
         "learn how to use coco with a short video tutorial.",
