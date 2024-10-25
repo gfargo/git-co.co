@@ -151,7 +151,7 @@ async function main() {
     
     await downloadSchema(CONFIG.schemaUrl, outputPath);
     
-    console.log('\n\x1b[32m✨ Process completed successfully!\x1b[0m\n');
+    console.log('\n\x1b[32m✨ Prebuild completed successfully!\x1b[0m\n');
   } catch (error) {
     logError(`Failed to download schema: ${error.message}`);
     if (error.stack) {
