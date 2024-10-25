@@ -84,7 +84,7 @@ const ScrolledCammera = () => {
   useEffect(() => {
     camera.position.z = -scrollY * 0.0005
     camera.lookAt(0, 0, 0)
-  }, [])
+  })
 
   useEffect(() => {
     const handleScroll = () => {
