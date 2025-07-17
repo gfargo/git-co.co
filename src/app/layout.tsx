@@ -12,7 +12,7 @@ const inter = Inter({
   variable: "--font-sans"
 })
 
-const baseUrl = "https://git-co.co"
+const baseUrl = "https://coco.griffen.codes"
 
 export const metadata = {
   title: "coco",
