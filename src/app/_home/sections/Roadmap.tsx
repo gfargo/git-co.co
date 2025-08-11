@@ -94,14 +94,16 @@ export const RoadmapSection = () => {
     },
     {
       title: "conventional commits",
+      icon: "📜",
       description:
         "generate commit messages that follow the rules of conventional commits.",
-      status: "planned"
+      status: "done"
     },
     {
       title: "commitlint & commitizen",
       description: "lint generated content via pre-existing tools.",
-      status: "planned"
+      status: "in-progress",
+      icon: "🛡️"
     },
     {
       title: "and much more!",

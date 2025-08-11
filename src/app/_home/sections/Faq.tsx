@@ -236,7 +236,13 @@ export const FaqSection = () => {
       </div>
 
       <ThreeJSBackground />
-      <Image src='/mascott/mascott_${randomLetter}.png' alt="mascott" width={200} height={200} className="hidden" />
+      <Image
+        src={`/mascott/mascott_${["a", "b", "c", "d"].sort(() => Math.random() - 0.5)[0]}.png`}
+        alt="mascott"
+        width={200}
+        height={200}
+        className="hidden"
+      />
     </Section>
   )
 }
