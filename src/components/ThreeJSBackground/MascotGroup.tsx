@@ -1,13 +1,15 @@
 "use client"
 
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect, createRef } from "react"
 import { useThree } from "@react-three/fiber"
 import { Vector3 } from "three"
 import { MascotPlane } from "./MascotPlane"
 
 export const MascotGroup = ({ count = 5 }: { count?: number }) => {
   const { viewport } = useThree()
-  const mouse = useRef(new Vector3())
+  const mouse = useRef(new Vector3(100, 100, 0)) // Initialize mouse far away
+
+  const mascotRefs = useRef(Array.from({ length: count }, () => createRef<any>()))
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -24,8 +26,13 @@ export const MascotGroup = ({ count = 5 }: { count?: number }) => {
 
   return (
     <>
-      {Array.from({ length: count }).map((_, i) => (
-        <MascotPlane key={i} mouse={mouse} />
+      {mascotRefs.current.map((ref, i) => (
+        <MascotPlane
+          key={i}
+          ref={ref}
+          mouse={mouse}
+          mascotRefs={mascotRefs.current}
+        />
       ))}
     </>
   )
