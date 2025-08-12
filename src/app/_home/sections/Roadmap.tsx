@@ -79,20 +79,6 @@ export const RoadmapSection = () => {
       'icon': '🔍'
     },
     {
-      title: "getting started video",
-      description:
-        "learn how to use coco with a short video tutorial.",
-      icon: "📹",
-      status: "in-progress"
-    },
-    {
-      title: "changelog 2.0",
-      description:
-        "improved CLI flags, additional args, links to commits, authors and more!",
-      // icon: "🕴️",
-      status: "in-progress"
-    },
-    {
       title: "conventional commits",
       icon: "📜",
       description:
@@ -104,6 +90,20 @@ export const RoadmapSection = () => {
       description: "lint generated content via pre-existing tools.",
       status: "in-progress",
       icon: "🛡️"
+    },
+    {
+      title: "getting started video",
+      description:
+        "learn how to use coco with a short video tutorial.",
+      icon: "📹",
+      status: "in-progress"
+    },
+    {
+      title: "changelog 2.0",
+      description:
+        "improved CLI flags, additional args, links to commits, authors and more!",
+      // icon: "🕴️",
+      status: "planned"
     },
     {
       title: "and much more!",
