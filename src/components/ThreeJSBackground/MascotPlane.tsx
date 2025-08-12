@@ -21,8 +21,8 @@ export const MascotPlane = ({ mouse }: MascotPlaneProps) => {
     if (viewport.width > 0 && homePosition === null) {
       const vw = viewport.width
       const vh = viewport.height
-      const x = (Math.random() - 0.5) * vw * 0.7
-      const y = (Math.random() - 0.5) * vh * 0.7
+      const x = (Math.random() - 0.5) * vw * 0.5
+      const y = (Math.random() - 0.5) * vh * 0.5
       const z = (Math.random() - 0.5) * 2
       setHomePosition(new Vector3(x, y, z))
     }

@@ -30,7 +30,7 @@ export const Scene = () => {
     <>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      <MascotGroup count={7} />
+      <MascotGroup count={8} />
       <Stars speed={0.5} depth={500} fade />
     </>
   )
