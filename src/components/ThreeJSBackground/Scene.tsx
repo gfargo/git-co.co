@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react"
 import { useThree, useFrame } from "@react-three/fiber"
 import { Stars } from "@react-three/drei"
 import { MascotGroup } from "./MascotGroup"
-import { lerp } from "three/src/math/MathUtils"
+import { MathUtils } from "three"
 
 export const Scene = () => {
   const { camera } = useThree()
@@ -22,7 +22,7 @@ export const Scene = () => {
 
   useFrame(() => {
     const targetZ = -scrollY.current * 0.0005
-    camera.position.z = lerp(camera.position.z, targetZ, 0.05)
+    camera.position.z = MathUtils.lerp(camera.position.z, targetZ, 0.05)
     camera.lookAt(0, 0, 0)
   })
 
