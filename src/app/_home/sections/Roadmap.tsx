@@ -89,7 +89,7 @@ export const RoadmapSection = () => {
       title: "changelog 2.0",
       description:
         "improved CLI flags, additional args, links to commits, authors and more!",
-      // icon: "🕴️",
+      icon: "🕴️",
       status: "done"
     },
     {
