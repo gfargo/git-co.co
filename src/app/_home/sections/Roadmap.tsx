@@ -86,6 +86,13 @@ export const RoadmapSection = () => {
       status: "done"
     },
     {
+      title: "changelog 2.0",
+      description:
+        "improved CLI flags, additional args, links to commits, authors and more!",
+      // icon: "🕴️",
+      status: "done"
+    },
+    {
       title: "commitlint & commitizen",
       description: "lint generated content via pre-existing tools.",
       status: "in-progress",
@@ -97,13 +104,6 @@ export const RoadmapSection = () => {
         "learn how to use coco with a short video tutorial.",
       icon: "📹",
       status: "in-progress"
-    },
-    {
-      title: "changelog 2.0",
-      description:
-        "improved CLI flags, additional args, links to commits, authors and more!",
-      // icon: "🕴️",
-      status: "planned"
     },
     {
       title: "and much more!",
