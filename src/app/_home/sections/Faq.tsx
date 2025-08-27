@@ -1,15 +1,10 @@
 import { Section } from "@/components/Section"
 import { SearchIcon } from "lucide-react"
-import {
-  AccordionTrigger,
-  AccordionContent,
-  AccordionItem,
-  Accordion
-} from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import ThreeJSBackground from "@/components/ThreeJSBackground"
 import Image from "next/image"
+import { FaqAccordion } from "./FaqAccordion"
 
 export const FaqSection = () => {
   const questions = [
@@ -210,28 +205,7 @@ export const FaqSection = () => {
           </div>
         </div>
         <div className="w-full max-w-2xl mx-auto bg-gray-900/60 p-10 rounded-lg shadow-inner">
-          <Accordion className="w-full" collapsible type="single">
-            {questions.map((question, index) => {
-              const id = question.question
-                .replace(/\s/g, "-")
-                .replace(/[^a-zA-Z0-9-_]/g, "")
-                .toLowerCase()
-
-              return (
-                <AccordionItem key={id} value={id}>
-                  <AccordionTrigger
-                    id={id}
-                    className="flex items-center justify-between py-4"
-                  >
-                    <span>{question.question}</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="py-4">
-                    {question.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              )
-            })}
-          </Accordion>
+          <FaqAccordion questions={questions} />
         </div>
       </div>
 

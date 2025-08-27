@@ -7,6 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from "../ui/tooltip"
+import { TrackedLink } from "../TrackedLink"
 
 export const Header: React.FC = () => {
   return (
@@ -42,13 +43,14 @@ export const Header: React.FC = () => {
             <TooltipProvider delayDuration={125}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link
+                  <TrackedLink
+                    eventName="NPM Link"
                     className="text-sm font-medium hover:underline underline-offset-4"
                     href="https://www.npmjs.com/package/git-coco"
                     target="_blank"
                   >
                     <PackageIcon className="w-5 h-5" />
-                  </Link>
+                  </TrackedLink>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Npm</p>
@@ -56,13 +58,14 @@ export const Header: React.FC = () => {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link
+                  <TrackedLink
+                    eventName="GitHub Link"
                     className="text-sm font-medium hover:underline underline-offset-4"
                     href="https://github.com/gfargo/coco/"
                     target="_blank"
                   >
                     <GithubIcon className="w-5 h-5" />
-                  </Link>
+                  </TrackedLink>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Github</p>

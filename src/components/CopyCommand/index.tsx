@@ -2,6 +2,7 @@
 
 import { CopyIcon } from "@radix-ui/react-icons"
 import copy from "copy-to-clipboard"
+import { track } from "@vercel/analytics/react"
 
 import { Button } from "../ui/button"
 
@@ -39,6 +40,14 @@ export const CopyCommand = ({ command, className }: CopyCommandProps) => {
     }
 
     const result = copy(copiedCommand)
+
+    if (result) {
+      track("Copy Command", {
+        service: service,
+        command: copiedCommand
+      })
+    }
+
     toast({
       title: "Copied to clipboard 📋",
       description: result ? (
