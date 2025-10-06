@@ -1,8 +1,18 @@
+"use client"
+
 import { CopyCommand } from "@/components/CopyCommand"
 import { Section } from "@/components/Section"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { track } from "@vercel/analytics/react"
 
 export const InstallSection = () => {
+  const handleTabChange = (value: string) => {
+    track("Install Tab Switch", {
+      installType: value,
+      section: "install"
+    })
+  }
+
   return (
     <Section
       id="install"
@@ -23,6 +33,7 @@ export const InstallSection = () => {
           <Tabs
             defaultValue="wizard"
             className="flex flex-col justify-center gap-4 items-center"
+            onValueChange={handleTabChange}
           >
             <TabsContent value="project">
               <CopyCommand command="npx git-coco@latest init --l project" />

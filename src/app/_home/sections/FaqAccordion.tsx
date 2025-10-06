@@ -20,7 +20,18 @@ type FaqAccordionProps = {
 export const FaqAccordion = ({ questions }: FaqAccordionProps) => {
   const handleValueChange = (value: string) => {
     if (value) {
-      track("FAQ", { question: value })
+      const question = questions.find(
+        q =>
+          q.question
+            .replace(/\s/g, "-")
+            .replace(/[^a-zA-Z0-9-_]/g, "")
+            .toLowerCase() === value
+      )
+      track("FAQ Interaction", {
+        questionId: value,
+        questionText: question?.question || value,
+        section: "faq"
+      })
     }
   }
 

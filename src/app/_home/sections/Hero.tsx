@@ -68,14 +68,19 @@ export const HeroSection = () => {
             </div>
 
             <p className="max-w-[700px] text-white md:text-xl font-extralight flex items-center">
-              <GitCommitVerticalIcon className="inline mr-1" /> Zero-effort
-              detailed commits, changelogs, and more!
+              <GitCommitVerticalIcon className="inline mr-1" /> Generate
+              intelligent commits with optional Conventional Commits support,
+              automated changelogs, code reviews, and more!
             </p>
 
             <SmoothScrollAnchor id="install">install</SmoothScrollAnchor>
           </div>
           <div className="-order-1 lg:order-1">
-            <Image src={cocoCoverImage} alt="git coco cover image" priority />
+            <Image
+              src={cocoCoverImage}
+              alt="Coco AI Git Assistant - Terminal interface showing automated commit message generation"
+              priority
+            />
           </div>
         </div>
       </div>

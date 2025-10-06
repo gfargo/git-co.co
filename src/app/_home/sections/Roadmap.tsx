@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import terminalScreenshot from "@/assets/coco-terminal.png"
 import { Fragment } from "react"
 import { CheckIcon } from "@radix-ui/react-icons"
+import { siteConfig } from "@/config/site"
 
 type milestone = {
   title: string
@@ -95,7 +96,7 @@ export const RoadmapSection = () => {
     {
       title: "commitlint & commitizen",
       description: "lint generated content via pre-existing tools.",
-      status: "in-progress",
+      status: "done",
       icon: "🛡️"
     },
     {
@@ -213,7 +214,7 @@ export const RoadmapSection = () => {
         <p className="text-center font-extralight items-center px-4">
           feel free to suggest a roadmap item on{" "}
           <Link
-            href="https://github.com/gfargo/coco/issues/new"
+            href={siteConfig.links.issues}
             className="text-primary hover:underline"
           >
             github

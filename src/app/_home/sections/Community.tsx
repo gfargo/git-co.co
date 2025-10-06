@@ -1,9 +1,21 @@
+"use client"
+
 import { Section } from "@/components/Section"
 import { DiscordLogoIcon, GitHubLogoIcon } from "@radix-ui/react-icons"
 import { BugIcon, CircleDotIcon, MessagesSquareIcon } from "lucide-react"
 import Link from "next/link"
+import { track } from "@vercel/analytics/react"
+import { siteConfig } from "@/config/site"
 
 export const CommunitySection = () => {
+  const handleLinkClick = (platform: string, type: string) => {
+    track("Community Link Click", {
+      platform,
+      type,
+      section: "community"
+    })
+  }
+
   return (
     <Section
       id="community"
@@ -16,11 +28,17 @@ export const CommunitySection = () => {
           </h2>
           <p className=" md:text-xl text-center max-w-lg font-extralight">
             Drop us a line on{" "}
-            <Link href="https://discord.gg/KGu9nE9Ejx">
+            <Link
+              href={siteConfig.links.discord}
+              onClick={() => handleLinkClick("Discord", "inline-text")}
+            >
               <DiscordLogoIcon className="inline h-5 w-5 mx-1" />
             </Link>{" "}
             or open an issue on{" "}
-            <Link href="https://github.com/gfargo/coco">
+            <Link
+              href={siteConfig.links.github}
+              onClick={() => handleLinkClick("GitHub", "inline-text")}
+            >
               <GitHubLogoIcon className="inline h-5 w-5 mx-1" />
             </Link>
             <br />
@@ -30,19 +48,25 @@ export const CommunitySection = () => {
           <div className="flex flex-row gap-4">
             <Link
               className="flex cursor-pointer h-9 items-center justify-center rounded-md bg-[#f5f8f7] px-4 py-2 text-sm font-medium text-secondary shadow transition-colors hover:bg-[#f5f8f7]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white disabled:pointer-events-none disabled:opacity-50"
-              href="https://discord.gg/KGu9nE9Ejx"
+              href={siteConfig.links.discord}
+              onClick={() => handleLinkClick("Discord", "button")}
+              aria-label="Join Discord community"
             >
               <DiscordLogoIcon className="h-5 w-5" />
             </Link>
             <Link
               className="flex cursor-pointer h-9 items-center justify-center rounded-md bg-[#f5f8f7] px-4 py-2 text-sm font-medium text-secondary shadow transition-colors hover:bg-[#f5f8f7]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white disabled:pointer-events-none disabled:opacity-50"
-              href="https://github.com/gfargo/coco/discussions"
+              href={siteConfig.links.discussions}
+              onClick={() => handleLinkClick("GitHub", "discussions-button")}
+              aria-label="View GitHub discussions"
             >
               <MessagesSquareIcon className="h-5 w-5" />
             </Link>
             <Link
               className="flex cursor-pointer h-9 items-center justify-center rounded-md bg-[#f5f8f7] px-4 py-2 text-sm font-medium text-secondary shadow transition-colors hover:bg-[#f5f8f7]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white disabled:pointer-events-none disabled:opacity-50"
-              href="https://github.com/gfargo/coco/issues/new"
+              href={siteConfig.links.issues}
+              onClick={() => handleLinkClick("GitHub", "bug-report-button")}
+              aria-label="Report a bug on GitHub"
             >
               <BugIcon className="h-5 w-5" />
             </Link>

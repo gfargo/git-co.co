@@ -46,6 +46,13 @@ export const CopyCommand = ({ command, className }: CopyCommandProps) => {
         service: service,
         command: copiedCommand
       })
+
+      // Track as a conversion event (install intent)
+      track("Install Intent", {
+        method: "copy-command",
+        packageManager: service,
+        command: copiedCommand
+      })
     }
 
     toast({

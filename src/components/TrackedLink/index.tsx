@@ -18,7 +18,14 @@ export const TrackedLink = ({
   ...props
 }: TrackedLinkProps) => {
   const handleClick = () => {
-    track(eventName, { href: props.href.toString() })
+    const url = props.href.toString()
+    const isExternal = url.startsWith("http")
+
+    track(eventName, {
+      href: url,
+      external: isExternal,
+      timestamp: new Date().toISOString()
+    })
   }
 
   return (
