@@ -193,6 +193,130 @@ export const FaqSection = () => {
       )
     },
     {
+      question: "is my code sent to AI providers? what about privacy?",
+      answer: (
+        <div className="flex flex-col gap-2">
+          <p>
+            <strong className="font-semibold">You have full control.</strong>{" "}
+            When using cloud AI providers (OpenAI, Anthropic), your staged
+            changes are sent to generate commit messages.
+          </p>
+          <p>
+            For complete privacy, use{" "}
+            <a
+              className="text-primary hover:underline"
+              href={siteConfig.links.ollamaWiki}
+              target="_blank"
+            >
+              Ollama to run AI models locally
+            </a>{" "}
+            - your code never leaves your machine. No API costs, full privacy,
+            and works offline.
+          </p>
+          <p>
+            You can also configure file ignoring to exclude sensitive files from
+            analysis.
+          </p>
+        </div>
+      )
+    },
+    {
+      question: "how much does it cost?",
+      answer: (
+        <div className="flex flex-col gap-2">
+          <p>
+            <code className="text-primary">coco</code> itself is{" "}
+            <strong>free and open-source</strong>. The only costs are for the AI
+            providers you choose:
+          </p>
+          <ul className="list-disc pl-4 space-y-2">
+            <li>
+              <strong>OpenAI</strong> - Pay per use (typically pennies per
+              commit)
+            </li>
+            <li>
+              <strong>Anthropic Claude</strong> - Pay per use
+            </li>
+            <li>
+              <strong>Ollama (Local)</strong> - 100% free, no API costs, runs on
+              your machine
+            </li>
+          </ul>
+          <p>
+            For teams wanting zero ongoing costs, Ollama is the perfect solution.
+          </p>
+        </div>
+      )
+    },
+    {
+      question: "can my team use coco together?",
+      answer: (
+        <div className="flex flex-col gap-2">
+          <p>
+            <strong className="font-semibold">Yes!</strong>{" "}
+            <code className="text-primary">coco</code> is designed for team
+            collaboration:
+          </p>
+          <ul className="list-disc pl-4 space-y-2">
+            <li>
+              Share configuration files (
+              <code>.coco.config.json</code>) in your repository
+            </li>
+            <li>
+              Enforce commit standards with commitlint integration across the
+              team
+            </li>
+            <li>Use Ollama for enterprise deployments with full privacy</li>
+            <li>
+              Configure project-specific rules and ignored files for consistency
+            </li>
+          </ul>
+          <p>
+            Check out our{" "}
+            <a
+              className="text-primary hover:underline"
+              href={`${siteConfig.links.wiki}/Team-Collaboration`}
+              target="_blank"
+            >
+              Team Collaboration guide
+            </a>{" "}
+            for enterprise setup best practices.
+          </p>
+        </div>
+      )
+    },
+    {
+      question: "what if the generated commit message isn't perfect?",
+      answer: (
+        <div className="flex flex-col gap-2">
+          <p>
+            <code className="text-primary">coco</code> offers multiple ways to
+            refine commit messages:
+          </p>
+          <ul className="list-disc pl-4 space-y-2">
+            <li>
+              Use <code>-i</code> (interactive mode) to review and edit before
+              committing
+            </li>
+            <li>
+              Add context with <code>--additional</code> flag to guide generation
+            </li>
+            <li>
+              If commitlint validation fails, coco automatically retries with
+              error feedback
+            </li>
+            <li>
+              Customize the prompt in your config for better results over time
+            </li>
+          </ul>
+          <p>
+            The AI learns from your project&apos;s patterns, and with
+            conventional commits enabled, messages follow your exact standards.
+          </p>
+        </div>
+      )
+    },
+    {
       question: "can I use coco within my CI/CD pipeline?",
       answer: (
         <div className="flex flex-col gap-2">
