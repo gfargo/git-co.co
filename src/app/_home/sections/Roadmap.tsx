@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import terminalScreenshot from "@/assets/coco-terminal.png"
 import { Fragment } from "react"
 import { CheckIcon } from "@radix-ui/react-icons"
+import { siteConfig } from "@/config/site"
 
 type milestone = {
   title: string
@@ -79,29 +80,31 @@ export const RoadmapSection = () => {
       'icon': '🔍'
     },
     {
-      title: "getting started video",
+      title: "conventional commits",
+      icon: "📜",
       description:
-        "learn how to use coco with a short video tutorial.",
-      icon: "📹",
-      status: "in-progress"
+        "generate commit messages that follow the rules of conventional commits.",
+      status: "done"
     },
     {
       title: "changelog 2.0",
       description:
         "improved CLI flags, additional args, links to commits, authors and more!",
-      // icon: "🕴️",
-      status: "in-progress"
-    },
-    {
-      title: "conventional commits",
-      description:
-        "generate commit messages that follow the rules of conventional commits.",
-      status: "planned"
+      icon: "🕴️",
+      status: "done"
     },
     {
       title: "commitlint & commitizen",
       description: "lint generated content via pre-existing tools.",
-      status: "planned"
+      status: "done",
+      icon: "🛡️"
+    },
+    {
+      title: "getting started video",
+      description:
+        "learn how to use coco with a short video tutorial.",
+      icon: "📹",
+      status: "in-progress"
     },
     {
       title: "and much more!",
@@ -211,7 +214,7 @@ export const RoadmapSection = () => {
         <p className="text-center font-extralight items-center px-4">
           feel free to suggest a roadmap item on{" "}
           <Link
-            href="https://github.com/gfargo/coco/issues/new"
+            href={siteConfig.links.issues}
             className="text-primary hover:underline"
           >
             github

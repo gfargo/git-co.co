@@ -1,5 +1,5 @@
 {
-  "$id": "https://git-co.co/schema.json",
+  "$id": "https://coco.griffen.codes/schema.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$ref": "#/definitions/ConfigWithServiceObject",
   "definitions": {
@@ -228,7 +228,7 @@
               "deprecated": "Use \"model\" instead."
             },
             "model": {
-              "type": "string",
+              "$ref": "#/definitions/OpenAIChatModelId",
               "description": "Model name to use"
             },
             "modelKwargs": {
@@ -260,6 +260,10 @@
             "apiKey": {
               "type": "string",
               "description": "API key to use when making requests to OpenAI. Defaults to the value of `OPENAI_API_KEY` environment variable."
+            },
+            "verbosity": {
+              "$ref": "#/definitions/OpenAIVerbosityParam",
+              "description": "The verbosity of the model's response."
             }
           }
         },
@@ -364,6 +368,11 @@
             }
           },
           "additionalProperties": false
+        },
+        "maxParsingAttempts": {
+          "type": "number",
+          "description": "The maximum number of attempts for schema parsing with retry logic.",
+          "default": 3
         }
       },
       "required": [
@@ -383,65 +392,7 @@
     "LLMModel": {
       "anyOf": [
         {
-          "type": "string",
-          "enum": [
-            "davinci-002",
-            "babbage-002",
-            "text-davinci-003",
-            "text-davinci-002",
-            "text-davinci-001",
-            "text-curie-001",
-            "text-babbage-001",
-            "text-ada-001",
-            "davinci",
-            "curie",
-            "babbage",
-            "ada",
-            "code-davinci-002",
-            "code-davinci-001",
-            "code-cushman-002",
-            "code-cushman-001",
-            "davinci-codex",
-            "cushman-codex",
-            "text-davinci-edit-001",
-            "code-davinci-edit-001",
-            "text-embedding-ada-002",
-            "text-similarity-davinci-001",
-            "text-similarity-curie-001",
-            "text-similarity-babbage-001",
-            "text-similarity-ada-001",
-            "text-search-davinci-doc-001",
-            "text-search-curie-doc-001",
-            "text-search-babbage-doc-001",
-            "text-search-ada-doc-001",
-            "code-search-babbage-code-001",
-            "code-search-ada-code-001",
-            "gpt2",
-            "gpt-3.5-turbo",
-            "gpt-35-turbo",
-            "gpt-3.5-turbo-0301",
-            "gpt-3.5-turbo-0613",
-            "gpt-3.5-turbo-1106",
-            "gpt-3.5-turbo-0125",
-            "gpt-3.5-turbo-16k",
-            "gpt-3.5-turbo-16k-0613",
-            "gpt-3.5-turbo-instruct",
-            "gpt-3.5-turbo-instruct-0914",
-            "gpt-4",
-            "gpt-4-0314",
-            "gpt-4-0613",
-            "gpt-4-32k",
-            "gpt-4-32k-0314",
-            "gpt-4-32k-0613",
-            "gpt-4-turbo",
-            "gpt-4-turbo-2024-04-09",
-            "gpt-4-turbo-preview",
-            "gpt-4-1106-preview",
-            "gpt-4-0125-preview",
-            "gpt-4-vision-preview",
-            "gpt-4o",
-            "gpt-4o-2024-05-13"
-          ]
+          "$ref": "#/definitions/OpenAIModel"
         },
         {
           "$ref": "#/definitions/OllamaModel"
@@ -451,9 +402,123 @@
         }
       ]
     },
+    "OpenAIModel": {
+      "type": "string",
+      "enum": [
+        "davinci-002",
+        "babbage-002",
+        "text-davinci-003",
+        "text-davinci-002",
+        "text-davinci-001",
+        "text-curie-001",
+        "text-babbage-001",
+        "text-ada-001",
+        "davinci",
+        "curie",
+        "babbage",
+        "ada",
+        "code-davinci-002",
+        "code-davinci-001",
+        "code-cushman-002",
+        "code-cushman-001",
+        "davinci-codex",
+        "cushman-codex",
+        "text-davinci-edit-001",
+        "code-davinci-edit-001",
+        "text-embedding-ada-002",
+        "text-embedding-3-small",
+        "text-embedding-3-large",
+        "text-similarity-davinci-001",
+        "text-similarity-curie-001",
+        "text-similarity-babbage-001",
+        "text-similarity-ada-001",
+        "text-search-davinci-doc-001",
+        "text-search-curie-doc-001",
+        "text-search-babbage-doc-001",
+        "text-search-ada-doc-001",
+        "code-search-babbage-code-001",
+        "code-search-ada-code-001",
+        "gpt2",
+        "gpt-3.5-turbo",
+        "gpt-35-turbo",
+        "gpt-3.5-turbo-0301",
+        "gpt-3.5-turbo-0613",
+        "gpt-3.5-turbo-1106",
+        "gpt-3.5-turbo-0125",
+        "gpt-3.5-turbo-16k",
+        "gpt-3.5-turbo-16k-0613",
+        "gpt-3.5-turbo-instruct",
+        "gpt-3.5-turbo-instruct-0914",
+        "gpt-4",
+        "gpt-4-0314",
+        "gpt-4-0613",
+        "gpt-4-32k",
+        "gpt-4-32k-0314",
+        "gpt-4-32k-0613",
+        "gpt-4-turbo",
+        "gpt-4-turbo-2024-04-09",
+        "gpt-4-turbo-preview",
+        "gpt-4-1106-preview",
+        "gpt-4-0125-preview",
+        "gpt-4-vision-preview",
+        "gpt-4o",
+        "gpt-4o-2024-05-13",
+        "gpt-4o-2024-08-06",
+        "gpt-4o-2024-11-20",
+        "gpt-4o-mini-2024-07-18",
+        "gpt-4o-mini",
+        "gpt-4o-search-preview",
+        "gpt-4o-search-preview-2025-03-11",
+        "gpt-4o-mini-search-preview",
+        "gpt-4o-mini-search-preview-2025-03-11",
+        "gpt-4o-audio-preview",
+        "gpt-4o-audio-preview-2024-12-17",
+        "gpt-4o-audio-preview-2024-10-01",
+        "gpt-4o-mini-audio-preview",
+        "gpt-4o-mini-audio-preview-2024-12-17",
+        "o1",
+        "o1-2024-12-17",
+        "o1-mini",
+        "o1-mini-2024-09-12",
+        "o1-preview",
+        "o1-preview-2024-09-12",
+        "o1-pro",
+        "o1-pro-2025-03-19",
+        "o3",
+        "o3-2025-04-16",
+        "o3-mini",
+        "o3-mini-2025-01-31",
+        "o4-mini",
+        "o4-mini-2025-04-16",
+        "chatgpt-4o-latest",
+        "gpt-4o-realtime",
+        "gpt-4o-realtime-preview-2024-10-01",
+        "gpt-4o-realtime-preview-2024-12-17",
+        "gpt-4o-mini-realtime-preview",
+        "gpt-4o-mini-realtime-preview-2024-12-17",
+        "gpt-4.1",
+        "gpt-4.1-2025-04-14",
+        "gpt-4.1-mini",
+        "gpt-4.1-mini-2025-04-14",
+        "gpt-4.1-nano",
+        "gpt-4.1-nano-2025-04-14",
+        "gpt-4.5-preview",
+        "gpt-4.5-preview-2025-02-27",
+        "gpt-5",
+        "gpt-5-2025-08-07",
+        "gpt-5-nano",
+        "gpt-5-nano-2025-08-07",
+        "gpt-5-mini",
+        "gpt-5-mini-2025-08-07",
+        "gpt-5-chat-latest"
+      ]
+    },
     "OllamaModel": {
       "type": "string",
       "enum": [
+        "deepseek-r1:1.5b",
+        "deepseek-r1:8b",
+        "deepseek-r1:32b",
         "codegemma:2b",
         "codegemma:7b-code",
         "codegemma",
@@ -485,9 +550,11 @@
         "llama3.2:latest",
         "llama3.2:1b",
         "llama3.2:3b",
-        "llama3.2:1b-instruct-fp16",
-        "llama3.2:1b-instruct-q3_K_M",
         "llama3",
+        "llava-llama3:latest",
+        "dolphin-llama3:latest",
+        "dolphin-llama3:8b",
+        "dolphin-llama3:70b",
         "mistral:7b",
         "mistral:latest",
         "mistral:text",
@@ -503,18 +570,28 @@
         "qwen2:1.5b",
         "qwen2:72b-text",
         "qwen2:72b",
-        "qwen2"
+        "qwen2",
+        "qwen2.5-coder:latest",
+        "qwen2.5-coder:0.5b",
+        "qwen2.5-coder:1.5b",
+        "qwen2.5-coder:3b",
+        "qwen2.5-coder:7b",
+        "qwen2.5-coder:14b",
+        "qwen2.5-coder:32b"
       ]
     },
     "AnthropicModel": {
       "type": "string",
       "enum": [
+        "claude-sonnet-4-0",
+        "claude-3-7-sonnet-latest",
+        "claude-3-5-haiku-latest",
+        "claude-3-5-sonnet-latest",
+        "claude-3-5-sonnet-20241022",
         "claude-3-5-sonnet-20240620",
         "claude-3-opus-20240229",
         "claude-3-sonnet-20240229",
-        "claude-3-haiku-20240307",
-        "claude-2.1",
-        "claude-2.0"
+        "claude-3-haiku-20240307"
       ]
     },
     "Callbacks": {
@@ -678,6 +755,98 @@
       "type": "object",
       "additionalProperties": false,
       "description": "Base class for all caches. All caches should extend this class."
+    },
+    "OpenAIChatModelId": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ChatModel"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "OpenAI.ChatModel": {
+      "$ref": "#/definitions/ChatModel"
+    },
+    "ChatModel": {
+      "type": "string",
+      "enum": [
+        "gpt-5",
+        "gpt-5-mini",
+        "gpt-5-nano",
+        "gpt-5-2025-08-07",
+        "gpt-5-mini-2025-08-07",
+        "gpt-5-nano-2025-08-07",
+        "gpt-5-chat-latest",
+        "gpt-4.1",
+        "gpt-4.1-mini",
+        "gpt-4.1-nano",
+        "gpt-4.1-2025-04-14",
+        "gpt-4.1-mini-2025-04-14",
+        "gpt-4.1-nano-2025-04-14",
+        "o4-mini",
+        "o4-mini-2025-04-16",
+        "o3",
+        "o3-2025-04-16",
+        "o3-mini",
+        "o3-mini-2025-01-31",
+        "o1",
+        "o1-2024-12-17",
+        "o1-preview",
+        "o1-preview-2024-09-12",
+        "o1-mini",
+        "o1-mini-2024-09-12",
+        "gpt-4o",
+        "gpt-4o-2024-11-20",
+        "gpt-4o-2024-08-06",
+        "gpt-4o-2024-05-13",
+        "gpt-4o-audio-preview",
+        "gpt-4o-audio-preview-2024-10-01",
+        "gpt-4o-audio-preview-2024-12-17",
+        "gpt-4o-audio-preview-2025-06-03",
+        "gpt-4o-mini-audio-preview",
+        "gpt-4o-mini-audio-preview-2024-12-17",
+        "gpt-4o-search-preview",
+        "gpt-4o-mini-search-preview",
+        "gpt-4o-search-preview-2025-03-11",
+        "gpt-4o-mini-search-preview-2025-03-11",
+        "chatgpt-4o-latest",
+        "codex-mini-latest",
+        "gpt-4o-mini",
+        "gpt-4o-mini-2024-07-18",
+        "gpt-4-turbo",
+        "gpt-4-turbo-2024-04-09",
+        "gpt-4-0125-preview",
+        "gpt-4-turbo-preview",
+        "gpt-4-1106-preview",
+        "gpt-4-vision-preview",
+        "gpt-4",
+        "gpt-4-0314",
+        "gpt-4-0613",
+        "gpt-4-32k",
+        "gpt-4-32k-0314",
+        "gpt-4-32k-0613",
+        "gpt-3.5-turbo",
+        "gpt-3.5-turbo-16k",
+        "gpt-3.5-turbo-0301",
+        "gpt-3.5-turbo-0613",
+        "gpt-3.5-turbo-1106",
+        "gpt-3.5-turbo-0125",
+        "gpt-3.5-turbo-16k-0613"
+      ]
+    },
+    "OpenAIVerbosityParam": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        null
+      ]
     },
     "OllamaLLMService": {
       "type": "object",
@@ -959,6 +1128,11 @@
             }
           },
           "additionalProperties": false
+        },
+        "maxParsingAttempts": {
+          "type": "number",
+          "description": "The maximum number of attempts for schema parsing with retry logic.",
+          "default": 3
         }
       },
       "required": [
@@ -1105,6 +1279,11 @@
             }
           },
           "additionalProperties": false
+        },
+        "maxParsingAttempts": {
+          "type": "number",
+          "description": "The maximum number of attempts for schema parsing with retry logic.",
+          "default": 3
         }
       },
       "required": [

@@ -36,3 +36,9 @@ local
 
 # vercel
 .vercel
+
+# Agents
+.kiro
+AGENTS.md
+CLAUDE.md
+GEMINI.md

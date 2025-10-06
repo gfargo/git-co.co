@@ -1,15 +1,11 @@
 import { Section } from "@/components/Section"
 import { SearchIcon } from "lucide-react"
-import {
-  AccordionTrigger,
-  AccordionContent,
-  AccordionItem,
-  Accordion
-} from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import ThreeJSBackground from "@/components/ThreeJSBackground"
 import Image from "next/image"
+import { FaqAccordion } from "./FaqAccordion"
+import { siteConfig } from "@/config/site"
 
 export const FaqSection = () => {
   const questions = [
@@ -18,13 +14,37 @@ export const FaqSection = () => {
       answer: (
         <div className="space-y-4">
           <p>
-            <code className="text-primary">coco</code> command line tool
-            automates away the tedium of writing git commit messages.
+            <code className="text-primary">coco</code> is an AI-powered git
+            assistant that automates commit messages, changelogs, code recaps,
+            and reviews.
           </p>
           <p>
-            It utilizes langchain and supported large language models (llms) to
-            facilitate the creation of detailed commit messages and changelogs.
+            It supports multiple AI providers (OpenAI, Anthropic Claude, and
+            local models via Ollama) with first-class Conventional Commits
+            support and commitlint integration.
           </p>
+        </div>
+      )
+    },
+    {
+      question: "does coco support conventional commits?",
+      answer: (
+        <div className="space-y-4">
+          <p>
+            <strong className="font-semibold">Yes!</strong>{" "}
+            <code className="text-primary">coco</code> has first-class support
+            for Conventional Commits - it&apos;s optional and can be enabled
+            automatically or manually.
+          </p>
+          <p>
+            When <code className="text-primary">coco</code> detects a
+            commitlint configuration, it automatically enables conventional
+            commits mode and validates your messages against your rules with
+            intelligent retry logic.
+          </p>
+          <pre className="bg-secondary rounded p-2 text-sm text-white">
+            <code>{`# Force conventional commits mode\ncoco --conventional\n\n# Output: feat(auth): add OAuth2 integration`}</code>
+          </pre>
         </div>
       )
     },
@@ -93,7 +113,7 @@ export const FaqSection = () => {
             <code className="text-primary">coco</code> loads{" "}
             <Link
               className="underline"
-              href="https://github.com/gfargo/coco/blob/main/src/lib/langchain/prompts/commitDefault.ts#L3-L15"
+              href={siteConfig.links.commitPrompt}
             >
               <code>/src/lib/langchain/prompts/commitDefault.ts</code>
             </Link>
@@ -130,36 +150,45 @@ export const FaqSection = () => {
       )
     },
     {
-      question: "how do I use my own language model?",
+      question: "what AI providers does coco support?",
       answer: (
         <div className="flex flex-col gap-2">
           <p>
-            <code className="text-primary">coco</code> will load OpenAI&apos;s
-            latest model by default however, if you&apos;d like you can
-            customize the default options or bring your own model.
+            <code className="text-primary">coco</code> supports multiple AI
+            providers, giving you flexibility in how you run it:
           </p>
-          <p>
-            Find out more about how to use your own language model in the{` `}
+          <ul className="list-disc pl-4 space-y-2">
+            <li>
+              <strong>OpenAI</strong> - GPT-4, GPT-3.5-turbo (default)
+            </li>
+            <li>
+              <strong>Anthropic Claude</strong> - Claude 3.5 Sonnet, Claude 3
+              Opus
+            </li>
+            <li>
+              <strong>Ollama</strong> - Run models locally (Llama, Mistral,
+              etc.)
+            </li>
+          </ul>
+          <p className="mt-2">
+            Find out more about configuring AI providers in the{" "}
             <a
               className="text-primary hover:underline"
-              href="https://github.com/gfargo/coco/wiki"
+              href={siteConfig.links.wiki}
               target="_blank"
             >
               wiki
             </a>
+            , including how to{" "}
+            <a
+              className="text-primary hover:underline"
+              href={siteConfig.links.ollamaWiki}
+              target="_blank"
+            >
+              use Ollama for privacy-focused local models
+            </a>
             .
           </p>
-          <ul className="list-disc pl-4">
-            <li>
-              <a
-                className="text-primary hover:underline"
-                href="https://github.com/gfargo/coco/wiki/Using-Ollama"
-                target="_blank"
-              >
-                Using Ollama
-              </a>
-            </li>
-          </ul>
         </div>
       )
     },
@@ -210,33 +239,18 @@ export const FaqSection = () => {
           </div>
         </div>
         <div className="w-full max-w-2xl mx-auto bg-gray-900/60 p-10 rounded-lg shadow-inner">
-          <Accordion className="w-full" collapsible type="single">
-            {questions.map((question, index) => {
-              const id = question.question
-                .replace(/\s/g, "-")
-                .replace(/[^a-zA-Z0-9-_]/g, "")
-                .toLowerCase()
-
-              return (
-                <AccordionItem key={id} value={id}>
-                  <AccordionTrigger
-                    id={id}
-                    className="flex items-center justify-between py-4"
-                  >
-                    <span>{question.question}</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="py-4">
-                    {question.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              )
-            })}
-          </Accordion>
+          <FaqAccordion questions={questions} />
         </div>
       </div>
 
       <ThreeJSBackground />
-      <Image src='/mascott/mascott_${randomLetter}.png' alt="mascott" width={200} height={200} className="hidden" />
+      <Image
+        src={`/mascott/mascott_${["a", "b", "c", "d"].sort(() => Math.random() - 0.5)[0]}.png`}
+        alt="mascott"
+        width={200}
+        height={200}
+        className="hidden"
+      />
     </Section>
   )
 }

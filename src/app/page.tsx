@@ -3,10 +3,13 @@ import { Header } from "@/components/Header"
 
 import { CommunitySection } from "./_home/sections/Community"
 import { HeroSection } from "./_home/sections/Hero"
+import { KeyFeaturesSection } from "./_home/sections/KeyFeatures"
 import { FeaturesSection } from "./_home/sections/Features"
 import { InstallSection } from "./_home/sections/Install"
 import { FeedbackSection } from "./_home/sections/Feedback"
 import { FaqSection } from "./_home/sections/Faq"
+import { CommandsSection } from "./_home/sections/Commands"
+import { DocumentationSection } from "./_home/sections/Documentation"
 import { RoadmapSection } from "./_home/sections/Roadmap"
 
 export default function HomePage() {
@@ -15,10 +18,13 @@ export default function HomePage() {
       <Header />
       <main className="w-full flex-1 pb-2 overflow-hidden">
         <HeroSection />
+        <KeyFeaturesSection />
         <FeaturesSection />
         <InstallSection />
         <RoadmapSection />
         <FaqSection />
+        <CommandsSection />
+        <DocumentationSection />
         {/* <FeedbackSection /> */}
         <CommunitySection />
       </main>

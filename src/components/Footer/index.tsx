@@ -1,5 +1,6 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons"
 import Link from "next/link"
+import { siteConfig } from "@/config/site"
 
 export const Footer: React.FC = () => {
   return (
@@ -7,7 +8,7 @@ export const Footer: React.FC = () => {
       <nav className="mx-auto flex gap-4 sm:gap-6">
         <Link
           className="text-xl hover:text-secondary transition-all"
-          href="https://github.com/gfargo/coco/"
+          href={siteConfig.links.github}
         >
           <GitHubLogoIcon className="w-8 h-8" />
         </Link>
