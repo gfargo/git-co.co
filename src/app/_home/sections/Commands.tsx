@@ -206,7 +206,7 @@ export const CommandsSection = () => {
                   <div className="border-l-2 border-primary pl-3">
                     <code className="text-primary">-r, --range [range]</code>
                     <p className="text-gray-600 mt-1">
-                      Specific commit range
+                      Specific commit range (HEAD refs or hashes)
                     </p>
                     <code className="text-xs text-gray-500 mt-1 block">
                       coco changelog -r HEAD~5:HEAD
@@ -225,9 +225,23 @@ export const CommandsSection = () => {
                     </code>
                   </div>
                   <div className="border-l-2 border-primary pl-3">
-                    <code className="text-primary">-t, --since-last-tag</code>
+                    <code className="text-primary">-t, --tag [name]</code>
+                    <p className="text-gray-600 mt-1">
+                      Compare against a specific tag
+                    </p>
+                    <code className="text-xs text-gray-500 mt-1 block">
+                      coco changelog -t 3.0.0
+                    </code>
+                  </div>
+                  <div className="border-l-2 border-primary pl-3">
+                    <code className="text-primary">--since-last-tag</code>
                     <p className="text-gray-600 mt-1">
                       All commits since last tag
+                    </p>
+                  </div>
+                  <div className="mt-4 bg-amber-50 border-l-4 border-amber-400 p-3">
+                    <p className="text-xs text-amber-800 font-medium">
+                      <strong>Note:</strong> --branch, --tag, and --since-last-tag cannot be combined in the same run.
                     </p>
                   </div>
                 </div>
