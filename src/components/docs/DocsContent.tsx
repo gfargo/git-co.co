@@ -50,8 +50,12 @@ export function DocsContent({ content, page, className }: DocsContentProps) {
             <p className="leading-7 text-muted-foreground mb-4">{children}</p>
           ),
           a: ({ href, children }) => {
-            const isExternal = href?.startsWith("http")
-            const isInternal = href?.startsWith("/docs")
+            if (!href) {
+              return <span>{children}</span>
+            }
+
+            const isExternal = href.startsWith("http")
+            const isInternal = href.startsWith("/docs")
 
             if (isInternal) {
               return (
