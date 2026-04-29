@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism"
+import type { SyntaxHighlighterProps } from "react-syntax-highlighter"
 import { processMarkdown, type WikiPage } from "@/lib/wiki"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
@@ -117,8 +118,9 @@ export function DocsContent({ content, page, className }: DocsContentProps) {
               {children}
             </td>
           ),
-          code: ({ className, children, ...props }) => {
+          code: ({ className, children, node: _node, ...props }) => {
             const match = /language-(\w+)/.exec(className || "")
+            const language = match?.[1] || "text"
             const isInline = !match
 
             if (isInline) {
@@ -133,7 +135,7 @@ export function DocsContent({ content, page, className }: DocsContentProps) {
             }
 
             return (
-              <CodeBlock language={match[1] || "text"}>
+              <CodeBlock language={language}>
                 {String(children).replace(/\n$/, "")}
               </CodeBlock>
             )
@@ -190,7 +192,7 @@ function CodeBlock({
       </div>
       <SyntaxHighlighter
         language={language}
-        style={oneDark}
+        style={oneDark as SyntaxHighlighterProps["style"]}
         customStyle={{
           margin: 0,
           borderRadius: "0.5rem",

@@ -198,7 +198,7 @@ export function getAdjacentPages(slug: string): {
   const index = wikiManifest.findIndex((page) => page.slug === slug)
 
   return {
-    prev: index > 0 ? wikiManifest[index - 1] : null,
-    next: index < wikiManifest.length - 1 ? wikiManifest[index + 1] : null,
+    prev: index > 0 ? (wikiManifest[index - 1] ?? null) : null,
+    next: index < wikiManifest.length - 1 ? (wikiManifest[index + 1] ?? null) : null,
   }
 }

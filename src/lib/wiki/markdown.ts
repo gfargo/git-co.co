@@ -10,7 +10,7 @@ export function transformWikiLinks(markdown: string): string {
   const wikiLinkPattern =
     /\[([^\]]+)\]\(https:\/\/github\.com\/gfargo\/coco\/wiki\/([^)]+)\)/g
 
-  return markdown.replace(wikiLinkPattern, (match, text, wikiPath) => {
+  return markdown.replace(wikiLinkPattern, (match, text: string, wikiPath: string) => {
     // Find the page in our manifest by wikiPath
     const page = wikiManifest.find(
       (p) =>
@@ -65,7 +65,7 @@ export function processMarkdown(
  */
 export function extractTitle(markdown: string): string | null {
   const match = markdown.match(/^#\s+(.+)$/m)
-  return match ? match[1].trim() : null
+  return match ? (match[1]?.trim() ?? null) : null
 }
 
 /**
