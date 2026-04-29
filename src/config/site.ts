@@ -5,6 +5,7 @@ export const siteConfig = {
   description:
     "AI-powered git assistant with first-class Conventional Commits support. Generate intelligent commit messages, create changelogs, get code reviews, and automate your git workflow with commitlint integration and multiple AI providers.",
   links: {
+    docs: "/docs",
     github: "https://github.com/gfargo/coco",
     githubProfile: "https://github.com/gfargo",
     discord: "https://discord.gg/KGu9nE9Ejx",

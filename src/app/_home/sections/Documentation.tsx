@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Section } from "@/components/Section"
 import { siteConfig } from "@/config/site"
 import {
@@ -8,7 +9,8 @@ import {
   WrenchIcon,
   AlertCircleIcon,
   FileTextIcon,
-  MessageSquareIcon
+  MessageSquareIcon,
+  ArrowRightIcon
 } from "lucide-react"
 
 export const DocumentationSection = () => {
@@ -17,25 +19,25 @@ export const DocumentationSection = () => {
       icon: RocketIcon,
       title: "Getting Started",
       description: "Complete beginner's guide from installation to first commit",
-      href: `${siteConfig.links.wiki}/Getting-Started`
+      href: "/docs/getting-started"
     },
     {
       icon: WrenchIcon,
       title: "Configuration Overview",
       description: "All configuration options and setup methods",
-      href: siteConfig.links.wiki
+      href: "/docs/configuration"
     },
     {
       icon: UsersIcon,
       title: "Team Collaboration",
       description: "Enterprise deployment and team adoption strategies",
-      href: `${siteConfig.links.wiki}/Team-Collaboration`
+      href: "/docs/team-collaboration"
     },
     {
       icon: HomeIcon,
       title: "Using Ollama",
       description: "Local AI setup for privacy and cost control",
-      href: siteConfig.links.ollamaWiki
+      href: "/docs/using-ollama"
     }
   ]
 
@@ -43,17 +45,17 @@ export const DocumentationSection = () => {
     {
       title: "Advanced Usage",
       description: "Custom prompts, automation, and power-user features",
-      href: `${siteConfig.links.wiki}/Advanced-Usage`
+      href: "/docs/advanced-usage"
     },
     {
       title: "Troubleshooting",
       description: "Solutions for common issues and debugging",
-      href: `${siteConfig.links.wiki}/Troubleshooting`
+      href: "/docs/troubleshooting"
     },
     {
       title: "Ignoring Files & Extensions",
       description: "Advanced file filtering and pattern matching",
-      href: `${siteConfig.links.wiki}/Ignoring-Files-&-Extensions`
+      href: "/docs/ignoring-files"
     }
   ]
 
@@ -79,11 +81,9 @@ export const DocumentationSection = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               {essentialGuides.map((guide, index) => (
-                <a
+                <Link
                   key={index}
                   href={guide.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="group flex items-start p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-transparent hover:border-primary/20"
                 >
                   <div className="flex items-center justify-center w-12 h-12 mr-4 rounded-lg bg-primary/10 flex-shrink-0 group-hover:bg-primary/20 transition-colors">
@@ -95,31 +95,38 @@ export const DocumentationSection = () => {
                     </h4>
                     <p className="text-sm text-gray-600">{guide.description}</p>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
 
           {/* Advanced Resources */}
           <div>
-            <div className="flex items-center mb-6">
-              <FileTextIcon className="w-6 h-6 text-primary mr-3" />
-              <h3 className="text-2xl font-bold">Advanced Resources</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center">
+                <FileTextIcon className="w-6 h-6 text-primary mr-3" />
+                <h3 className="text-2xl font-bold">Advanced Resources</h3>
+              </div>
+              <Link
+                href="/docs"
+                className="group flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              >
+                View all docs
+                <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
             </div>
             <div className="grid md:grid-cols-3 gap-4">
               {advancedResources.map((resource, index) => (
-                <a
+                <Link
                   key={index}
                   href={resource.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="group p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-transparent hover:border-primary/20"
                 >
                   <h4 className="text-base font-semibold mb-2 group-hover:text-primary transition-colors">
                     {resource.title}
                   </h4>
                   <p className="text-sm text-gray-600">{resource.description}</p>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -131,10 +138,8 @@ export const DocumentationSection = () => {
               <h3 className="text-2xl font-bold">Need Help?</h3>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
-              <a
-                href={`${siteConfig.links.wiki}/Troubleshooting`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/docs/troubleshooting"
                 className="group flex flex-col items-center text-center p-4 bg-white/50 rounded-lg hover:bg-white transition-colors"
               >
                 <BookOpenIcon className="w-8 h-8 text-primary mb-3" />
@@ -144,7 +149,7 @@ export const DocumentationSection = () => {
                 <p className="text-sm text-gray-600">
                   Comprehensive problem-solving resource
                 </p>
-              </a>
+              </Link>
               <a
                 href={siteConfig.links.issues}
                 target="_blank"
