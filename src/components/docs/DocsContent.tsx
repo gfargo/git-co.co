@@ -133,7 +133,7 @@ export function DocsContent({ content, page, className }: DocsContentProps) {
             }
 
             return (
-              <CodeBlock language={match[1]}>
+              <CodeBlock language={match[1] || "text"}>
                 {String(children).replace(/\n$/, "")}
               </CodeBlock>
             )
