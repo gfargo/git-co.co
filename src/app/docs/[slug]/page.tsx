@@ -22,18 +22,39 @@ export async function generateMetadata({
   const page = getWikiPage(slug)
 
   if (!page) {
-    return {
-      title: "Not Found",
-    }
+    return { title: "Not Found" }
   }
 
+  const pageUrl = `${siteConfig.url}/docs/${slug}`
+  const description = page.description || `Documentation for ${page.title} in Coco, the AI-powered git assistant.`
+
   return {
-    title: `${page.title} | Coco Docs`,
-    description: page.description || `Documentation for ${page.title}`,
+    title: page.title,
+    description,
+    alternates: {
+      canonical: pageUrl,
+    },
     openGraph: {
+      type: "article",
       title: `${page.title} | Coco Documentation`,
-      description: page.description || `Learn about ${page.title} in Coco`,
-      url: `${siteConfig.url}/docs/${slug}`,
+      description,
+      url: pageUrl,
+      siteName: siteConfig.name,
+      images: [
+        {
+          url: siteConfig.ogImage,
+          width: 1280,
+          height: 640,
+          alt: `${page.title} - Coco Documentation`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${page.title} | Coco Docs`,
+      description,
+      images: [siteConfig.ogImage],
+      creator: siteConfig.author.twitter,
     },
   }
 }
@@ -48,8 +69,35 @@ export default async function DocPage({ params }: DocPageProps) {
 
   const { page, content } = result
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": page.title,
+    "description": page.description || `Documentation for ${page.title}`,
+    "url": `${siteConfig.url}/docs/${page.slug}`,
+    "author": {
+      "@type": "Person",
+      "name": siteConfig.author.name,
+      "url": siteConfig.author.url,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": siteConfig.name,
+      "url": siteConfig.url,
+    },
+    "isPartOf": {
+      "@type": "TechArticle",
+      "name": "Coco Documentation",
+      "url": `${siteConfig.url}/docs`,
+    },
+  }
+
   return (
     <div className="max-w-3xl">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
         <Link href="/docs" className="hover:text-foreground transition-colors">

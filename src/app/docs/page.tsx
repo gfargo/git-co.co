@@ -2,11 +2,22 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { getWikiCategories } from "@/lib/wiki"
 import { ArrowRight, Book, Settings, Users, Wrench, Map, HelpCircle } from "lucide-react"
+import { siteConfig } from "@/config/site"
 
 export const metadata: Metadata = {
-  title: "Documentation | Coco",
+  title: "Documentation",
   description:
     "Comprehensive documentation for Coco, the AI-powered git assistant. Learn about installation, configuration, team collaboration, and advanced features.",
+  alternates: {
+    canonical: `${siteConfig.url}/docs`,
+  },
+  openGraph: {
+    title: "Documentation | Coco",
+    description:
+      "Comprehensive documentation for Coco, the AI-powered git assistant. Learn about installation, configuration, team collaboration, and advanced features.",
+    url: `${siteConfig.url}/docs`,
+    siteName: siteConfig.name,
+  },
 }
 
 const categoryIcons: Record<string, React.ElementType> = {
