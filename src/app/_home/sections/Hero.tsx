@@ -78,11 +78,7 @@ export const HeroSection = () => {
         </div>
       </section>
 
-      {/* Gradient band below the hero — fades green into dark */}
-      <div
-        className="h-96 w-full bg-gradient-to-b from-oxley-400 via-oxley-900 to-background"
-        aria-hidden="true"
-      />
+      {/* No gradient — clean edge between hero and dark green content below */}
     </>
   )
 }

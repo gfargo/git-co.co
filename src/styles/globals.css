@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    /* Dark terminal palette — dark-first, no toggle */
-    --bg-primary: 220 15% 8%;
-    --bg-secondary: 220 15% 12%;
-    --bg-elevated: 220 15% 16%;
-    --bg-surface: 220 15% 20%;
+    /* Dark terminal palette — dark-first, no toggle, green-tinted */
+    --bg-primary: 150 22% 10%;
+    --bg-secondary: 150 18% 13%;
+    --bg-elevated: 150 14% 16%;
+    --bg-surface: 150 12% 20%;
 
     /* Terminal greens (accent) */
     --accent-green: 154 40% 53%;
@@ -17,44 +17,44 @@
 
     /* Text hierarchy */
     --text-primary: 0 0% 92%;
-    --text-secondary: 220 10% 64%;
-    --text-tertiary: 220 10% 40%;
+    --text-secondary: 150 10% 64%;
+    --text-tertiary: 150 10% 40%;
 
     /* Borders */
-    --border-default: 220 15% 20%;
+    --border-default: 150 12% 20%;
     --border-accent: 154 30% 35%;
 
     /* Code */
-    --code-bg: 220 20% 10%;
+    --code-bg: 150 20% 8%;
     --code-text: 154 40% 65%;
 
-    /* shadcn/ui mappings — all dark */
-    --background: 220 15% 8%;
+    /* shadcn/ui mappings — all dark, green-tinted */
+    --background: 150 22% 10%;
     --foreground: 0 0% 92%;
 
-    --card: 220 15% 12%;
+    --card: 150 18% 13%;
     --card-foreground: 0 0% 92%;
 
-    --popover: 220 15% 12%;
+    --popover: 150 18% 13%;
     --popover-foreground: 0 0% 92%;
 
     --primary: 154 40% 53%;
-    --primary-foreground: 220 15% 8%;
+    --primary-foreground: 150 22% 10%;
 
-    --secondary: 220 15% 16%;
+    --secondary: 150 14% 16%;
     --secondary-foreground: 0 0% 92%;
 
-    --muted: 220 15% 16%;
-    --muted-foreground: 220 10% 64%;
+    --muted: 150 14% 16%;
+    --muted-foreground: 150 10% 64%;
 
     --accent: 154 40% 53%;
-    --accent-foreground: 220 15% 8%;
+    --accent-foreground: 150 22% 10%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 92%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 20%;
+    --border: 150 12% 20%;
+    --input: 150 12% 20%;
     --ring: 154 40% 53%;
 
     --radius: 0.5rem;
