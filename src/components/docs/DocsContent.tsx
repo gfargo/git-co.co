@@ -17,8 +17,8 @@ interface DocsContentProps {
   className?: string
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function DocsContent({ content, page, className }: DocsContentProps) {
+export function DocsContent(props: DocsContentProps) {
+  const { content, className } = props
   const processedContent = processMarkdown(content)
 
   return (
@@ -123,8 +123,7 @@ export function DocsContent({ content, page, className }: DocsContentProps) {
               {children}
             </td>
           ),
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          code: ({ className, children, node: _node, ...props }) => {
+          code: ({ className, children, ...props }) => {
             const match = /language-(\w+)/.exec(className || "")
             const language = match?.[1] || "text"
             const isInline = !match
