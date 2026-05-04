@@ -1,7 +1,7 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import { SearchIcon, XIcon } from "lucide-react"
+import { ExternalLinkIcon, SearchIcon, XIcon } from "lucide-react"
 
 import { ReleaseEntry } from "@/components/ReleaseEntry"
 import type { ChangelogEntry } from "@/lib/changelog/types"
@@ -99,6 +99,22 @@ export function ChangelogSearch({ entries }: ChangelogSearchProps) {
               githubUrl={entry.githubUrl}
             />
           ))}
+
+          {/* Footer — link to full release history on GitHub */}
+          <div className="mt-10 rounded-lg border border-border bg-bg-elevated p-6 text-center">
+            <p className="text-sm text-muted-foreground">
+              Showing the {filtered.length} most recent releases.
+            </p>
+            <a
+              href="https://github.com/gfargo/coco/releases"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-2 rounded-sm font-mono text-sm text-terminal-green transition-colors hover:text-terminal-green-bright focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              View all releases on GitHub
+              <ExternalLinkIcon className="h-3.5 w-3.5" />
+            </a>
+          </div>
         </div>
       )}
     </>

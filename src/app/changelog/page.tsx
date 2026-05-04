@@ -69,7 +69,7 @@ export default function ChangelogPage() {
             <SectionHeader
               prompt="~/coco $ changelog"
               title="Changelog"
-              subtitle="Release history and highlights. See what changed in every version."
+              subtitle="Recent releases and highlights. For the full release history, visit GitHub."
             />
           </div>
         </Section>
