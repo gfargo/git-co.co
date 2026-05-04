@@ -97,6 +97,7 @@ export function ChangelogSearch({ entries }: ChangelogSearchProps) {
               highlights={entry.highlights}
               body={entry.body}
               githubUrl={entry.githubUrl}
+              searchQuery={query.trim()}
             />
           ))}
 

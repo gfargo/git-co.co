@@ -11,6 +11,38 @@ interface ReleaseEntryProps {
   body: string
   githubUrl: string
   isExpanded?: boolean
+  /** When provided, matching text is highlighted in the entry */
+  searchQuery?: string
+}
+
+/**
+ * Highlights occurrences of `query` within `text` by wrapping matches
+ * in a <mark> element. Case-insensitive. Returns the original text
+ * if query is empty.
+ */
+function HighlightText({ text, query }: { text: string; query?: string }) {
+  if (!query || !query.trim()) return <>{text}</>
+
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+  const regex = new RegExp(`(${escaped})`, "gi")
+  const parts = text.split(regex)
+
+  return (
+    <>
+      {parts.map((part, i) =>
+        regex.test(part) ? (
+          <mark
+            key={i}
+            className="rounded-sm bg-terminal-green/20 px-0.5 text-terminal-green"
+          >
+            {part}
+          </mark>
+        ) : (
+          part
+        )
+      )}
+    </>
+  )
 }
 
 /**
@@ -25,6 +57,7 @@ export function ReleaseEntry({
   body,
   githubUrl,
   isExpanded: initialExpanded = false,
+  searchQuery,
 }: ReleaseEntryProps) {
   const [expanded, setExpanded] = useState(initialExpanded)
 
@@ -71,7 +104,7 @@ export function ReleaseEntry({
                   key={i}
                   className="text-sm leading-relaxed text-muted-foreground before:mr-2 before:text-terminal-green-dim before:content-['›']"
                 >
-                  {highlight}
+                  <HighlightText text={highlight} query={searchQuery} />
                 </li>
               ))}
             </ul>
@@ -97,7 +130,7 @@ export function ReleaseEntry({
               "[&_p]:my-2"
             )}
           >
-            <MarkdownBody content={body} />
+            <MarkdownBody content={body} searchQuery={searchQuery} />
           </div>
 
           {/* GitHub release link */}
@@ -123,7 +156,7 @@ export function ReleaseEntry({
  * Handles headings, lists, bold, code, links, and paragraphs.
  * No external dependency — keeps the bundle light.
  */
-function MarkdownBody({ content }: { content: string }) {
+function MarkdownBody({ content, searchQuery }: { content: string; searchQuery?: string }) {
   const lines = content.split("\n")
   const elements: React.ReactNode[] = []
   let i = 0
@@ -139,12 +172,12 @@ function MarkdownBody({ content }: { content: string }) {
 
     // Headings
     if (line.startsWith("### ")) {
-      elements.push(<h3 key={i}>{renderInline(line.slice(4))}</h3>)
+      elements.push(<h3 key={i}>{renderInline(line.slice(4), searchQuery)}</h3>)
       i++
       continue
     }
     if (line.startsWith("## ")) {
-      elements.push(<h2 key={i}>{renderInline(line.slice(3))}</h2>)
+      elements.push(<h2 key={i}>{renderInline(line.slice(3), searchQuery)}</h2>)
       i++
       continue
     }
@@ -154,7 +187,7 @@ function MarkdownBody({ content }: { content: string }) {
       const listItems: React.ReactNode[] = []
       while (i < lines.length && lines[i]!.match(/^[-*] /)) {
         listItems.push(
-          <li key={i}>{renderInline(lines[i]!.replace(/^[-*] /, ""))}</li>
+          <li key={i}>{renderInline(lines[i]!.replace(/^[-*] /, ""), searchQuery)}</li>
         )
         i++
       }
@@ -175,7 +208,7 @@ function MarkdownBody({ content }: { content: string }) {
     }
     if (paraLines.length > 0) {
       elements.push(
-        <p key={`p-${i}`}>{renderInline(paraLines.join(" "))}</p>
+        <p key={`p-${i}`}>{renderInline(paraLines.join(" "), searchQuery)}</p>
       )
     }
   }
@@ -183,8 +216,8 @@ function MarkdownBody({ content }: { content: string }) {
   return <>{elements}</>
 }
 
-/** Render inline markdown: **bold**, `code`, and [links](url) */
-function renderInline(text: string): React.ReactNode {
+/** Render inline markdown: **bold**, `code`, and [links](url), with optional search highlighting */
+function renderInline(text: string, searchQuery?: string): React.ReactNode {
   // Split on inline patterns: **bold**, `code`, [text](url)
   const parts: React.ReactNode[] = []
   const regex = /(\*\*(.+?)\*\*|`([^`]+)`|\[([^\]]+)\]\(([^)]+)\))/g
@@ -194,15 +227,16 @@ function renderInline(text: string): React.ReactNode {
   while ((match = regex.exec(text)) !== null) {
     // Text before the match
     if (match.index > lastIndex) {
-      parts.push(text.slice(lastIndex, match.index))
+      const segment = text.slice(lastIndex, match.index)
+      parts.push(<HighlightText key={`t-${lastIndex}`} text={segment} query={searchQuery} />)
     }
 
     if (match[2]) {
       // Bold
-      parts.push(<strong key={match.index}>{match[2]}</strong>)
+      parts.push(<strong key={match.index}><HighlightText text={match[2]} query={searchQuery} /></strong>)
     } else if (match[3]) {
       // Inline code
-      parts.push(<code key={match.index}>{match[3]}</code>)
+      parts.push(<code key={match.index}><HighlightText text={match[3]} query={searchQuery} /></code>)
     } else if (match[4] && match[5]) {
       // Link
       parts.push(
@@ -212,7 +246,7 @@ function renderInline(text: string): React.ReactNode {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {match[4]}
+          <HighlightText text={match[4]} query={searchQuery} />
         </a>
       )
     }
@@ -222,7 +256,8 @@ function renderInline(text: string): React.ReactNode {
 
   // Remaining text
   if (lastIndex < text.length) {
-    parts.push(text.slice(lastIndex))
+    const segment = text.slice(lastIndex)
+    parts.push(<HighlightText key={`t-${lastIndex}`} text={segment} query={searchQuery} />)
   }
 
   return parts.length === 1 ? parts[0] : <>{parts}</>
