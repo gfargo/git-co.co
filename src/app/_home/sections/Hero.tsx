@@ -17,7 +17,7 @@ export const HeroSection = () => {
     >
       {/* Gradient transition from green hero into dark content below */}
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background via-background/60 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-background via-background/60 to-transparent"
         aria-hidden="true"
       />
 
