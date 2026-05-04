@@ -1,16 +1,12 @@
 import Link from "next/link"
 import { Section } from "@/components/Section"
-import { siteConfig } from "@/config/site"
+import { SectionHeader } from "@/components/SectionHeader"
 import {
-  BookOpenIcon,
-  RocketIcon,
-  UsersIcon,
-  HomeIcon,
-  WrenchIcon,
-  AlertCircleIcon,
-  FileTextIcon,
-  MessageSquareIcon,
-  ArrowRightIcon
+    RocketIcon,
+    UsersIcon,
+    HomeIcon,
+    WrenchIcon,
+    ArrowRightIcon
 } from "lucide-react"
 
 export const DocumentationSection = () => {
@@ -41,144 +37,42 @@ export const DocumentationSection = () => {
     }
   ]
 
-  const advancedResources = [
-    {
-      title: "Advanced Usage",
-      description: "Custom prompts, automation, and power-user features",
-      href: "/docs/advanced-usage"
-    },
-    {
-      title: "Troubleshooting",
-      description: "Solutions for common issues and debugging",
-      href: "/docs/troubleshooting"
-    },
-    {
-      title: "Ignoring Files & Extensions",
-      description: "Advanced file filtering and pattern matching",
-      href: "/docs/ignoring-files"
-    }
-  ]
-
   return (
-    <Section id="documentation" className="bg-gray-50 text-secondary">
+    <Section id="documentation">
       <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center mb-12 lg:mb-16">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center text-primary mb-4">
-            documentation & resources
-          </h2>
-          <p className="text-center text-lg text-gray-600 max-w-2xl">
-            Comprehensive guides and resources to help you get the most out of
-            coco
-          </p>
-        </div>
+        <SectionHeader prompt="~/coco $ docs" title="Documentation" />
 
-        <div className="max-w-6xl mx-auto space-y-12">
-          {/* Essential Guides */}
-          <div>
-            <div className="flex items-center mb-6">
-              <BookOpenIcon className="w-6 h-6 text-primary mr-3" />
-              <h3 className="text-2xl font-bold">Essential Guides</h3>
-            </div>
-            <div className="grid md:grid-cols-2 gap-6">
-              {essentialGuides.map((guide, index) => (
-                <Link
-                  key={index}
-                  href={guide.href}
-                  className="group flex items-start p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-transparent hover:border-primary/20"
-                >
-                  <div className="flex items-center justify-center w-12 h-12 mr-4 rounded-lg bg-primary/10 flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <guide.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
-                      {guide.title}
-                    </h4>
-                    <p className="text-sm text-gray-600">{guide.description}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Advanced Resources */}
-          <div>
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center">
-                <FileTextIcon className="w-6 h-6 text-primary mr-3" />
-                <h3 className="text-2xl font-bold">Advanced Resources</h3>
-              </div>
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6">
+            {essentialGuides.map((guide, index) => (
               <Link
-                href="/docs"
-                className="group flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                key={index}
+                href={guide.href}
+                className="group flex items-start p-4 sm:p-6 bg-bg-elevated border border-border rounded-lg hover:border-terminal-green-dim transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
-                View all docs
-                <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-              </Link>
-            </div>
-            <div className="grid md:grid-cols-3 gap-4">
-              {advancedResources.map((resource, index) => (
-                <Link
-                  key={index}
-                  href={resource.href}
-                  className="group p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-all border border-transparent hover:border-primary/20"
-                >
-                  <h4 className="text-base font-semibold mb-2 group-hover:text-primary transition-colors">
-                    {resource.title}
+                <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 mr-3 sm:mr-4 rounded-lg bg-terminal-green/10 flex-shrink-0">
+                  <guide.icon className="w-5 h-5 sm:w-6 sm:h-6 text-terminal-green" />
+                </div>
+                <div>
+                  <h4 className="text-lg font-mono text-foreground mb-2">
+                    {guide.title}
                   </h4>
-                  <p className="text-sm text-gray-600">{resource.description}</p>
-                </Link>
-              ))}
-            </div>
+                  <p className="text-sm text-muted-foreground">
+                    {guide.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
           </div>
 
-          {/* Need Help Section */}
-          <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-8">
-            <div className="flex items-center mb-6">
-              <AlertCircleIcon className="w-6 h-6 text-primary mr-3" />
-              <h3 className="text-2xl font-bold">Need Help?</h3>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              <Link
-                href="/docs/troubleshooting"
-                className="group flex flex-col items-center text-center p-4 bg-white/50 rounded-lg hover:bg-white transition-colors"
-              >
-                <BookOpenIcon className="w-8 h-8 text-primary mb-3" />
-                <h4 className="font-semibold mb-1 group-hover:text-primary transition-colors">
-                  Troubleshooting Guide
-                </h4>
-                <p className="text-sm text-gray-600">
-                  Comprehensive problem-solving resource
-                </p>
-              </Link>
-              <a
-                href={siteConfig.links.issues}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center text-center p-4 bg-white/50 rounded-lg hover:bg-white transition-colors"
-              >
-                <AlertCircleIcon className="w-8 h-8 text-primary mb-3" />
-                <h4 className="font-semibold mb-1 group-hover:text-primary transition-colors">
-                  GitHub Issues
-                </h4>
-                <p className="text-sm text-gray-600">
-                  Bug reports and feature requests
-                </p>
-              </a>
-              <a
-                href={siteConfig.links.discord}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-center text-center p-4 bg-white/50 rounded-lg hover:bg-white transition-colors"
-              >
-                <MessageSquareIcon className="w-8 h-8 text-primary mb-3" />
-                <h4 className="font-semibold mb-1 group-hover:text-primary transition-colors">
-                  Discord Community
-                </h4>
-                <p className="text-sm text-gray-600">
-                  Real-time help and discussion
-                </p>
-              </a>
-            </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/docs"
+              className="inline-flex items-center gap-1 rounded-sm font-mono text-terminal-green hover:text-terminal-green-bright transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              View all docs
+              <ArrowRightIcon className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </div>

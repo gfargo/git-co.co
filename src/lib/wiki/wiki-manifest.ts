@@ -1,3 +1,6 @@
+import { discoveredPages } from "./discovered-pages"
+import { mergeManifests } from "./merge-manifests"
+
 export type WikiPage = {
   slug: string
   title: string
@@ -5,6 +8,7 @@ export type WikiPage = {
   category: string
   order: number
   description?: string
+  isAutoDiscovered?: boolean
 }
 
 export type WikiCategory = {
@@ -13,7 +17,7 @@ export type WikiCategory = {
   pages: WikiPage[]
 }
 
-export const wikiManifest: WikiPage[] = [
+const manualManifest: WikiPage[] = [
   // Getting Started
   {
     slug: "getting-started",
@@ -22,6 +26,14 @@ export const wikiManifest: WikiPage[] = [
     category: "Getting Started",
     order: 1,
     description: "Installation, setup, and your first AI-generated commit",
+  },
+  {
+    slug: "command-reference",
+    title: "Command Reference",
+    wikiPath: "Command-Reference",
+    category: "Getting Started",
+    order: 2,
+    description: "Complete reference for every coco command and flag",
   },
 
   // Configuration
@@ -48,6 +60,40 @@ export const wikiManifest: WikiPage[] = [
     category: "Configuration",
     order: 3,
     description: "Local AI setup for privacy-focused workflows",
+  },
+  {
+    slug: "using-openrouter",
+    title: "Using OpenRouter",
+    wikiPath: "Using-OpenRouter",
+    category: "Configuration",
+    order: 4,
+    description: "Route AI requests through OpenRouter for model flexibility",
+  },
+
+  // Terminal Workstation
+  {
+    slug: "coco-ui",
+    title: "Coco UI",
+    wikiPath: "Coco-UI",
+    category: "Terminal Workstation",
+    order: 1,
+    description: "Overview of the keyboard-driven terminal Git workstation",
+  },
+  {
+    slug: "interactive-log-tui",
+    title: "Interactive Log TUI",
+    wikiPath: "Interactive-Log-TUI",
+    category: "Terminal Workstation",
+    order: 2,
+    description: "Browse commit history with the interactive log viewer",
+  },
+  {
+    slug: "tui-navigation",
+    title: "TUI Navigation",
+    wikiPath: "TUI-Navigation",
+    category: "Terminal Workstation",
+    order: 3,
+    description: "Keyboard shortcuts and navigation reference for the TUI",
   },
 
   // Team & Enterprise
@@ -86,54 +132,12 @@ export const wikiManifest: WikiPage[] = [
     description: "Route tasks to different AI models",
   },
   {
-    slug: "ai-call-audit",
-    title: "AI Call Audit",
-    wikiPath: "AI-Call-Audit",
-    category: "Advanced Features",
-    order: 4,
-    description: "Inventory and track remote AI call paths",
-  },
-  {
-    slug: "command-reliability-audit",
-    title: "Command Reliability Audit",
-    wikiPath: "Command-Reliability-Audit",
-    category: "Advanced Features",
-    order: 5,
-    description: "Review command coverage and reliability",
-  },
-  {
     slug: "documentation-workflow",
     title: "Documentation Workflow",
     wikiPath: "Documentation-Workflow",
     category: "Advanced Features",
-    order: 6,
+    order: 4,
     description: "Maintain wiki documentation locally",
-  },
-
-  // Product Roadmap
-  {
-    slug: "merge-conflict-resolution",
-    title: "AI-Assisted Merge Conflict Resolution",
-    wikiPath: "AI-Assisted-Merge-Conflict-Resolution",
-    category: "Roadmap",
-    order: 1,
-    description: "Upcoming feature for conflict resolution",
-  },
-  {
-    slug: "commit-range-recomposition",
-    title: "AI Commit Range Recomposition",
-    wikiPath: "AI-Commit-Range-Recomposition",
-    category: "Roadmap",
-    order: 2,
-    description: "Analyze and reorganize commit ranges",
-  },
-  {
-    slug: "worktree-workspaces",
-    title: "Worktree & Parallel Agent Workspaces",
-    wikiPath: "Worktree-And-Parallel-Agent-Workspaces",
-    category: "Roadmap",
-    order: 3,
-    description: "Manage local worktrees for parallel workflows",
   },
 
   // Help & Support
@@ -147,14 +151,20 @@ export const wikiManifest: WikiPage[] = [
   },
 ]
 
+export const wikiManifest: WikiPage[] = mergeManifests(
+  manualManifest,
+  discoveredPages
+)
+
 // Category ordering for sidebar
 export const categoryOrder: Record<string, number> = {
   "Getting Started": 1,
   Configuration: 2,
-  "Team & Enterprise": 3,
-  "Advanced Features": 4,
-  Roadmap: 5,
+  "Terminal Workstation": 3,
+  "Team & Enterprise": 4,
+  "Advanced Features": 5,
   "Help & Support": 6,
+  Uncategorized: 99,
 }
 
 // Get pages grouped by category
@@ -198,7 +208,8 @@ export function getAdjacentPages(slug: string): {
   const index = wikiManifest.findIndex((page) => page.slug === slug)
 
   return {
-    prev: index > 0 ? (wikiManifest[index - 1] ?? null) : null,
-    next: index < wikiManifest.length - 1 ? (wikiManifest[index + 1] ?? null) : null,
+    prev: index > 0 ? wikiManifest[index - 1] ?? null : null,
+    next:
+      index < wikiManifest.length - 1 ? wikiManifest[index + 1] ?? null : null,
   }
 }

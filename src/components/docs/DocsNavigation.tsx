@@ -8,7 +8,10 @@ interface DocsNavigationProps {
   className?: string
 }
 
-export function DocsNavigation({ currentSlug, className }: DocsNavigationProps) {
+export function DocsNavigation({
+  currentSlug,
+  className,
+}: DocsNavigationProps) {
   const { prev, next } = getAdjacentPages(currentSlug)
 
   if (!prev && !next) return null
@@ -16,20 +19,20 @@ export function DocsNavigation({ currentSlug, className }: DocsNavigationProps) 
   return (
     <nav
       className={cn(
-        "flex items-center justify-between gap-4 pt-8 mt-8 border-t",
+        "flex items-center justify-between gap-4 pt-8 mt-8 border-t border-[hsl(var(--border-default))]",
         className
       )}
     >
       {prev ? (
         <Link
           href={`/docs/${prev.slug}`}
-          className="group flex flex-col items-start gap-1 p-4 rounded-lg border hover:border-oxley-300 hover:bg-muted/50 transition-colors flex-1"
+          className="group flex flex-col items-start gap-1 p-4 rounded-lg border border-[hsl(var(--border-default))] bg-[hsl(var(--bg-secondary))] hover:border-terminal-green-dim hover:bg-[hsl(var(--bg-elevated))] transition-colors flex-1"
         >
-          <span className="flex items-center gap-1 text-sm text-muted-foreground group-hover:text-oxley-600">
+          <span className="flex items-center gap-1 text-sm font-mono text-[hsl(var(--text-tertiary))] group-hover:text-terminal-green">
             <ChevronLeft className="h-4 w-4" />
             Previous
           </span>
-          <span className="font-medium text-foreground group-hover:text-oxley-700">
+          <span className="font-medium text-foreground group-hover:text-terminal-green-bright transition-colors">
             {prev.title}
           </span>
         </Link>
@@ -40,13 +43,13 @@ export function DocsNavigation({ currentSlug, className }: DocsNavigationProps) 
       {next ? (
         <Link
           href={`/docs/${next.slug}`}
-          className="group flex flex-col items-end gap-1 p-4 rounded-lg border hover:border-oxley-300 hover:bg-muted/50 transition-colors flex-1 text-right"
+          className="group flex flex-col items-end gap-1 p-4 rounded-lg border border-[hsl(var(--border-default))] bg-[hsl(var(--bg-secondary))] hover:border-terminal-green-dim hover:bg-[hsl(var(--bg-elevated))] transition-colors flex-1 text-right"
         >
-          <span className="flex items-center gap-1 text-sm text-muted-foreground group-hover:text-oxley-600">
+          <span className="flex items-center gap-1 text-sm font-mono text-[hsl(var(--text-tertiary))] group-hover:text-terminal-green">
             Next
             <ChevronRight className="h-4 w-4" />
           </span>
-          <span className="font-medium text-foreground group-hover:text-oxley-700">
+          <span className="font-medium text-foreground group-hover:text-terminal-green-bright transition-colors">
             {next.title}
           </span>
         </Link>

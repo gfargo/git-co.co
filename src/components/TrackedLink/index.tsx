@@ -8,7 +8,7 @@ type TrackedLinkProps = LinkProps & {
   children: React.ReactNode
   className?: string
   eventName: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export const TrackedLink = ({

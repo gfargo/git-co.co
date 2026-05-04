@@ -1,7 +1,4 @@
 import { Footer } from "@/components/Footer"
-import { Header } from "@/components/Header"
-import { TerminalIcon } from "lucide-react"
-import Link from "next/link"
 
 export default function NotFound() {
   return (
