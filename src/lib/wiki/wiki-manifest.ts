@@ -1,3 +1,6 @@
+import { discoveredPages } from "./discovered-pages"
+import { mergeManifests } from "./merge-manifests"
+
 export type WikiPage = {
   slug: string
   title: string
@@ -5,6 +8,7 @@ export type WikiPage = {
   category: string
   order: number
   description?: string
+  isAutoDiscovered?: boolean
 }
 
 export type WikiCategory = {
@@ -13,7 +17,7 @@ export type WikiCategory = {
   pages: WikiPage[]
 }
 
-export const wikiManifest: WikiPage[] = [
+const manualManifest: WikiPage[] = [
   // Getting Started
   {
     slug: "getting-started",
@@ -21,7 +25,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Getting-Started",
     category: "Getting Started",
     order: 1,
-    description: "Installation, setup, and your first AI-generated commit",
+    description: "Installation, setup, and your first AI-generated commit"
   },
 
   // Configuration
@@ -31,7 +35,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Config-Overview",
     category: "Configuration",
     order: 1,
-    description: "Complete configuration reference with all options",
+    description: "Complete configuration reference with all options"
   },
   {
     slug: "ignoring-files",
@@ -39,7 +43,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Ignoring-Files-&-Extensions",
     category: "Configuration",
     order: 2,
-    description: "Advanced pattern matching and file filtering",
+    description: "Advanced pattern matching and file filtering"
   },
   {
     slug: "using-ollama",
@@ -47,7 +51,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Using-Ollama",
     category: "Configuration",
     order: 3,
-    description: "Local AI setup for privacy-focused workflows",
+    description: "Local AI setup for privacy-focused workflows"
   },
 
   // Team & Enterprise
@@ -57,7 +61,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Team-Collaboration",
     category: "Team & Enterprise",
     order: 1,
-    description: "Shared configurations and enterprise deployment",
+    description: "Shared configurations and enterprise deployment"
   },
 
   // Advanced Features
@@ -67,7 +71,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Advanced-Usage",
     category: "Advanced Features",
     order: 1,
-    description: "Custom prompts, automation, and optimization",
+    description: "Custom prompts, automation, and optimization"
   },
   {
     slug: "commit-split",
@@ -75,7 +79,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Commit-Split",
     category: "Advanced Features",
     order: 2,
-    description: "Plan smaller commits from broad staged changes",
+    description: "Plan smaller commits from broad staged changes"
   },
   {
     slug: "dynamic-model-routing",
@@ -83,7 +87,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Dynamic-Model-Routing",
     category: "Advanced Features",
     order: 3,
-    description: "Route tasks to different AI models",
+    description: "Route tasks to different AI models"
   },
   {
     slug: "ai-call-audit",
@@ -91,7 +95,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "AI-Call-Audit",
     category: "Advanced Features",
     order: 4,
-    description: "Inventory and track remote AI call paths",
+    description: "Inventory and track remote AI call paths"
   },
   {
     slug: "command-reliability-audit",
@@ -99,7 +103,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Command-Reliability-Audit",
     category: "Advanced Features",
     order: 5,
-    description: "Review command coverage and reliability",
+    description: "Review command coverage and reliability"
   },
   {
     slug: "documentation-workflow",
@@ -107,7 +111,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Documentation-Workflow",
     category: "Advanced Features",
     order: 6,
-    description: "Maintain wiki documentation locally",
+    description: "Maintain wiki documentation locally"
   },
 
   // Product Roadmap
@@ -117,7 +121,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "AI-Assisted-Merge-Conflict-Resolution",
     category: "Roadmap",
     order: 1,
-    description: "Upcoming feature for conflict resolution",
+    description: "Upcoming feature for conflict resolution"
   },
   {
     slug: "commit-range-recomposition",
@@ -125,7 +129,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "AI-Commit-Range-Recomposition",
     category: "Roadmap",
     order: 2,
-    description: "Analyze and reorganize commit ranges",
+    description: "Analyze and reorganize commit ranges"
   },
   {
     slug: "worktree-workspaces",
@@ -133,7 +137,7 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Worktree-And-Parallel-Agent-Workspaces",
     category: "Roadmap",
     order: 3,
-    description: "Manage local worktrees for parallel workflows",
+    description: "Manage local worktrees for parallel workflows"
   },
 
   // Help & Support
@@ -143,9 +147,14 @@ export const wikiManifest: WikiPage[] = [
     wikiPath: "Troubleshooting",
     category: "Help & Support",
     order: 1,
-    description: "Common issues, solutions, and debugging",
-  },
+    description: "Common issues, solutions, and debugging"
+  }
 ]
+
+export const wikiManifest: WikiPage[] = mergeManifests(
+  manualManifest,
+  discoveredPages
+)
 
 // Category ordering for sidebar
 export const categoryOrder: Record<string, number> = {
@@ -155,6 +164,7 @@ export const categoryOrder: Record<string, number> = {
   "Advanced Features": 4,
   Roadmap: 5,
   "Help & Support": 6,
+  Uncategorized: 99
 }
 
 // Get pages grouped by category
@@ -173,7 +183,7 @@ export function getWikiCategories(): WikiCategory[] {
     categories.push({
       name,
       order: categoryOrder[name] || 99,
-      pages: pages.sort((a, b) => a.order - b.order),
+      pages: pages.sort((a, b) => a.order - b.order)
     })
   }
 
@@ -198,7 +208,8 @@ export function getAdjacentPages(slug: string): {
   const index = wikiManifest.findIndex((page) => page.slug === slug)
 
   return {
-    prev: index > 0 ? (wikiManifest[index - 1] ?? null) : null,
-    next: index < wikiManifest.length - 1 ? (wikiManifest[index + 1] ?? null) : null,
+    prev: index > 0 ? wikiManifest[index - 1] ?? null : null,
+    next:
+      index < wikiManifest.length - 1 ? wikiManifest[index + 1] ?? null : null
   }
 }

@@ -4,13 +4,17 @@ import { DetailedHTMLProps, HTMLAttributes } from "react"
 interface SectionProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
   className?: string
+  variant?: "default" | "elevated" | "gradient"
 }
 
-export const Section = ({ className, children, ...rest }: SectionProps) => {
+export const Section = ({ className, variant = "default", children, ...rest }: SectionProps) => {
   return (
     <section
       className={cn(
-        "w-full py-12 md:py-24 lg:py-32 bg-primary text-white",
+        "relative w-full py-16 md:py-24 lg:py-32 bg-background text-foreground",
+        variant === "elevated" && "bg-bg-elevated",
+        variant === "gradient" &&
+          "bg-gradient-to-b from-background via-bg-elevated/50 to-background",
         className
       )}
       {...rest}

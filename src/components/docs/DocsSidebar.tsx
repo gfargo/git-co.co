@@ -4,8 +4,29 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { getWikiCategories, type WikiCategory } from "@/lib/wiki"
-import { ChevronRight, Book, Menu, X } from "lucide-react"
+import {
+    ChevronRight,
+    Book,
+    Menu,
+    X,
+    Settings,
+    Users,
+    Wrench,
+    Map,
+    HelpCircle,
+    FolderOpen,
+} from "lucide-react"
 import { useState } from "react"
+
+const categoryIcons: Record<string, React.ElementType> = {
+  "Getting Started": Book,
+  Configuration: Settings,
+  "Team & Enterprise": Users,
+  "Advanced Features": Wrench,
+  Roadmap: Map,
+  "Help & Support": HelpCircle,
+  Uncategorized: FolderOpen,
+}
 
 interface DocsSidebarProps {
   className?: string
@@ -18,12 +39,15 @@ export function DocsSidebar({ className }: DocsSidebarProps) {
   return (
     <nav className={cn("space-y-6", className)}>
       <div className="flex items-center gap-2 px-2">
-        <Book className="h-5 w-5 text-oxley-500" />
-        <Link href="/docs" className="font-semibold text-foreground">
+        <Book className="h-5 w-5 text-terminal-green" />
+        <Link
+          href="/docs"
+          className="font-mono font-semibold text-foreground hover:text-terminal-green transition-colors rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
           Documentation
         </Link>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-5">
         {categories.map((category) => (
           <SidebarCategory
             key={category.name}
@@ -43,15 +67,16 @@ function SidebarCategory({
   category: WikiCategory
   currentPath: string
 }) {
-  const hasActivePage = category.pages.some(
-    (page) => `/docs/${page.slug}` === currentPath
-  )
+  const Icon = categoryIcons[category.name] || FolderOpen
 
   return (
     <div className="space-y-1">
-      <h4 className="px-2 text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-        {category.name}
-      </h4>
+      <div className="flex items-center gap-2 px-2 mb-1.5">
+        <Icon className="h-3.5 w-3.5 text-[hsl(var(--text-tertiary))]" />
+        <h4 className="text-xs font-mono font-semibold text-[hsl(var(--text-secondary))] uppercase tracking-wider">
+          {category.name}
+        </h4>
+      </div>
       <ul className="space-y-0.5">
         {category.pages.map((page) => {
           const isActive = `/docs/${page.slug}` === currentPath
@@ -60,16 +85,19 @@ function SidebarCategory({
               <Link
                 href={`/docs/${page.slug}`}
                 className={cn(
-                  "flex items-center gap-2 px-2 py-1.5 text-sm rounded-md transition-colors",
+                  "flex items-center gap-2 px-2 py-1.5 text-sm rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                   isActive
-                    ? "bg-oxley-100 text-oxley-700 font-medium dark:bg-oxley-900 dark:text-oxley-100"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    ? "bg-[hsl(var(--bg-surface))] text-terminal-green font-medium border-l-2 border-terminal-green"
+                    : "text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--bg-elevated))]"
                 )}
               >
-                {isActive && (
-                  <ChevronRight className="h-3 w-3 shrink-0" />
-                )}
+                {isActive && <ChevronRight className="h-3 w-3 shrink-0" />}
                 <span className={cn(!isActive && "ml-5")}>{page.title}</span>
+                {page.isAutoDiscovered && (
+                  <span className="ml-auto text-[10px] font-mono text-[hsl(var(--text-tertiary))] opacity-60">
+                    •
+                  </span>
+                )}
               </Link>
             </li>
           )
@@ -87,8 +115,8 @@ export function MobileDocsSidebar() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="lg:hidden fixed bottom-4 right-4 z-50 bg-oxley-500 text-white p-3 rounded-full shadow-lg hover:bg-oxley-600 transition-colors"
-        aria-label="Open navigation"
+        className="lg:hidden fixed bottom-4 right-4 z-50 bg-terminal-green text-[hsl(var(--bg-primary))] p-3 rounded-full shadow-lg hover:bg-terminal-green-bright transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        aria-label="Open documentation navigation"
       >
         <Menu className="h-6 w-6" />
       </button>
@@ -96,16 +124,18 @@ export function MobileDocsSidebar() {
       {isOpen && (
         <div className="lg:hidden fixed inset-0 z-50">
           <div
-            className="absolute inset-0 bg-black/50"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute left-0 top-0 bottom-0 w-72 bg-background border-r overflow-y-auto">
-            <div className="flex items-center justify-between p-4 border-b">
-              <span className="font-semibold">Documentation</span>
+          <div className="absolute left-0 top-0 bottom-0 w-72 bg-[hsl(var(--bg-secondary))] border-r border-[hsl(var(--border-default))] overflow-y-auto">
+            <div className="flex items-center justify-between p-4 border-b border-[hsl(var(--border-default))]">
+              <span className="font-mono font-semibold text-foreground">
+                Documentation
+              </span>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-muted rounded"
-                aria-label="Close navigation"
+                className="p-1 hover:bg-[hsl(var(--bg-elevated))] rounded text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                aria-label="Close documentation navigation"
               >
                 <X className="h-5 w-5" />
               </button>

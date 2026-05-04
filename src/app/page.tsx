@@ -4,28 +4,24 @@ import { Header } from "@/components/Header"
 import { CommunitySection } from "./_home/sections/Community"
 import { HeroSection } from "./_home/sections/Hero"
 import { KeyFeaturesSection } from "./_home/sections/KeyFeatures"
-import { FeaturesSection } from "./_home/sections/Features"
 import { InstallSection } from "./_home/sections/Install"
-import { FeedbackSection } from "./_home/sections/Feedback"
-import { FaqSection } from "./_home/sections/Faq"
-import { CommandsSection } from "./_home/sections/Commands"
 import { DocumentationSection } from "./_home/sections/Documentation"
-import { RoadmapSection } from "./_home/sections/Roadmap"
+import { ToolbeltSection } from "./_home/sections/Toolbelt"
+import { WorkstationTeaser } from "./_home/sections/WorkstationTeaser"
+import { WhatsNewSection } from "./_home/sections/WhatsNew"
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-primary">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background">
       <Header />
       <main className="w-full flex-1 pb-2 overflow-hidden">
         <HeroSection />
+        <ToolbeltSection />
+        <WorkstationTeaser />
         <KeyFeaturesSection />
-        <FeaturesSection />
+        <WhatsNewSection />
         <InstallSection />
-        <RoadmapSection />
-        <FaqSection />
-        <CommandsSection />
         <DocumentationSection />
-        {/* <FeedbackSection /> */}
         <CommunitySection />
       </main>
       <Footer />

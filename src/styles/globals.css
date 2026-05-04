@@ -4,65 +4,65 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
+    /* Dark terminal palette — dark-first, no toggle */
+    --bg-primary: 220 15% 8%;
+    --bg-secondary: 220 15% 12%;
+    --bg-elevated: 220 15% 16%;
+    --bg-surface: 220 15% 20%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
+    /* Terminal greens (accent) */
+    --accent-green: 154 40% 53%;
+    --accent-green-dim: 154 30% 35%;
+    --accent-green-bright: 154 50% 65%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
+    /* Text hierarchy */
+    --text-primary: 0 0% 92%;
+    --text-secondary: 220 10% 64%;
+    --text-tertiary: 220 10% 40%;
 
-    --primary: 154, 19%, 53%;
-    --primary-foreground: 210 20% 98%;
+    /* Borders */
+    --border-default: 220 15% 20%;
+    --border-accent: 154 30% 35%;
 
-    --secondary: 164, 15%, 40%;
-    --secondary-foreground: 0 0% 95%;
+    /* Code */
+    --code-bg: 220 20% 10%;
+    --code-text: 154 40% 65%;
 
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
+    /* shadcn/ui mappings — all dark */
+    --background: 220 15% 8%;
+    --foreground: 0 0% 92%;
 
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
+    --card: 220 15% 12%;
+    --card-foreground: 0 0% 92%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
+    --popover: 220 15% 12%;
+    --popover-foreground: 0 0% 92%;
 
-    --border: 220 14.3% 95.9%;
-    --input: 175 28% 50%;
-    --ring: 154 19% 53%;
+    --primary: 154 40% 53%;
+    --primary-foreground: 220 15% 8%;
 
-    --radius: 0.5rem;
-  }
+    --secondary: 220 15% 16%;
+    --secondary-foreground: 0 0% 92%;
 
-  .dark {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
+    --muted: 220 15% 16%;
+    --muted-foreground: 220 10% 64%;
 
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 20% 98%;
-
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
-
-    --primary: 210 20% 98%;
-    --primary-foreground: 220.9 39.3% 11%;
-
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 20% 98%;
-
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
-
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
+    --accent: 154 40% 53%;
+    --accent-foreground: 220 15% 8%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive-foreground: 0 0% 92%;
 
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 216 12.2% 83.9%;
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 154 40% 53%;
+
+    --radius: 0.5rem;
+
+    /* Transition tokens */
+    --transition-fast: 150ms ease;
+    --transition-default: 250ms ease;
+    --transition-slow: 400ms ease;
   }
 }
 
@@ -76,5 +76,37 @@
 
   .container {
     @apply max-w-[1300px] mx-auto px-4 sm:px-6 md:px-10;
+  }
+}
+
+/* Terminal animation keyframes */
+@keyframes cursor-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes terminal-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 4px hsl(var(--accent-green));
+  }
+  50% {
+    box-shadow: 0 0 12px hsl(var(--accent-green));
   }
 }

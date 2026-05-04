@@ -24,19 +24,6 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        // oxley: {
-        //   "50": "hsl(160, 18%, 97%)",
-        //   "100": "hsl(148, 24%, 89%)",
-        //   "200": "hsl(151, 24%, 78%)",
-        //   "300": "hsl(153, 22%, 64%)",
-        //   "400": "hsl(154, 19%, 53%)",
-        //   "500": "hsl(155, 24%, 40%)",
-        //   "600": "hsl(157, 24%, 32%)",
-        //   "700": "hsl(155, 23%, 26%)",
-        //   "800": "hsl(157, 21%, 22%)",
-        //   "900": "hsl(159, 18%, 19%)",
-        //   "950": "hsl(162, 25%, 10%)",
-        // },
         oxley: {
           "50": "#f5f8f7",
           "100": "#ddeae2",
@@ -50,7 +37,13 @@ export default {
           "900": "#283932",
           "950": "#13201a"
         },
-
+        "terminal-green": {
+          DEFAULT: "hsl(154 40% 53%)",
+          dim: "hsl(154 30% 35%)",
+          bright: "hsl(154 50% 65%)"
+        },
+        "bg-elevated": "hsl(var(--bg-elevated))",
+        "bg-surface": "hsl(var(--bg-surface))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))"
@@ -81,7 +74,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans]
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+        mono: ["var(--font-mono)", ...fontFamily.mono]
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -96,11 +90,26 @@ export default {
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" }
+        },
+        "cursor-blink": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" }
+        },
+        "fade-in-up": {
+          from: { opacity: "0", transform: "translateY(8px)" },
+          to: { opacity: "1", transform: "translateY(0)" }
+        },
+        "terminal-glow": {
+          "0%, 100%": { boxShadow: "0 0 4px hsl(154 40% 53%)" },
+          "50%": { boxShadow: "0 0 12px hsl(154 40% 53%)" }
         }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out"
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "cursor-blink": "cursor-blink 1s step-end infinite",
+        "fade-in-up": "fade-in-up 0.5s ease-out",
+        "terminal-glow": "terminal-glow 2s ease-in-out infinite"
       }
     }
   },
