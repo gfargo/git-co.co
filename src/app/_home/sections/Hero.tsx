@@ -32,7 +32,7 @@ export const HeroSection = () => {
               </span>
 
               {/* Main heading with blinking cursor */}
-              <h1 className="font-mono text-3xl font-bold tracking-tighter text-white drop-shadow-lg sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+              <h1 className="font-mono text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
                 Your git toolbelt, sharpened by AI.
                 <span
                   className="ml-1 inline-block h-[0.9em] w-[0.5ch] translate-y-[0.05em] bg-white animate-cursor-blink"
@@ -76,7 +76,6 @@ export const HeroSection = () => {
                 src={cocoCoverImage}
                 alt="Coco AI Git Assistant — terminal interface showing automated commit message generation"
                 priority
-                className="drop-shadow-2xl"
               />
             </div>
           </div>
