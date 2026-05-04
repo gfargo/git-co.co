@@ -1,5 +1,5 @@
 /**
- * A single release entry parsed from `specs/RELEASE_NOTES_*.md` at build time
+ * A single release entry fetched from the GitHub Releases API at build time
  * and stored in `public/changelog.json`.
  */
 export interface ChangelogEntry {

@@ -273,51 +273,30 @@ async function discoverWikiPages() {
 }
 
 /**
- * Extracts a semver version string from a release notes filename.
- *
- * Duplicated from src/lib/changelog/parse-version.ts because prebuild.mjs
- * is plain Node ESM and cannot import TypeScript directly.
- *
- * Example: "RELEASE_NOTES_0.41.0.md" → "0.41.0"
- * Returns null if the filename doesn't match the expected pattern.
- */
-function parseVersionFromFilename(filename) {
-  const match = filename.match(/^RELEASE_NOTES_(\d+\.\d+\.\d+)\.md$/)
-  return match ? match[1] : null
-}
-
-/**
- * Compares two semver version strings for sorting (descending — newest first).
- *
- * Returns negative if a > b, positive if a < b, zero if equal.
- */
-function compareSemverDesc(a, b) {
-  const pa = a.split('.').map(Number)
-  const pb = b.split('.').map(Number)
-  for (let i = 0; i < 3; i++) {
-    if (pa[i] !== pb[i]) return pb[i] - pa[i]
-  }
-  return 0
-}
-
-/**
  * Extracts the summary from a release notes markdown body.
  *
- * The summary is the first paragraph under `## What's Changed` —
- * all text between that heading and the next `## ` heading, trimmed.
+ * Looks for the first paragraph under `## What's Changed`, or falls back
+ * to the first non-heading paragraph in the body.
  */
 function extractSummary(body) {
   const match = body.match(/(?:^|\n)## What's Changed[ \t]*\n([\s\S]*?)(?=\n## [^#]|$)/)
-  if (!match) return ''
-  return match[1].trim().split('\n\n')[0].trim()
+  if (match) return match[1].trim().split('\n\n')[0].trim()
+  // Fallback: first paragraph that isn't a heading
+  const lines = body.split('\n')
+  const para = []
+  for (const line of lines) {
+    if (line.startsWith('#')) continue
+    if (line.trim() === '' && para.length > 0) break
+    if (line.trim() !== '') para.push(line.trim())
+  }
+  return para.join(' ').slice(0, 200)
 }
 
 /**
  * Extracts highlight headings from a release notes markdown body.
  *
  * Collects all `### ` headings that appear between `## Highlights`
- * and the next `## ` heading. Only matches `## Highlights` (exactly
- * two `#` at line start), not `### Highlights`.
+ * and the next `## ` heading.
  */
 function extractHighlights(body) {
   const match = body.match(/(?:^|\n)## Highlights[ \t]*\n([\s\S]*?)(?=\n## [^#]|$)/)
@@ -333,110 +312,101 @@ function extractHighlights(body) {
 
 /**
  * Detects whether a release notes body contains actual breaking changes.
- *
- * Returns true if the `## Breaking Changes` section contains content
- * beyond "None known", "None", or similar negations. Only matches
- * `## Breaking Changes` (exactly two `#` at line start).
  */
 function hasBreakingChanges(body) {
   const match = body.match(/(?:^|\n)## Breaking Changes[ \t]*\n([\s\S]*?)(?=\n## [^#]|\n\*\*Full Changelog\*\*|$)/)
   if (!match) return false
   const section = match[1].trim()
   if (!section) return false
-  // Check if the section is just a "none" variant
   if (/^none(\s+known)?\.?$/i.test(section)) return false
-  // Check if the first line is a "none" variant followed by more text
-  const firstLine = section.split('\n')[0].trim()
-  if (/^none(\s+known)?\.?\s/i.test(firstLine)) return false
-  // If the section starts with a list item, there are breaking changes
-  if (/^- /.test(section)) return true
-  // Otherwise, if it's not a "none" variant, assume there are breaking changes
   return true
 }
 
 /**
- * Scans specs/RELEASE_NOTES_*.md files, parses each into a changelog entry,
- * sorts by version (newest first), and writes public/changelog.json.
+ * Fetches releases from the GitHub Releases API and writes public/changelog.json.
  *
- * - Missing specs/ directory or no matching files: writes empty array
- * - Unparseable files (bad filename, read errors): skipped with warnings
+ * Pulls the most recent releases (up to 20) from the gfargo/coco repo.
+ * No authentication required for public repos (rate limit: 60 req/hr).
+ *
+ * - Network failure: logs warning, writes empty array (build continues)
+ * - No releases found: writes empty array
  */
 async function generateChangelog() {
   console.log('\n\x1b[1m📋 Changelog Generation\x1b[0m\n')
 
-  const specsDir = path.resolve(__dirname, '..', 'specs')
   const outputPath = path.join(__dirname, 'public', 'changelog.json')
-
-  // Check if specs/ directory exists
-  if (!fs.existsSync(specsDir)) {
-    logInfo('No specs/ directory found — writing empty changelog.json')
-    ensureDirectoryExists(outputPath)
-    fs.writeFileSync(outputPath, JSON.stringify([], null, 2) + '\n')
-    logInfo('Wrote empty changelog.json')
-    return
-  }
-
-  // Read all files in specs/
-  let files
-  try {
-    files = fs.readdirSync(specsDir)
-  } catch (err) {
-    logError(`Failed to read specs/ directory: ${err.message}`)
-    ensureDirectoryExists(outputPath)
-    fs.writeFileSync(outputPath, JSON.stringify([], null, 2) + '\n')
-    return
-  }
-
-  // Filter to RELEASE_NOTES_*.md files
-  const releaseFiles = files.filter((f) => /^RELEASE_NOTES_.*\.md$/.test(f))
-
-  if (releaseFiles.length === 0) {
-    logInfo('No RELEASE_NOTES_*.md files found — writing empty changelog.json')
-    ensureDirectoryExists(outputPath)
-    fs.writeFileSync(outputPath, JSON.stringify([], null, 2) + '\n')
-    return
-  }
-
-  const entries = []
-
-  for (const file of releaseFiles) {
-    const version = parseVersionFromFilename(file)
-    if (!version) {
-      logInfo(`Skipping "${file}" — could not parse version from filename`)
-      continue
-    }
-
-    let body
-    try {
-      body = fs.readFileSync(path.join(specsDir, file), 'utf-8')
-    } catch (err) {
-      logInfo(`Skipping "${file}" — read error: ${err.message}`)
-      continue
-    }
-
-    const summary = extractSummary(body)
-    const highlights = extractHighlights(body)
-    const breakingChanges = hasBreakingChanges(body)
-    const githubUrl = `https://github.com/gfargo/coco/releases/tag/${version}`
-
-    entries.push({
-      version,
-      date: '',
-      highlights,
-      summary,
-      body,
-      githubUrl,
-      breakingChanges,
-    })
-  }
-
-  // Sort by version descending (newest first)
-  entries.sort((a, b) => compareSemverDesc(a.version, b.version))
+  const apiUrl = 'https://api.github.com/repos/gfargo/coco/releases?per_page=20'
 
   ensureDirectoryExists(outputPath)
+
+  let releases
+  try {
+    releases = await fetchJson(apiUrl)
+  } catch (err) {
+    logInfo(`Could not fetch GitHub releases: ${err.message}`)
+    logInfo('Writing empty changelog.json — build continues')
+    fs.writeFileSync(outputPath, JSON.stringify([], null, 2) + '\n')
+    return
+  }
+
+  if (!Array.isArray(releases) || releases.length === 0) {
+    logInfo('No releases found on GitHub — writing empty changelog.json')
+    fs.writeFileSync(outputPath, JSON.stringify([], null, 2) + '\n')
+    return
+  }
+
+  const entries = releases
+    .filter((r) => !r.draft)
+    .map((r) => {
+      const body = r.body || ''
+      const version = (r.tag_name || '').replace(/^v/, '')
+      const date = r.published_at ? r.published_at.split('T')[0] : ''
+      const highlights = extractHighlights(body)
+      const summary = extractSummary(body)
+      const breakingChanges = hasBreakingChanges(body)
+      const githubUrl = r.html_url || `https://github.com/gfargo/coco/releases/tag/${r.tag_name}`
+
+      return { version, date, highlights, summary, body, githubUrl, breakingChanges }
+    })
+    .filter((e) => e.version) // skip entries where version couldn't be parsed
+
   fs.writeFileSync(outputPath, JSON.stringify(entries, null, 2) + '\n')
 
   logSuccess(`Generated changelog with ${entries.length} entries → ${path.relative(__dirname, outputPath)}`)
+}
+
+/**
+ * Fetches JSON from a URL using the built-in https module.
+ * Returns the parsed JSON response.
+ */
+function fetchJson(url) {
+  return new Promise((resolve, reject) => {
+    const options = {
+      headers: {
+        'User-Agent': 'git-coco-www-prebuild',
+        'Accept': 'application/vnd.github+json',
+      },
+      timeout: CONFIG.timeout,
+    }
+
+    https.get(url, options, (res) => {
+      if (res.statusCode !== 200) {
+        reject(new Error(`GitHub API returned ${res.statusCode}`))
+        res.resume()
+        return
+      }
+
+      let data = ''
+      res.on('data', (chunk) => { data += chunk })
+      res.on('end', () => {
+        try {
+          resolve(JSON.parse(data))
+        } catch (err) {
+          reject(new Error(`Failed to parse JSON: ${err.message}`))
+        }
+      })
+    }).on('error', reject)
+  })
 }
 
 async function main() {
