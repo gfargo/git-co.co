@@ -25,7 +25,15 @@ const manualManifest: WikiPage[] = [
     wikiPath: "Getting-Started",
     category: "Getting Started",
     order: 1,
-    description: "Installation, setup, and your first AI-generated commit"
+    description: "Installation, setup, and your first AI-generated commit",
+  },
+  {
+    slug: "command-reference",
+    title: "Command Reference",
+    wikiPath: "Command-Reference",
+    category: "Getting Started",
+    order: 2,
+    description: "Complete reference for every coco command and flag",
   },
 
   // Configuration
@@ -35,7 +43,7 @@ const manualManifest: WikiPage[] = [
     wikiPath: "Config-Overview",
     category: "Configuration",
     order: 1,
-    description: "Complete configuration reference with all options"
+    description: "Complete configuration reference with all options",
   },
   {
     slug: "ignoring-files",
@@ -43,7 +51,7 @@ const manualManifest: WikiPage[] = [
     wikiPath: "Ignoring-Files-&-Extensions",
     category: "Configuration",
     order: 2,
-    description: "Advanced pattern matching and file filtering"
+    description: "Advanced pattern matching and file filtering",
   },
   {
     slug: "using-ollama",
@@ -51,7 +59,41 @@ const manualManifest: WikiPage[] = [
     wikiPath: "Using-Ollama",
     category: "Configuration",
     order: 3,
-    description: "Local AI setup for privacy-focused workflows"
+    description: "Local AI setup for privacy-focused workflows",
+  },
+  {
+    slug: "using-openrouter",
+    title: "Using OpenRouter",
+    wikiPath: "Using-OpenRouter",
+    category: "Configuration",
+    order: 4,
+    description: "Route AI requests through OpenRouter for model flexibility",
+  },
+
+  // Terminal Workstation
+  {
+    slug: "coco-ui",
+    title: "Coco UI",
+    wikiPath: "Coco-UI",
+    category: "Terminal Workstation",
+    order: 1,
+    description: "Overview of the keyboard-driven terminal Git workstation",
+  },
+  {
+    slug: "interactive-log-tui",
+    title: "Interactive Log TUI",
+    wikiPath: "Interactive-Log-TUI",
+    category: "Terminal Workstation",
+    order: 2,
+    description: "Browse commit history with the interactive log viewer",
+  },
+  {
+    slug: "tui-navigation",
+    title: "TUI Navigation",
+    wikiPath: "TUI-Navigation",
+    category: "Terminal Workstation",
+    order: 3,
+    description: "Keyboard shortcuts and navigation reference for the TUI",
   },
 
   // Team & Enterprise
@@ -61,7 +103,7 @@ const manualManifest: WikiPage[] = [
     wikiPath: "Team-Collaboration",
     category: "Team & Enterprise",
     order: 1,
-    description: "Shared configurations and enterprise deployment"
+    description: "Shared configurations and enterprise deployment",
   },
 
   // Advanced Features
@@ -71,7 +113,7 @@ const manualManifest: WikiPage[] = [
     wikiPath: "Advanced-Usage",
     category: "Advanced Features",
     order: 1,
-    description: "Custom prompts, automation, and optimization"
+    description: "Custom prompts, automation, and optimization",
   },
   {
     slug: "commit-split",
@@ -79,7 +121,7 @@ const manualManifest: WikiPage[] = [
     wikiPath: "Commit-Split",
     category: "Advanced Features",
     order: 2,
-    description: "Plan smaller commits from broad staged changes"
+    description: "Plan smaller commits from broad staged changes",
   },
   {
     slug: "dynamic-model-routing",
@@ -87,57 +129,15 @@ const manualManifest: WikiPage[] = [
     wikiPath: "Dynamic-Model-Routing",
     category: "Advanced Features",
     order: 3,
-    description: "Route tasks to different AI models"
-  },
-  {
-    slug: "ai-call-audit",
-    title: "AI Call Audit",
-    wikiPath: "AI-Call-Audit",
-    category: "Advanced Features",
-    order: 4,
-    description: "Inventory and track remote AI call paths"
-  },
-  {
-    slug: "command-reliability-audit",
-    title: "Command Reliability Audit",
-    wikiPath: "Command-Reliability-Audit",
-    category: "Advanced Features",
-    order: 5,
-    description: "Review command coverage and reliability"
+    description: "Route tasks to different AI models",
   },
   {
     slug: "documentation-workflow",
     title: "Documentation Workflow",
     wikiPath: "Documentation-Workflow",
     category: "Advanced Features",
-    order: 6,
-    description: "Maintain wiki documentation locally"
-  },
-
-  // Product Roadmap
-  {
-    slug: "merge-conflict-resolution",
-    title: "AI-Assisted Merge Conflict Resolution",
-    wikiPath: "AI-Assisted-Merge-Conflict-Resolution",
-    category: "Roadmap",
-    order: 1,
-    description: "Upcoming feature for conflict resolution"
-  },
-  {
-    slug: "commit-range-recomposition",
-    title: "AI Commit Range Recomposition",
-    wikiPath: "AI-Commit-Range-Recomposition",
-    category: "Roadmap",
-    order: 2,
-    description: "Analyze and reorganize commit ranges"
-  },
-  {
-    slug: "worktree-workspaces",
-    title: "Worktree & Parallel Agent Workspaces",
-    wikiPath: "Worktree-And-Parallel-Agent-Workspaces",
-    category: "Roadmap",
-    order: 3,
-    description: "Manage local worktrees for parallel workflows"
+    order: 4,
+    description: "Maintain wiki documentation locally",
   },
 
   // Help & Support
@@ -147,8 +147,8 @@ const manualManifest: WikiPage[] = [
     wikiPath: "Troubleshooting",
     category: "Help & Support",
     order: 1,
-    description: "Common issues, solutions, and debugging"
-  }
+    description: "Common issues, solutions, and debugging",
+  },
 ]
 
 export const wikiManifest: WikiPage[] = mergeManifests(
@@ -160,11 +160,11 @@ export const wikiManifest: WikiPage[] = mergeManifests(
 export const categoryOrder: Record<string, number> = {
   "Getting Started": 1,
   Configuration: 2,
-  "Team & Enterprise": 3,
-  "Advanced Features": 4,
-  Roadmap: 5,
+  "Terminal Workstation": 3,
+  "Team & Enterprise": 4,
+  "Advanced Features": 5,
   "Help & Support": 6,
-  Uncategorized: 99
+  Uncategorized: 99,
 }
 
 // Get pages grouped by category
@@ -183,7 +183,7 @@ export function getWikiCategories(): WikiCategory[] {
     categories.push({
       name,
       order: categoryOrder[name] || 99,
-      pages: pages.sort((a, b) => a.order - b.order)
+      pages: pages.sort((a, b) => a.order - b.order),
     })
   }
 
@@ -210,6 +210,6 @@ export function getAdjacentPages(slug: string): {
   return {
     prev: index > 0 ? wikiManifest[index - 1] ?? null : null,
     next:
-      index < wikiManifest.length - 1 ? wikiManifest[index + 1] ?? null : null
+      index < wikiManifest.length - 1 ? wikiManifest[index + 1] ?? null : null,
   }
 }

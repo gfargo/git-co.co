@@ -12,7 +12,7 @@ import {
     Settings,
     Users,
     Wrench,
-    Map,
+    MonitorIcon,
     HelpCircle,
     FolderOpen,
 } from "lucide-react"
@@ -21,9 +21,9 @@ import { useState } from "react"
 const categoryIcons: Record<string, React.ElementType> = {
   "Getting Started": Book,
   Configuration: Settings,
+  "Terminal Workstation": MonitorIcon,
   "Team & Enterprise": Users,
   "Advanced Features": Wrench,
-  Roadmap: Map,
   "Help & Support": HelpCircle,
   Uncategorized: FolderOpen,
 }
