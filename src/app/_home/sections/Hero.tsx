@@ -15,9 +15,9 @@ export const HeroSection = () => {
       id="hero"
       className="relative w-full overflow-hidden bg-oxley-400 py-16 text-white md:py-20 lg:py-32"
     >
-      {/* Subtle dark overlay at the bottom for transition into dark sections */}
+      {/* Gradient transition from green hero into dark content below */}
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-background via-background/60 to-transparent"
         aria-hidden="true"
       />
 
