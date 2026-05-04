@@ -8,7 +8,6 @@ import { InstallSection } from "./_home/sections/Install"
 import { DocumentationSection } from "./_home/sections/Documentation"
 import { ToolbeltSection } from "./_home/sections/Toolbelt"
 import { WorkstationTeaser } from "./_home/sections/WorkstationTeaser"
-import { WhatsNewSection } from "./_home/sections/WhatsNew"
 
 export default function HomePage() {
   return (
@@ -19,7 +18,6 @@ export default function HomePage() {
         <ToolbeltSection />
         <WorkstationTeaser />
         <KeyFeaturesSection />
-        <WhatsNewSection />
         <InstallSection />
         <DocumentationSection />
         <CommunitySection />
