@@ -80,7 +80,7 @@ export const HeroSection = () => {
 
       {/* Gradient band that sits below the hero — tall enough to bleed into the Toolbelt section */}
       <div
-        className="h-96 w-full bg-gradient-to-b from-oxley-400 via-oxley-400/20 to-background -mb-96"
+        className="h-96 w-full bg-gradient-to-b from-oxley-400 via-oxley-900 to-background -mb-96"
         aria-hidden="true"
       />
     </>
