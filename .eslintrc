@@ -1,4 +1,0 @@
-{
-  // Configuration for JavaScript files
-  "extends": ["next/core-web-vitals"]
-}

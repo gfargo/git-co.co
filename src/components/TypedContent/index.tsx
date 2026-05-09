@@ -42,7 +42,7 @@ const CursorImitator: React.FC<CursorImitatorProps> = ({
   }, [])
 
   const loadCursorBlink = (
-    ref: React.RefObject<HTMLDivElement>,
+    ref: React.RefObject<HTMLDivElement | null>,
     ttw: number,
     end: boolean,
     isLastSentence: boolean
@@ -84,7 +84,7 @@ const CursorImitator: React.FC<CursorImitatorProps> = ({
 
   const loadLetter = (
     sentence: string,
-    ref: React.RefObject<HTMLDivElement>,
+    ref: React.RefObject<HTMLDivElement | null>,
     isLastSentence: boolean
   ) => {
     sentence.split("").forEach((letter, index) => {
