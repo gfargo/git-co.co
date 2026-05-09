@@ -2,7 +2,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, JetBrains_Mono } from "next/font/google"
 
 import "@/styles/globals.css"
 import { Toaster } from "@/components/ui/toaster"
@@ -13,25 +13,19 @@ const inter = Inter({
   variable: "--font-sans"
 })
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono"
+})
+
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Coco - AI Git Assistant for Effortless Commits, Changelogs, and More",
+    default: "Coco — AI-Powered Git Toolbelt & Terminal Workstation",
     template: "%s | Coco"
   },
   description: siteConfig.description,
-  keywords: [
-    "git",
-    "cli tool",
-    "commit messages",
-    "changelog generator",
-    "code review",
-    "developer tools",
-    "AI assistant",
-    "conventional commits",
-    "git automation",
-    "terminal tools"
-  ],
+  keywords: siteConfig.keywords,
   authors: [{ name: siteConfig.author.name, url: siteConfig.author.url }],
   creator: siteConfig.author.name,
   icons: [{ rel: "icon", url: "/favicon.ico" }],
@@ -40,21 +34,22 @@ export const metadata = {
     locale: "en_US",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: "Coco - AI Git Assistant for Effortless Commits, Changelogs, and More",
+    title: "Coco — AI-Powered Git Toolbelt & Terminal Workstation",
     description: siteConfig.description,
     images: [
       {
         url: siteConfig.ogImage,
         width: 1280,
         height: 640,
-        alt: "Coco - AI-Powered Git Assistant for the Command Line"
+        alt: "Coco — A suite of AI-powered Git tools and a keyboard-driven terminal workstation"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Coco - AI Git Assistant for Effortless Commits, Changelogs, and More",
-    description: "Generate commit messages, create changelogs, and automate your git workflow with AI-powered assistance.",
+    title: "Coco — AI-Powered Git Toolbelt & Terminal Workstation",
+    description:
+      "Smart commits, automated changelogs, code reviews, commit splitting — plus a keyboard-driven terminal workstation. Supports OpenAI, Anthropic, and Ollama.",
     images: [siteConfig.ogImage],
     creator: siteConfig.author.twitter
   },
@@ -74,36 +69,32 @@ export const metadata = {
   }
 } as Metadata
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   // JSON-LD structured data for SoftwareApplication
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": siteConfig.name,
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Linux, macOS, Windows",
-    "offers": {
+    name: siteConfig.name,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Linux, macOS, Windows",
+    offers: {
       "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
+      price: "0",
+      priceCurrency: "USD"
     },
-    "description": siteConfig.description,
-    "url": siteConfig.url,
-    "author": {
+    description: siteConfig.description,
+    url: siteConfig.url,
+    author: {
       "@type": "Person",
-      "name": siteConfig.author.name,
-      "url": siteConfig.author.url
+      name: siteConfig.author.name,
+      url: siteConfig.author.url
     },
-    "softwareVersion": "latest",
-    "keywords": "git, cli, commit messages, changelog, code review, developer tools, AI assistant",
-    "aggregateRating": {
+    softwareVersion: "latest",
+    keywords: "git, cli, AI git commits, automated changelogs, code review, commit splitting, terminal git workstation, developer tools, coco ui, ollama",
+    aggregateRating: {
       "@type": "AggregateRating",
-      "ratingValue": "5",
-      "ratingCount": "1"
+      ratingValue: "5",
+      ratingCount: "1"
     }
   }
 
@@ -115,7 +106,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`font-sans ${inter.variable}`}>
+      <body className={`font-sans ${inter.variable} ${jetbrainsMono.variable} bg-background text-foreground`}>
         {children}
         <Toaster />
       </body>

@@ -7,14 +7,14 @@ import { track } from "@vercel/analytics/react"
 import { Button } from "../ui/button"
 
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
 import { cn } from "@/lib/utils"
 import { toast } from "../ui/use-toast"
-import { MagnetIcon, ShellIcon } from "lucide-react"
+import { ShellIcon } from "lucide-react"
 
 type CopyCommandProps = {
   command: string
@@ -72,11 +72,11 @@ export const CopyCommand = ({ command, className }: CopyCommandProps) => {
   return (
     <div
       className={cn(
-        "relative flex w-96 p-4 pr-16 md:w-auto lg:min-w-[396px] lg:max-w-md bg-secondary rounded text-white shadow hover:shadow-lg transition-shadow duration-300",
+        "relative flex w-full max-w-sm p-4 pr-14 sm:pr-16 md:w-auto lg:min-w-[396px] lg:max-w-md bg-secondary rounded text-white shadow hover:shadow-lg transition-shadow duration-300",
         className
       )}
     >
-      <code className="inline-block truncate max-w-full">{command}</code>
+      <code className="inline-block truncate max-w-full text-sm sm:text-base">{command}</code>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -84,6 +84,7 @@ export const CopyCommand = ({ command, className }: CopyCommandProps) => {
             variant="ghost"
             size="sm"
             className="absolute right-4 top-1/2 transform -translate-y-1/2"
+            aria-label="Copy install command"
           >
             <CopyIcon />
           </Button>
