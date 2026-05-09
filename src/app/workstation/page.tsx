@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import {
+    AlertTriangleIcon,
     ArchiveIcon,
     BookOpenIcon,
     ChevronRightIcon,
@@ -9,9 +10,12 @@ import {
     DiffIcon,
     FileEditIcon,
     GitBranchIcon,
+    GitCompareIcon,
     GitPullRequestIcon,
+    HistoryIcon,
     MonitorIcon,
     PenToolIcon,
+    SearchIcon,
     TagIcon,
     TreesIcon,
 } from "lucide-react"
@@ -35,7 +39,7 @@ import { WorkflowsAccordion } from "./WorkflowsAccordion"
 export function generateMetadata(): Metadata {
   const title = "Workstation — Terminal Git Workstation"
   const description =
-    "A keyboard-driven terminal Git workstation with 9 specialized views, chord navigation, AI-powered commits, PR workflows, and customizable themes. No Electron, no mouse required."
+    "A keyboard-driven terminal Git workstation with 12 specialized views, chord navigation, AI-powered commits, PR workflows, and customizable themes. No Electron, no mouse required."
 
   return {
     title,
@@ -125,6 +129,24 @@ const tuiViews = [
     chord: ["g", "p"],
     description: "Review, approve, merge, and comment on PRs",
   },
+  {
+    icon: AlertTriangleIcon,
+    name: "Conflicts",
+    chord: ["g", "x"],
+    description: "Resolve merge / rebase / cherry-pick / revert conflicts inline",
+  },
+  {
+    icon: HistoryIcon,
+    name: "Reflog",
+    chord: ["g", "r"],
+    description: "Chronological recovery log — every HEAD movement, one keystroke away",
+  },
+  {
+    icon: SearchIcon,
+    name: "Bisect",
+    chord: ["g", "B"],
+    description: "Binary-search through history to find regressions — good / bad / skip / reset",
+  },
 ]
 
 const chordKeys = [
@@ -137,6 +159,32 @@ const chordKeys = [
   { key: "z", label: "Stash" },
   { key: "w", label: "Worktrees" },
   { key: "p", label: "Pull Request" },
+  { key: "x", label: "Conflicts" },
+  { key: "r", label: "Reflog" },
+  { key: "B", label: "Bisect" },
+]
+
+/**
+ * Cross-view workflows that span multiple views (#779, #784).
+ * Surfaced as a distinct section because the keys are scoped to the
+ * source view but the action lands on a *second* view — they're not
+ * top-level destinations like the entries above.
+ */
+const crossViewWorkflows = [
+  {
+    icon: GitCompareIcon,
+    name: "Compare two refs",
+    chord: ["m"],
+    description:
+      "Mark a ref on branches / tags / history with `m`, then `Enter` on a second ref to open `git diff base..head`. Cleared automatically when the diff is popped.",
+  },
+  {
+    icon: SearchIcon,
+    name: "Bisect (in-view actions)",
+    chord: ["g", "b", "s", "x"],
+    description:
+      "Inside the bisect view: `g` good · `b` bad · `s` skip · `x` reset. The title bar shows a BISECTING badge whenever a bisect is in progress.",
+  },
 ]
 
 const themePresets = [
@@ -166,7 +214,7 @@ const migrationFeatures = [
   "Terminal-native (no Electron)",
   "AI-powered commits & reviews",
   "Keyboard-first chord navigation",
-  "9 specialized views",
+  "12 specialized views",
   "PR workflows in terminal",
   "Theming + NO_COLOR",
   "Free & open source",
@@ -192,7 +240,7 @@ export default function WorkstationPage() {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Linux, macOS, Windows",
     description:
-      "A keyboard-driven terminal Git workstation with 9 specialized views, chord navigation, AI-powered commits, PR workflows, and customizable themes.",
+      "A keyboard-driven terminal Git workstation with 12 specialized views, chord navigation, AI-powered commits, PR workflows, and customizable themes.",
     url: `${siteConfig.url}/workstation`,
     offers: {
       "@type": "Offer",
@@ -205,12 +253,16 @@ export default function WorkstationPage() {
       url: siteConfig.author.url,
     },
     featureList: [
-      "9 specialized TUI views",
+      "12 specialized TUI views",
       "Chord-based keyboard navigation",
       "Hunk-level staging",
       "AI-powered commit drafting",
       "Pull request workflows",
       "Side-by-side diff viewer",
+      "Compare any two refs (branches / tags / commits)",
+      "Bisect workflow with single-keystroke decisions",
+      "Reflog browser with one-key drill-in to any HEAD movement",
+      "Conflict resolution helper for merge / rebase / cherry-pick / revert",
       "4 built-in theme presets",
       "NO_COLOR support",
     ],
@@ -288,7 +340,7 @@ export default function WorkstationPage() {
           <div className="container">
             <SectionHeader
               prompt="~/coco $ ui --view"
-              title="9 specialized views"
+              title="12 specialized views"
               subtitle="Each view is purpose-built for a specific Git workflow. Switch between them instantly with chord navigation."
             />
 
@@ -368,6 +420,41 @@ export default function WorkstationPage() {
                   anywhere for the full keymap reference
                 </p>
               </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================================ */}
+        {/*  CROSS-VIEW WORKFLOWS — multi-step flows                     */}
+        {/* ============================================================ */}
+        <Section id="cross-view-workflows">
+          <div className="container">
+            <SectionHeader
+              prompt="~/coco $ help workflows"
+              title="Cross-view workflows"
+              subtitle="Some flows span multiple views — mark a state on one surface, act on it from another. Footer hints adapt so the override is always discoverable."
+            />
+
+            <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 md:grid-cols-2">
+              {crossViewWorkflows.map(({ icon: Icon, name, chord, description }) => (
+                <div
+                  key={name}
+                  className="group rounded-lg border border-border bg-bg-surface/30 p-5 transition-colors hover:border-terminal-green/30 hover:bg-bg-elevated"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-bg-elevated">
+                      <Icon className="h-4 w-4 text-terminal-green" />
+                    </div>
+                    <KbdBadge keys={chord} />
+                  </div>
+                  <h3 className="mt-3 font-mono text-sm font-semibold text-foreground">
+                    {name}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                    {description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </Section>
