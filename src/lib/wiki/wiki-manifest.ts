@@ -77,7 +77,7 @@ const manualManifest: WikiPage[] = [
     wikiPath: "Coco-UI",
     category: "Terminal Workstation",
     order: 1,
-    description: "Overview of the keyboard-driven terminal Git workstation",
+    description: "Full-screen Git workstation — twelve views, chord-driven navigation, workflow keys",
   },
   {
     slug: "interactive-log-tui",
@@ -85,7 +85,7 @@ const manualManifest: WikiPage[] = [
     wikiPath: "Interactive-Log-TUI",
     category: "Terminal Workstation",
     order: 2,
-    description: "Browse commit history with the interactive log viewer",
+    description: "History-focused `coco log -i` guide",
   },
   {
     slug: "tui-navigation",
@@ -93,7 +93,7 @@ const manualManifest: WikiPage[] = [
     wikiPath: "TUI-Navigation",
     category: "Terminal Workstation",
     order: 3,
-    description: "Keyboard shortcuts and navigation reference for the TUI",
+    description: "Chord rules, contextual transitions, cross-view workflows (compare-refs, bisect), palette, search, breadcrumb",
   },
 
   // Team & Enterprise
