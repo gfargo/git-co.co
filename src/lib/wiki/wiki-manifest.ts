@@ -24,6 +24,32 @@ export const wikiManifest: WikiPage[] = [
     description: "Installation, setup, and your first AI-generated commit",
   },
 
+  // Coco UI / TUI
+  {
+    slug: "coco-ui",
+    title: "Coco UI",
+    wikiPath: "Coco-UI",
+    category: "Coco UI",
+    order: 1,
+    description: "Full-screen Git workstation — twelve views, chord-driven navigation, workflow keys",
+  },
+  {
+    slug: "tui-navigation",
+    title: "TUI Navigation",
+    wikiPath: "TUI-Navigation",
+    category: "Coco UI",
+    order: 2,
+    description: "Chord rules, contextual transitions, cross-view workflows (compare-refs, bisect), palette, search, breadcrumb",
+  },
+  {
+    slug: "interactive-log-tui",
+    title: "Interactive Log TUI",
+    wikiPath: "Interactive-Log-TUI",
+    category: "Coco UI",
+    order: 3,
+    description: "History-focused `coco log -i` guide",
+  },
+
   // Configuration
   {
     slug: "configuration",
@@ -150,11 +176,12 @@ export const wikiManifest: WikiPage[] = [
 // Category ordering for sidebar
 export const categoryOrder: Record<string, number> = {
   "Getting Started": 1,
-  Configuration: 2,
-  "Team & Enterprise": 3,
-  "Advanced Features": 4,
-  Roadmap: 5,
-  "Help & Support": 6,
+  "Coco UI": 2,
+  Configuration: 3,
+  "Team & Enterprise": 4,
+  "Advanced Features": 5,
+  Roadmap: 6,
+  "Help & Support": 7,
 }
 
 // Get pages grouped by category
