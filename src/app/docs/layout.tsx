@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: "%s | Coco Docs",
   },
   description:
-    "Learn how to use Coco, the AI-powered git assistant. Comprehensive guides for installation, configuration, and advanced features.",
+    "Learn how to use Coco, the AI-powered Git toolbelt. Comprehensive guides for installation, configuration, and advanced features.",
 }
 
 export default function DocsLayout({
@@ -18,13 +18,13 @@ export default function DocsLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[hsl(var(--bg-primary))]">
       <Header />
-      <div className="flex-1 container py-8">
+      <div className="flex-1 container py-8 md:py-12">
         <div className="flex gap-10">
           {/* Desktop Sidebar */}
           <aside className="hidden lg:block w-64 shrink-0">
-            <div className="sticky top-8">
+            <div className="sticky top-8 rounded-lg border border-[hsl(var(--border-default))] bg-[hsl(var(--bg-secondary))] p-4">
               <DocsSidebar />
             </div>
           </aside>

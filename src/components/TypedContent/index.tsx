@@ -88,7 +88,7 @@ const CursorImitator: React.FC<CursorImitatorProps> = ({
     isLastSentence: boolean
   ) => {
     sentence.split("").forEach((letter, index) => {
-      let nextLetter = letter
+      const nextLetter = letter
       let currTTW = ttw++
       if (index === 0) {
         loadCursorBlink(ref, ttw, false, isLastSentence)
