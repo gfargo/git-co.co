@@ -25,9 +25,9 @@ const features = [
   },
   {
     icon: LayoutGridIcon,
-    title: "9 specialized views",
+    title: "12 specialized views",
     description:
-      "History, status, diff, compose, branches, tags, stash, worktrees, and pull-request.",
+      "History, status, diff, compose, branches, tags, stash, worktrees, pull-request, conflicts, reflog, and bisect.",
   },
   {
     icon: LayersIcon,
