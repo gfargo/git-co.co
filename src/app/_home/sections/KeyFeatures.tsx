@@ -41,7 +41,7 @@ const features: Feature[] = [
     icon: MonitorIcon,
     title: "Terminal Workstation",
     description:
-      "A keyboard-driven Git workstation with 9 views that brings every tool together in one surface.",
+      "A keyboard-driven Git workstation with 12 views — including conflict resolution, reflog recovery, and a bisect workflow — that brings every tool together in one surface.",
     layout: "tall",
     visual: () => <WorkstationVisual />,
   },
@@ -110,6 +110,9 @@ function CommandsVisual() {
 }
 
 function WorkstationVisual() {
+  // Twelve top-level views, mirroring the LogInkView union in coco's
+  // inkViewModel.ts — keep this list in sync with the workstation
+  // page's tuiViews array.
   const views = [
     "history",
     "status",
@@ -120,6 +123,9 @@ function WorkstationVisual() {
     "stash",
     "worktrees",
     "PR",
+    "conflicts",
+    "reflog",
+    "bisect",
   ]
   return (
     <div className="grid grid-cols-3 gap-1.5">
