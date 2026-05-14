@@ -39,7 +39,7 @@ import { WorkflowsAccordion } from "./WorkflowsAccordion"
 export function generateMetadata(): Metadata {
   const title = "Workstation — Terminal Git Workstation"
   const description =
-    "A keyboard-driven terminal Git workstation with 12 specialized views, chord navigation, AI-powered commits, PR workflows, and customizable themes. No Electron, no mouse required."
+    "A keyboard-driven terminal Git workstation with 13 specialized views, chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, and customizable themes. No Electron, no mouse required."
 
   return {
     title,
@@ -147,6 +147,12 @@ const tuiViews = [
     chord: ["g", "B"],
     description: "Binary-search through history to find regressions — good / bad / skip / reset",
   },
+  {
+    icon: GitBranchIcon,
+    name: "Changelog",
+    chord: ["L"],
+    description: "Full-screen AI-generated changelog for the current branch — yank, edit, or seed a PR from it",
+  },
 ]
 
 const chordKeys = [
@@ -162,6 +168,7 @@ const chordKeys = [
   { key: "x", label: "Conflicts" },
   { key: "r", label: "Reflog" },
   { key: "B", label: "Bisect" },
+  { key: "L", label: "Changelog" },
 ]
 
 /**
@@ -184,6 +191,34 @@ const crossViewWorkflows = [
     chord: ["g", "b", "s", "x"],
     description:
       "Inside the bisect view: `g` good · `b` bad · `s` skip · `x` reset. The title bar shows a BISECTING badge whenever a bisect is in progress.",
+  },
+  {
+    icon: GitPullRequestIcon,
+    name: "Create a pull request",
+    chord: ["C"],
+    description:
+      "From history or branches, `C` generates a PR title + body from `coco changelog` against the default branch, then opens a multi-line review prompt. Auto-detects head + base; surfaces a pointer if a PR is already open.",
+  },
+  {
+    icon: GitBranchIcon,
+    name: "Generate a changelog",
+    chord: ["L"],
+    description:
+      "From history or branches, `L` opens a full-screen changelog view. Per-branch cache for instant re-entry; `r` regenerates, `y` yanks to clipboard, `E` opens in $EDITOR, `c` kicks off create-PR seeded with this content.",
+  },
+  {
+    icon: FileEditIcon,
+    name: "Split commits",
+    chord: ["S"],
+    description:
+      "From compose, `S` opens an overlay with an LLM-generated multi-commit plan. Each group's title respects your conventional-commits + commitlint config. `y` apply / `r` regenerate / `<` cancel.",
+  },
+  {
+    icon: FileEditIcon,
+    name: "Edit in $EDITOR",
+    chord: ["E"],
+    description:
+      "From compose / status / diff, `E` opens the current commit draft in $EDITOR or $VISUAL. Round-trips through a temp file with `.md` extension for markdown highlighting. Companion to lowercase `e` (inline edit).",
   },
 ]
 
@@ -214,8 +249,9 @@ const migrationFeatures = [
   "Terminal-native (no Electron)",
   "AI-powered commits & reviews",
   "Keyboard-first chord navigation",
-  "12 specialized views",
+  "13 specialized views",
   "PR workflows in terminal",
+  "One-keystroke split / changelog / PR creation",
   "Theming + NO_COLOR",
   "Free & open source",
 ]
@@ -240,7 +276,7 @@ export default function WorkstationPage() {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Linux, macOS, Windows",
     description:
-      "A keyboard-driven terminal Git workstation with 12 specialized views, chord navigation, AI-powered commits, PR workflows, and customizable themes.",
+      "A keyboard-driven terminal Git workstation with 13 specialized views, chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, and customizable themes.",
     url: `${siteConfig.url}/workstation`,
     offers: {
       "@type": "Offer",
@@ -253,10 +289,14 @@ export default function WorkstationPage() {
       url: siteConfig.author.url,
     },
     featureList: [
-      "12 specialized TUI views",
+      "13 specialized TUI views",
       "Chord-based keyboard navigation",
       "Hunk-level staging",
       "AI-powered commit drafting",
+      "One-keystroke PR creation seeded from AI changelog",
+      "Full-screen AI changelog view with per-branch cache",
+      "Multi-commit split workflow with rescue chain",
+      "Edit commit drafts in $EDITOR / $VISUAL",
       "Pull request workflows",
       "Side-by-side diff viewer",
       "Compare any two refs (branches / tags / commits)",
