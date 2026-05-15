@@ -7,6 +7,8 @@ import {
     ClipboardCheckIcon,
     ScissorsIcon,
     MonitorIcon,
+    CircleDotIcon,
+    GitPullRequestIcon,
     SettingsIcon,
 } from "lucide-react"
 import { track } from "@vercel/analytics/react"
@@ -103,7 +105,7 @@ const commands: (CommandCardProps & { id: string })[] = [
     name: "ui",
     tagline: "Your full terminal workstation",
     description:
-      "Launch the keyboard-driven Git workstation with 9 views: history, status, diff, compose, branches, tags, stash, worktrees, and pull-request.",
+      "Launch the keyboard-driven Git workstation with 15 views: history, status, diff, compose, branches, tags, stash, worktrees, pull-request, PR triage, issues, conflicts, reflog, bisect, and changelog.",
     usage: "coco ui",
     icon: MonitorIcon,
     flags: [
@@ -113,6 +115,44 @@ const commands: (CommandCardProps & { id: string })[] = [
       { flag: "--branch", description: "Filter to a specific branch" },
       { flag: "--path", description: "Filter history to a file path" },
       { flag: "--limit", description: "Limit number of commits loaded" },
+    ],
+  },
+  {
+    id: "issues",
+    name: "issues",
+    tagline: "Triage GitHub issues without leaving your terminal",
+    description:
+      "List, filter, and act on issues for the current repo. Pipe to grep / jq for scripting, or jump to gi inside coco ui for a list-and-inspector triage surface with per-row actions: comment, label, assign, close, reopen.",
+    usage: "coco issues",
+    icon: CircleDotIcon,
+    flags: [
+      { flag: "--state", description: "Filter by state (open, closed, all)" },
+      { flag: "--mine", description: "Shorthand for --assignee @me" },
+      { flag: "--assignee", description: "Filter by assignee login" },
+      { flag: "--author", description: "Filter by author login" },
+      { flag: "--label", description: "Filter by label (comma-separated for AND)" },
+      { flag: "--search", description: "Free-form GitHub search syntax" },
+      { flag: "--json", description: "Machine-readable output for pipelines" },
+      { flag: "--refresh", description: "Force a fresh gh call (5-min disk cache by default)" },
+    ],
+  },
+  {
+    id: "prs",
+    name: "prs",
+    tagline: "Triage GitHub pull requests at the speed of thought",
+    description:
+      "Multi-PR triage list with the full action panel: merge, approve, request changes, close, comment, label, assign — all gated through y-confirm. Filter cycling via f: open / draft / mine / assigned / closed / merged. Hit gP inside coco ui for the inspector view with body, status checks, and reviews.",
+    usage: "coco prs",
+    icon: GitPullRequestIcon,
+    flags: [
+      { flag: "--state", description: "open, closed, merged, all" },
+      { flag: "--draft", description: "Draft PRs only" },
+      { flag: "--mine", description: "PRs you authored (shorthand for --author @me)" },
+      { flag: "--base", description: "PRs targeting a specific base branch" },
+      { flag: "--head", description: "PRs from a specific head branch" },
+      { flag: "--label", description: "Filter by label" },
+      { flag: "--search", description: "Free-form GitHub search syntax" },
+      { flag: "--json", description: "Machine-readable output for pipelines" },
     ],
   },
   {
