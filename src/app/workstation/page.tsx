@@ -5,6 +5,7 @@ import {
     ArchiveIcon,
     BookOpenIcon,
     ChevronRightIcon,
+    CircleDotIcon,
     ClockIcon,
     CodeIcon,
     DiffIcon,
@@ -12,6 +13,7 @@ import {
     GitBranchIcon,
     GitCompareIcon,
     GitPullRequestIcon,
+    GitPullRequestArrowIcon,
     HistoryIcon,
     MonitorIcon,
     PenToolIcon,
@@ -39,7 +41,7 @@ import { WorkflowsAccordion } from "./WorkflowsAccordion"
 export function generateMetadata(): Metadata {
   const title = "Workstation — Terminal Git Workstation"
   const description =
-    "A keyboard-driven terminal Git workstation with 13 specialized views, chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, and customizable themes. No Electron, no mouse required."
+    "A keyboard-driven terminal Git workstation with 15 specialized views — including GitHub issue and PR triage surfaces — chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, and customizable themes. No Electron, no mouse required."
 
   return {
     title,
@@ -127,7 +129,19 @@ const tuiViews = [
     icon: GitPullRequestIcon,
     name: "Pull Request",
     chord: ["g", "p"],
-    description: "Review, approve, merge, and comment on PRs",
+    description: "Review, approve, merge, and comment on the current branch's PR",
+  },
+  {
+    icon: GitPullRequestArrowIcon,
+    name: "PR Triage",
+    chord: ["g", "P"],
+    description: "Multi-PR triage list with filter cycling, body / reviews / checks in the inspector, and the full action panel by-number",
+  },
+  {
+    icon: CircleDotIcon,
+    name: "Issues",
+    chord: ["g", "i"],
+    description: "Issue triage list with filter cycling, body / comments in the inspector, and per-row comment / label / assign / close / reopen",
   },
   {
     icon: AlertTriangleIcon,
@@ -165,6 +179,8 @@ const chordKeys = [
   { key: "z", label: "Stash" },
   { key: "w", label: "Worktrees" },
   { key: "p", label: "Pull Request" },
+  { key: "P", label: "PR Triage" },
+  { key: "i", label: "Issues" },
   { key: "x", label: "Conflicts" },
   { key: "r", label: "Reflog" },
   { key: "B", label: "Bisect" },
