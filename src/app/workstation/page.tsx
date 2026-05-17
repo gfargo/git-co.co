@@ -10,12 +10,14 @@ import {
     CodeIcon,
     DiffIcon,
     FileEditIcon,
+    FolderTreeIcon,
     GitBranchIcon,
     GitCompareIcon,
     GitPullRequestIcon,
     GitPullRequestArrowIcon,
     HistoryIcon,
     MonitorIcon,
+    PackageIcon,
     PenToolIcon,
     SearchIcon,
     TagIcon,
@@ -41,7 +43,7 @@ import { WorkflowsAccordion } from "./WorkflowsAccordion"
 export function generateMetadata(): Metadata {
   const title = "Workstation — Terminal Git Workstation"
   const description =
-    "A keyboard-driven terminal Git workstation with 15 specialized views — including GitHub issue and PR triage surfaces — chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, and customizable themes. No Electron, no mouse required."
+    "A keyboard-driven terminal Git workstation with 16 specialized views — including GitHub issue and PR triage surfaces and recursive submodule navigation — chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, and customizable themes. No Electron, no mouse required."
 
   return {
     title,
@@ -162,6 +164,12 @@ const tuiViews = [
     description: "Binary-search through history to find regressions — good / bad / skip / reset",
   },
   {
+    icon: PackageIcon,
+    name: "Submodules",
+    chord: ["g", "M"],
+    description: "Registered submodules with pinned sha, tracking branch, and clean / modified / uninitialized state. Enter drills into the cursored submodule.",
+  },
+  {
     icon: GitBranchIcon,
     name: "Changelog",
     chord: ["L"],
@@ -184,6 +192,7 @@ const chordKeys = [
   { key: "x", label: "Conflicts" },
   { key: "r", label: "Reflog" },
   { key: "B", label: "Bisect" },
+  { key: "M", label: "Submodules" },
   { key: "L", label: "Changelog" },
 ]
 
@@ -236,6 +245,13 @@ const crossViewWorkflows = [
     description:
       "From compose / status / diff, `E` opens the current commit draft in $EDITOR or $VISUAL. Round-trips through a temp file with `.md` extension for markdown highlighting. Companion to lowercase `e` (inline edit).",
   },
+  {
+    icon: FolderTreeIcon,
+    name: "Submodule drill-in",
+    chord: ["Enter"],
+    description:
+      "Press `Enter` on a submodule row (`g M`) or on a submodule file in a commit diff to drill in. Every view re-scopes to the submodule's working directory — like running `coco ui` from inside it. `Esc` or `<` walks back out; the title bar shows `coco › vendor/lib   ← esc` so you always know where you are. Frames stack.",
+  },
 ]
 
 const themePresets = [
@@ -265,7 +281,7 @@ const migrationFeatures = [
   "Terminal-native (no Electron)",
   "AI-powered commits & reviews",
   "Keyboard-first chord navigation",
-  "13 specialized views",
+  "16 specialized views",
   "PR workflows in terminal",
   "One-keystroke split / changelog / PR creation",
   "Theming + NO_COLOR",
@@ -292,7 +308,7 @@ export default function WorkstationPage() {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Linux, macOS, Windows",
     description:
-      "A keyboard-driven terminal Git workstation with 13 specialized views, chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, and customizable themes.",
+      "A keyboard-driven terminal Git workstation with 16 specialized views, recursive submodule navigation, chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, and customizable themes.",
     url: `${siteConfig.url}/workstation`,
     offers: {
       "@type": "Offer",
@@ -305,7 +321,7 @@ export default function WorkstationPage() {
       url: siteConfig.author.url,
     },
     featureList: [
-      "13 specialized TUI views",
+      "16 specialized TUI views",
       "Chord-based keyboard navigation",
       "Hunk-level staging",
       "AI-powered commit drafting",
@@ -396,7 +412,7 @@ export default function WorkstationPage() {
           <div className="container">
             <SectionHeader
               prompt="~/coco $ ui --view"
-              title="12 specialized views"
+              title="16 specialized views"
               subtitle="Each view is purpose-built for a specific Git workflow. Switch between them instantly with chord navigation."
             />
 
