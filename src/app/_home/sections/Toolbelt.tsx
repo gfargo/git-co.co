@@ -105,7 +105,7 @@ const commands: (CommandCardProps & { id: string })[] = [
     name: "ui",
     tagline: "Your full terminal workstation",
     description:
-      "Launch the keyboard-driven Git workstation with 15 views: history, status, diff, compose, branches, tags, stash, worktrees, pull-request, PR triage, issues, conflicts, reflog, bisect, and changelog.",
+      "Launch the keyboard-driven Git workstation with 16 views: history, status, diff, compose, branches, tags, stash, worktrees, pull-request, PR triage, issues, conflicts, reflog, bisect, submodules, and changelog.",
     usage: "coco ui",
     icon: MonitorIcon,
     flags: [

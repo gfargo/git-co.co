@@ -75,7 +75,7 @@ function TerminalMockup() {
             <div className="pl-1 text-foreground/70">main</div>
             <div className="pl-1 text-foreground/50">feat/ui</div>
             <div className="mt-2 text-terminal-green">Tags</div>
-            <div className="pl-1 text-foreground/50">v0.41.0</div>
+            <div className="pl-1 text-foreground/50">v0.52.0</div>
             <div className="mt-2 text-terminal-green">Stashes</div>
             <div className="pl-1 text-foreground/50">wip: layout</div>
           </div>
