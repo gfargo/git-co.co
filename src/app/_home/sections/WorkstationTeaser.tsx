@@ -11,7 +11,6 @@ import {
 import { Section } from "@/components/Section"
 import { SectionHeader } from "@/components/SectionHeader"
 import { TerminalAtmosphere } from "@/components/TerminalAtmosphere"
-import Image from 'next/image'
 
 /* ------------------------------------------------------------------ */
 /*  Feature bullets                                                    */
@@ -68,15 +67,22 @@ export function WorkstationTeaser() {
 
         {/* Asymmetric 60/40 layout */}
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[3fr_2fr] lg:gap-14">
-          {/* Left — real screenshot */}
-          <div className="relative aspect-video overflow-hidden rounded-lg border border-border">
-            <Image
-              src="/screenshots/hero-history-graph.png"
-              alt="coco ui — full-screen Git workstation with commit graph, branches, and inspector"
-              fill
-              className="object-cover object-top"
-              sizes="(max-width: 768px) 100vw, 60vw"
-              priority
+          {/* Left — animated GIF demo */}
+          <div className="overflow-hidden rounded-lg border border-border/60 shadow-lg shadow-black/30">
+            {/* macOS title bar */}
+            <div className="flex items-center gap-2 bg-bg-elevated/80 px-4 py-2 border-b border-border/40">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+              <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+              <span className="ml-3 font-mono text-[10px] text-muted-foreground/50">
+                coco ui
+              </span>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/screenshots/demo-ui-view-switching.gif"
+              alt="coco ui — switching between history, status, branches, and diff views via chord navigation"
+              className="w-full h-auto"
             />
           </div>
 
