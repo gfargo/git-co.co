@@ -418,57 +418,48 @@ export default function WorkstationPage() {
         {/* ============================================================ */}
         {/*  HERO                                                        */}
         {/* ============================================================ */}
-        <Section id="workstation-hero" className="relative overflow-hidden md:py-16 lg:py-24">
+        <Section id="workstation-hero" className="relative overflow-hidden pt-8 pb-0 md:pt-12 lg:pt-16">
           <TerminalAtmosphere variant="hero" />
 
           <div className="container relative z-10">
-            {/* Compact text header */}
-            <div className="mb-8 flex flex-col items-start gap-4 lg:mb-10">
-              <span className="font-mono text-sm tracking-wide text-terminal-green animate-fade-in-up">
-                ~/coco $ ui
-              </span>
-
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-8 w-full">
-                <h1 className="font-mono text-3xl font-bold tracking-tighter text-foreground sm:text-4xl md:text-5xl">
-                  Your terminal Git workstation
+            {/* Tight header — title + CTA on one line */}
+            <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <span className="font-mono text-xs tracking-widest uppercase text-terminal-green/70">
+                  coco workstation
+                </span>
+                <h1 className="mt-1 font-mono text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
+                  Git, keyboard-first
                   <span
-                    className="ml-1 inline-block h-[0.9em] w-[0.5ch] translate-y-[0.05em] bg-terminal-green animate-cursor-blink"
+                    className="ml-1 inline-block h-[0.8em] w-[0.45ch] translate-y-[0.05em] bg-terminal-green animate-cursor-blink"
                     aria-hidden="true"
                   />
                 </h1>
-
-                <p className="max-w-md shrink-0 text-sm leading-6 text-muted-foreground lg:text-right">
-                  Keyboard-driven TUI — branches, diffs, commits, PRs in one
-                  full-screen interface. No mouse, no Electron.
-                </p>
               </div>
+              <CopyCommand command="npx git-coco@latest ui" />
             </div>
+          </div>
 
-            {/* Hero screenshot — full bleed, the star of the show */}
-            <div className="relative -mx-4 sm:-mx-6 md:-mx-10 lg:-mx-16">
-              {/* Glow effect behind the screenshot */}
-              <div className="absolute inset-0 -z-10 blur-3xl opacity-20 bg-gradient-to-b from-terminal-green/30 via-transparent to-transparent" />
+          {/* Full-bleed GIF — breaks out of container, edge to edge */}
+          <div className="relative mt-2">
+            {/* Subtle glow behind */}
+            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-terminal-green/5 to-transparent pointer-events-none" />
 
-              {/* Terminal chrome wrapper */}
-              <div className="mx-auto max-w-[1400px] overflow-hidden rounded-lg border border-border/60 shadow-2xl shadow-black/50">
-                {/* macOS title bar */}
-                <div className="flex items-center gap-2 bg-bg-elevated/80 backdrop-blur-sm px-4 py-2.5 border-b border-border/40">
-                  <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-                  <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
-                  <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-                  <span className="ml-3 font-mono text-xs text-muted-foreground/60">
-                    coco ui — history
+            <div className="mx-auto max-w-[1600px] px-2 sm:px-4">
+              <div className="overflow-hidden rounded-t-xl border border-b-0 border-border/40 shadow-2xl shadow-black/60">
+                {/* Minimal title bar */}
+                <div className="flex items-center gap-2 bg-[hsl(150_20%_8%)] px-4 py-2 border-b border-border/30">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]/80" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]/80" />
+                  <span className="ml-auto font-mono text-[10px] text-muted-foreground/40">
+                    workspace → repo → history
                   </span>
                 </div>
 
-                {/* The actual GIF demo */}
+                {/* The GIF */}
                 <GifHero />
               </div>
-            </div>
-
-            {/* Install CTA below the screenshot */}
-            <div className="mt-8 flex justify-center">
-              <CopyCommand command="npx git-coco@latest init" />
             </div>
           </div>
         </Section>
