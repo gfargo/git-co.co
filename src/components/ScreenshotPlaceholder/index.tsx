@@ -1,6 +1,9 @@
+"use client"
+
 import Image from "next/image"
 import { ImageIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Lightbox } from "@/components/Lightbox"
 
 interface ScreenshotPlaceholderProps {
   /** Path to the screenshot image in /public/screenshots/. When provided, renders the image. */
@@ -11,33 +14,47 @@ interface ScreenshotPlaceholderProps {
   aspect?: string
   /** Optional caption below the image */
   caption?: string
+  /** Disable lightbox on click (default: enabled when src is provided) */
+  disableLightbox?: boolean
   className?: string
 }
 
 /**
  * Screenshot slot that renders an actual image when `src` is provided,
  * or a styled placeholder with a label when no image exists yet.
- * Use this to mark spots where real TUI screenshots should go.
+ * Images are wrapped in a Lightbox for full-screen viewing on click.
  */
 export function ScreenshotPlaceholder({
   src,
   alt,
   aspect = "aspect-video",
   caption,
+  disableLightbox = false,
   className,
 }: ScreenshotPlaceholderProps) {
+  const imageContent = src ? (
+    <div className={cn("overflow-hidden rounded-lg border border-border", aspect)}>
+      <Image
+        src={src}
+        alt={alt}
+        width={1260}
+        height={800}
+        className="h-auto w-full object-cover object-top"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1100px"
+      />
+    </div>
+  ) : null
+
   return (
     <figure className={cn("overflow-hidden", className)}>
       {src ? (
-        <div className={cn("relative overflow-hidden rounded-lg border border-border", aspect)}>
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            className="object-cover object-top"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1100px"
-          />
-        </div>
+        disableLightbox ? (
+          imageContent
+        ) : (
+          <Lightbox src={src} alt={alt}>
+            {imageContent}
+          </Lightbox>
+        )
       ) : (
         <div
           className={cn(

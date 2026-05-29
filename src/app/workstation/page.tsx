@@ -1,27 +1,27 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import {
-    AlertTriangleIcon,
-    ArchiveIcon,
-    BookOpenIcon,
-    ChevronRightIcon,
-    CircleDotIcon,
-    ClockIcon,
-    CodeIcon,
-    DiffIcon,
-    FileEditIcon,
-    FolderTreeIcon,
-    GitBranchIcon,
-    GitCompareIcon,
-    GitPullRequestIcon,
-    GitPullRequestArrowIcon,
-    HistoryIcon,
-    MonitorIcon,
-    PackageIcon,
-    PenToolIcon,
-    SearchIcon,
-    TagIcon,
-    TreesIcon,
+  AlertTriangleIcon,
+  ArchiveIcon,
+  BookOpenIcon,
+  ChevronRightIcon,
+  CircleDotIcon,
+  ClockIcon,
+  CodeIcon,
+  DiffIcon,
+  FileEditIcon,
+  FolderTreeIcon,
+  GitBranchIcon,
+  GitCompareIcon,
+  GitPullRequestIcon,
+  GitPullRequestArrowIcon,
+  HistoryIcon,
+  MonitorIcon,
+  PackageIcon,
+  PenToolIcon,
+  SearchIcon,
+  TagIcon,
+  TreesIcon,
 } from "lucide-react"
 
 import { Header } from "@/components/Header"
@@ -33,8 +33,11 @@ import { KbdBadge } from "@/components/KbdBadge"
 import { CopyCommand } from "@/components/CopyCommand"
 import { TrackedLink } from "@/components/TrackedLink"
 import { ScreenshotPlaceholder } from "@/components/ScreenshotPlaceholder"
+import { ThemeCarousel } from "@/components/ThemeCarousel"
 import { siteConfig } from "@/config/site"
 import { WorkflowsAccordion } from "./WorkflowsAccordion"
+import { GifHero } from "./GifHero"
+import { GifDemo } from "@/components/GifDemo"
 
 /* ------------------------------------------------------------------ */
 /*  SEO Metadata                                                       */
@@ -84,96 +87,112 @@ const tuiViews = [
     name: "History",
     chord: ["g", "h"],
     description: "Browse commit history with graph visualization",
+    screenshot: "/screenshots/view-history.png",
   },
   {
     icon: FileEditIcon,
     name: "Status",
     chord: ["g", "s"],
     description: "View working tree status and stage changes",
+    screenshot: "/screenshots/view-status.png",
   },
   {
     icon: DiffIcon,
     name: "Diff",
     chord: ["g", "d"],
     description: "Side-by-side diff viewer for any commit or file",
+    screenshot: "/screenshots/view-diff.png",
   },
   {
     icon: PenToolIcon,
     name: "Compose",
     chord: ["g", "c"],
     description: "Draft and edit commit messages with optional AI assistance",
+    screenshot: "/screenshots/view-compose.png",
   },
   {
     icon: GitBranchIcon,
     name: "Branches",
     chord: ["g", "b"],
     description: "Manage local and remote branches",
+    screenshot: "/screenshots/view-branches.png",
   },
   {
     icon: TagIcon,
     name: "Tags",
     chord: ["g", "t"],
     description: "Browse and create tags",
+    screenshot: "/screenshots/view-tags.png",
   },
   {
     icon: ArchiveIcon,
     name: "Stash",
     chord: ["g", "z"],
     description: "Manage stash entries",
+    screenshot: "/screenshots/view-stash.png",
   },
   {
     icon: TreesIcon,
     name: "Worktrees",
     chord: ["g", "w"],
     description: "Manage git worktrees",
+    screenshot: "/screenshots/view-worktrees.png",
   },
   {
     icon: GitPullRequestIcon,
     name: "Pull Request",
     chord: ["g", "p"],
     description: "Review, approve, merge, and comment on the current branch's PR",
+    screenshot: "/screenshots/view-pull-request.png",
   },
   {
     icon: GitPullRequestArrowIcon,
     name: "PR Triage",
     chord: ["g", "P"],
     description: "Multi-PR triage list with filter cycling, body / reviews / checks in the inspector, and the full action panel by-number",
+    screenshot: "/screenshots/view-pr-triage.png",
   },
   {
     icon: CircleDotIcon,
     name: "Issues",
     chord: ["g", "i"],
     description: "Issue triage list with filter cycling, body / comments in the inspector, and per-row comment / label / assign / close / reopen",
+    screenshot: "/screenshots/view-issues.png",
   },
   {
     icon: AlertTriangleIcon,
     name: "Conflicts",
     chord: ["g", "x"],
     description: "Resolve merge / rebase / cherry-pick / revert conflicts inline",
+    screenshot: "/screenshots/view-conflicts.png",
   },
   {
     icon: HistoryIcon,
     name: "Reflog",
     chord: ["g", "r"],
     description: "Chronological recovery log — every HEAD movement, one keystroke away",
+    screenshot: "/screenshots/view-reflog.png",
   },
   {
     icon: SearchIcon,
     name: "Bisect",
     chord: ["g", "B"],
     description: "Binary-search through history to find regressions — good / bad / skip / reset",
+    screenshot: "/screenshots/view-bisect.png",
   },
   {
     icon: PackageIcon,
     name: "Submodules",
     chord: ["g", "M"],
     description: "Registered submodules with pinned sha, tracking branch, and clean / modified / uninitialized state. Enter drills into the cursored submodule.",
+    screenshot: "/screenshots/view-submodules.png",
   },
   {
     icon: GitBranchIcon,
     name: "Changelog",
     chord: ["L"],
     description: "Full-screen AI-generated changelog for the current branch — yank, edit, or seed a PR from it",
+    screenshot: "/screenshots/view-changelog.png",
   },
 ]
 
@@ -261,11 +280,6 @@ const themePresets = [
     colors: ["#121418", "#1a1d24", "#4d9e6d", "#6bc490"],
   },
   {
-    name: "Monochrome",
-    description: "Grayscale palette",
-    colors: ["#121418", "#1a1d24", "#888888", "#cccccc"],
-  },
-  {
     name: "Catppuccin",
     description: "Pastel colors on dark",
     colors: ["#1e1e2e", "#313244", "#cba6f7", "#f5c2e7"],
@@ -274,6 +288,51 @@ const themePresets = [
     name: "Gruvbox",
     description: "Warm retro palette",
     colors: ["#282828", "#3c3836", "#b8bb26", "#fabd2f"],
+  },
+  {
+    name: "Dracula",
+    description: "Purple-accented dark",
+    colors: ["#282a36", "#44475a", "#bd93f9", "#ff79c6"],
+  },
+  {
+    name: "Nord",
+    description: "Arctic blue palette",
+    colors: ["#2e3440", "#3b4252", "#88c0d0", "#81a1c1"],
+  },
+  {
+    name: "Tokyo Night",
+    description: "Neon city lights",
+    colors: ["#1a1b26", "#3b4261", "#7aa2f7", "#7dcfff"],
+  },
+  {
+    name: "One Dark",
+    description: "Atom-inspired",
+    colors: ["#282c34", "#3e4452", "#61afef", "#56b6c2"],
+  },
+  {
+    name: "Rosé Pine",
+    description: "Muted pastels",
+    colors: ["#191724", "#26233a", "#c4a7e7", "#9ccfd8"],
+  },
+  {
+    name: "Kanagawa",
+    description: "Japanese wave palette",
+    colors: ["#1f1f28", "#2a2a37", "#7e9cd8", "#7fb4ca"],
+  },
+  {
+    name: "Everforest",
+    description: "Forest greens",
+    colors: ["#2d353b", "#374145", "#a7c080", "#83c092"],
+  },
+  {
+    name: "Solarized Dark",
+    description: "Precision contrast",
+    colors: ["#002b36", "#073642", "#268bd2", "#2aa198"],
+  },
+  {
+    name: "Monochrome",
+    description: "Grayscale palette",
+    colors: ["#121418", "#1a1d24", "#888888", "#cccccc"],
   },
 ]
 
@@ -356,18 +415,21 @@ export default function WorkstationPage() {
         {/* ============================================================ */}
         {/*  HERO                                                        */}
         {/* ============================================================ */}
-        <Section id="workstation-hero" className="relative overflow-hidden md:py-20 lg:py-32">
+        {/* ============================================================ */}
+        {/*  HERO                                                        */}
+        {/* ============================================================ */}
+        <Section id="workstation-hero" className="relative overflow-hidden md:py-16 lg:py-24">
           <TerminalAtmosphere variant="hero" />
 
           <div className="container relative z-10">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[3fr_2fr] lg:gap-14 items-center">
-              {/* Left — text */}
-              <div className="flex flex-col items-start gap-6">
-                <span className="font-mono text-sm tracking-wide text-terminal-green animate-fade-in-up">
-                  ~/coco $ ui
-                </span>
+            {/* Compact text header */}
+            <div className="mb-8 flex flex-col items-start gap-4 lg:mb-10">
+              <span className="font-mono text-sm tracking-wide text-terminal-green animate-fade-in-up">
+                ~/coco $ ui
+              </span>
 
-                <h1 className="font-mono text-3xl font-bold tracking-tighter text-foreground sm:text-4xl md:text-5xl lg:text-6xl">
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-8 w-full">
+                <h1 className="font-mono text-3xl font-bold tracking-tighter text-foreground sm:text-4xl md:text-5xl">
                   Your terminal Git workstation
                   <span
                     className="ml-1 inline-block h-[0.9em] w-[0.5ch] translate-y-[0.05em] bg-terminal-green animate-cursor-blink"
@@ -375,32 +437,38 @@ export default function WorkstationPage() {
                   />
                 </h1>
 
-                <p className="max-w-xl text-base leading-7 text-muted-foreground md:text-lg">
-                  A keyboard-driven TUI that brings branches, diffs, commits, PRs,
-                  and more into a single full-screen interface — no mouse, no
-                  Electron, no context switching.
+                <p className="max-w-md shrink-0 text-sm leading-6 text-muted-foreground lg:text-right">
+                  Keyboard-driven TUI — branches, diffs, commits, PRs in one
+                  full-screen interface. No mouse, no Electron.
                 </p>
-
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-                  <CopyCommand command="npx git-coco@latest init" />
-                </div>
-              </div>
-
-              {/* Right — screenshot of coco ui (desktop) */}
-              <div className="hidden lg:block">
-                <ScreenshotPlaceholder
-                  alt="coco ui — history view"
-                  caption="The history view with commit graph, branches, and file inspector"
-                />
               </div>
             </div>
 
-            {/* Mobile screenshot below text */}
-            <div className="mt-10 lg:hidden">
-              <ScreenshotPlaceholder
-                alt="coco ui — history view"
-                caption="The history view with commit graph, branches, and file inspector"
-              />
+            {/* Hero screenshot — full bleed, the star of the show */}
+            <div className="relative -mx-4 sm:-mx-6 md:-mx-10 lg:-mx-16">
+              {/* Glow effect behind the screenshot */}
+              <div className="absolute inset-0 -z-10 blur-3xl opacity-20 bg-gradient-to-b from-terminal-green/30 via-transparent to-transparent" />
+
+              {/* Terminal chrome wrapper */}
+              <div className="mx-auto max-w-[1400px] overflow-hidden rounded-lg border border-border/60 shadow-2xl shadow-black/50">
+                {/* macOS title bar */}
+                <div className="flex items-center gap-2 bg-bg-elevated/80 backdrop-blur-sm px-4 py-2.5 border-b border-border/40">
+                  <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+                  <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+                  <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+                  <span className="ml-3 font-mono text-xs text-muted-foreground/60">
+                    coco ui — history
+                  </span>
+                </div>
+
+                {/* The actual GIF demo */}
+                <GifHero />
+              </div>
+            </div>
+
+            {/* Install CTA below the screenshot */}
+            <div className="mt-8 flex justify-center">
+              <CopyCommand command="npx git-coco@latest init" />
             </div>
           </div>
         </Section>
@@ -417,7 +485,7 @@ export default function WorkstationPage() {
             />
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {tuiViews.map(({ icon: Icon, name, chord, description }) => (
+              {tuiViews.map(({ icon: Icon, name, chord, description, screenshot }) => (
                 <div
                   key={name}
                   className="group rounded-lg border border-border bg-bg-surface/30 p-5 transition-colors hover:border-terminal-green/30 hover:bg-bg-elevated"
@@ -429,9 +497,10 @@ export default function WorkstationPage() {
                     <KbdBadge keys={chord} />
                   </div>
 
-                  {/* Screenshot slot for this view */}
+                  {/* Screenshot for this view */}
                   <div className="mt-3">
                     <ScreenshotPlaceholder
+                      src={screenshot}
                       alt={`${name} view screenshot`}
                       aspect="aspect-[4/3]"
                     />
@@ -445,6 +514,27 @@ export default function WorkstationPage() {
                   </p>
                 </div>
               ))}
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================================ */}
+        {/*  SEARCH & FILTER — live demo                                 */}
+        {/* ============================================================ */}
+        <Section id="search">
+          <div className="container">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[2fr_3fr] lg:gap-12 items-center">
+              <div>
+                <SectionHeader
+                  prompt="~/coco $ /"
+                  title="Find anything instantly"
+                  subtitle="Press / to filter commits, branches, or files in real time. Results narrow as you type — no waiting, no separate search UI."
+                />
+              </div>
+              <GifDemo
+                src="/screenshots/demo-search-filter.gif"
+                alt="Live search filter narrowing commits as you type"
+              />
             </div>
           </div>
         </Section>
@@ -492,6 +582,15 @@ export default function WorkstationPage() {
                   anywhere for the full keymap reference
                 </p>
               </div>
+            </div>
+
+            {/* View-switching GIF demo */}
+            <div className="mt-10">
+              <GifDemo
+                src="/screenshots/demo-ui-view-switching.gif"
+                alt="Chord navigation in action — switching between history, status, branches, and diff"
+                caption="g + key — instant view switching without leaving the keyboard"
+              />
             </div>
           </div>
         </Section>
@@ -543,11 +642,12 @@ export default function WorkstationPage() {
             />
             <WorkflowsAccordion />
 
-            {/* Full-width workflow screenshot */}
+            {/* Full-width workflow GIF demo */}
             <div className="mt-12">
-              <ScreenshotPlaceholder
-                alt="Hunk-level staging workflow"
-                caption="Staging individual hunks from the status view"
+              <GifDemo
+                src="/screenshots/demo-hunk-staging.gif"
+                alt="Staging individual files from the status view"
+                caption="Stage files one by one with Space — precise control over every commit"
               />
             </div>
           </div>
@@ -588,17 +688,71 @@ export default function WorkstationPage() {
               ))}
             </div>
 
-            {/* Theme screenshots — side by side */}
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <ScreenshotPlaceholder
-                alt="Default theme screenshot"
-                aspect="aspect-[4/3]"
-                caption="Default — terminal green on dark"
-              />
-              <ScreenshotPlaceholder
-                alt="Catppuccin theme screenshot"
-                aspect="aspect-[4/3]"
-                caption="Catppuccin — pastel colors on dark"
+            {/* Theme carousel — cycle through all presets */}
+            <div className="mt-8">
+              <ThemeCarousel
+                slides={[
+                  {
+                    name: "Default",
+                    description: "Terminal green on dark — the classic look",
+                    src: "/screenshots/workstation-history.png",
+                  },
+                  {
+                    name: "Catppuccin",
+                    description: "Pastel colors on dark — easy on the eyes",
+                    src: "/screenshots/theme-catppuccin.png",
+                  },
+                  {
+                    name: "Gruvbox",
+                    description: "Warm retro palette — cozy and readable",
+                    src: "/screenshots/theme-gruvbox.png",
+                  },
+                  {
+                    name: "Dracula",
+                    description: "Purple-accented dark theme — bold and vibrant",
+                    src: "/screenshots/theme-dracula.png",
+                  },
+                  {
+                    name: "Nord",
+                    description: "Arctic blue palette — calm and focused",
+                    src: "/screenshots/theme-nord.png",
+                  },
+                  {
+                    name: "Tokyo Night",
+                    description: "Neon city lights — modern and sharp",
+                    src: "/screenshots/theme-tokyo-night.png",
+                  },
+                  {
+                    name: "One Dark",
+                    description: "Atom-inspired — familiar and balanced",
+                    src: "/screenshots/theme-one-dark.png",
+                  },
+                  {
+                    name: "Rosé Pine",
+                    description: "Muted pastels — gentle and elegant",
+                    src: "/screenshots/theme-rose-pine.png",
+                  },
+                  {
+                    name: "Kanagawa",
+                    description: "Japanese wave palette — serene and distinctive",
+                    src: "/screenshots/theme-kanagawa.png",
+                  },
+                  {
+                    name: "Everforest",
+                    description: "Forest greens — natural and restful",
+                    src: "/screenshots/theme-everforest.png",
+                  },
+                  {
+                    name: "Solarized Dark",
+                    description: "Precision-engineered contrast — a timeless classic",
+                    src: "/screenshots/theme-solarized-dark.png",
+                  },
+                  {
+                    name: "Monochrome",
+                    description: "Grayscale — minimal and distraction-free",
+                    src: "/screenshots/theme-monochrome.png",
+                  },
+                ]}
               />
             </div>
 

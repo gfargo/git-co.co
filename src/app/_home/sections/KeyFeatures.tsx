@@ -304,7 +304,7 @@ function FeatureCard({ feature }: { feature: Feature }) {
 
 export const KeyFeaturesSection = () => {
   return (
-    <Section id="key-features" className="relative overflow-hidden">
+    <Section id="features" className="relative overflow-hidden">
       <TerminalAtmosphere variant="section" />
 
       <div className="container relative z-10">
