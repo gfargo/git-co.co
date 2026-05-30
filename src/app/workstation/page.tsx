@@ -683,66 +683,35 @@ export default function WorkstationPage() {
             <div className="mt-8">
               <ThemeCarousel
                 slides={[
-                  {
-                    name: "Default",
-                    description: "Terminal green on dark — the classic look",
-                    src: "/screenshots/workstation-history.png",
-                  },
-                  {
-                    name: "Catppuccin",
-                    description: "Pastel colors on dark — easy on the eyes",
-                    src: "/screenshots/theme-catppuccin.png",
-                  },
-                  {
-                    name: "Gruvbox",
-                    description: "Warm retro palette — cozy and readable",
-                    src: "/screenshots/theme-gruvbox.png",
-                  },
-                  {
-                    name: "Dracula",
-                    description: "Purple-accented dark theme — bold and vibrant",
-                    src: "/screenshots/theme-dracula.png",
-                  },
-                  {
-                    name: "Nord",
-                    description: "Arctic blue palette — calm and focused",
-                    src: "/screenshots/theme-nord.png",
-                  },
-                  {
-                    name: "Tokyo Night",
-                    description: "Neon city lights — modern and sharp",
-                    src: "/screenshots/theme-tokyo-night.png",
-                  },
-                  {
-                    name: "One Dark",
-                    description: "Atom-inspired — familiar and balanced",
-                    src: "/screenshots/theme-one-dark.png",
-                  },
-                  {
-                    name: "Rosé Pine",
-                    description: "Muted pastels — gentle and elegant",
-                    src: "/screenshots/theme-rose-pine.png",
-                  },
-                  {
-                    name: "Kanagawa",
-                    description: "Japanese wave palette — serene and distinctive",
-                    src: "/screenshots/theme-kanagawa.png",
-                  },
-                  {
-                    name: "Everforest",
-                    description: "Forest greens — natural and restful",
-                    src: "/screenshots/theme-everforest.png",
-                  },
-                  {
-                    name: "Solarized Dark",
-                    description: "Precision-engineered contrast — a timeless classic",
-                    src: "/screenshots/theme-solarized-dark.png",
-                  },
-                  {
-                    name: "Monochrome",
-                    description: "Grayscale — minimal and distraction-free",
-                    src: "/screenshots/theme-monochrome.png",
-                  },
+                  { name: "Default", description: "Terminal green on dark — the classic", src: "/screenshots/workstation-history.png" },
+                  { name: "Catppuccin", description: "Pastel colors on dark — easy on the eyes", src: "/screenshots/theme-catppuccin.png" },
+                  { name: "Gruvbox", description: "Warm retro palette — cozy and readable", src: "/screenshots/theme-gruvbox.png" },
+                  { name: "Dracula", description: "Purple-accented — bold and vibrant", src: "/screenshots/theme-dracula.png" },
+                  { name: "Nord", description: "Arctic blue — calm and focused", src: "/screenshots/theme-nord.png" },
+                  { name: "Tokyo Night", description: "Neon city lights — modern and sharp", src: "/screenshots/theme-tokyo-night.png" },
+                  { name: "One Dark", description: "Atom-inspired — familiar and balanced", src: "/screenshots/theme-one-dark.png" },
+                  { name: "Rosé Pine", description: "Muted pastels — gentle and elegant", src: "/screenshots/theme-rose-pine.png" },
+                  { name: "Kanagawa", description: "Japanese wave — serene and distinctive", src: "/screenshots/theme-kanagawa.png" },
+                  { name: "Everforest", description: "Forest greens — natural and restful", src: "/screenshots/theme-everforest.png" },
+                  { name: "Monokai", description: "Sublime classic — vibrant syntax", src: "/screenshots/theme-monokai.png" },
+                  { name: "Synthwave", description: "Retro neon — cyberpunk vibes", src: "/screenshots/theme-synthwave.png" },
+                  { name: "Ayu Dark", description: "Golden accent — clean and minimal", src: "/screenshots/theme-ayu-dark.png" },
+                  { name: "Palenight", description: "Material-inspired — soft and refined", src: "/screenshots/theme-palenight.png" },
+                  { name: "GitHub Dark", description: "Familiar — professional and clean", src: "/screenshots/theme-github-dark.png" },
+                  { name: "Horizon", description: "Warm sunset tones — inviting", src: "/screenshots/theme-horizon.png" },
+                  { name: "Nightfox", description: "Deep blue — focused and calm", src: "/screenshots/theme-nightfox.png" },
+                  { name: "Carbonfox", description: "IBM Carbon — professional edge", src: "/screenshots/theme-carbonfox.png" },
+                  { name: "Tokyonight Storm", description: "Stormy variant — deeper contrast", src: "/screenshots/theme-tokyonight-storm.png" },
+                  { name: "Iceberg", description: "Cool blue-gray — Japanese minimalism", src: "/screenshots/theme-iceberg.png" },
+                  { name: "Material Ocean", description: "Deep ocean blues — immersive", src: "/screenshots/theme-material-ocean.png" },
+                  { name: "Moonlight", description: "Soft moonlit blues — dreamy", src: "/screenshots/theme-moonlight.png" },
+                  { name: "Poimandres", description: "Teal + lavender — modern dev", src: "/screenshots/theme-poimandres.png" },
+                  { name: "Vitesse Dark", description: "Muted green — understated", src: "/screenshots/theme-vitesse-dark.png" },
+                  { name: "Vesper", description: "Warm amber + teal — cozy evening", src: "/screenshots/theme-vesper.png" },
+                  { name: "Flexoki", description: "Ink-inspired — organic warmth", src: "/screenshots/theme-flexoki.png" },
+                  { name: "Mellow", description: "Soft pastels — gentle on the eyes", src: "/screenshots/theme-mellow.png" },
+                  { name: "Solarized Dark", description: "Precision contrast — timeless", src: "/screenshots/theme-solarized-dark.png" },
+                  { name: "Monochrome", description: "Grayscale — distraction-free", src: "/screenshots/theme-monochrome.png" },
                 ]}
               />
             </div>
