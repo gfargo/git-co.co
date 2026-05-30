@@ -1,10 +1,8 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
-import cocoCoverImage from "@/assets/coco-cover.png"
 import { CopyCommand } from "@/components/CopyCommand"
 
 const commands = ["commit", "changelog", "recap", "review", "commit split"]
@@ -65,13 +63,38 @@ export const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Right — the coco cover image */}
-              <div className="-order-1 lg:order-1">
-                <Image
-                  src={cocoCoverImage}
-                  alt="Coco AI Git Assistant — terminal interface showing automated commit message generation"
-                  priority
-                />
+              {/* Right — the real workstation, floating in 3-space */}
+              <div className="-order-1 lg:order-1 [perspective:1800px]">
+                <div className="hero-terminal-float relative">
+                  {/* Glow bleeding from the screen into the green hero */}
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.28),transparent_70%)] blur-2xl"
+                  />
+                  <div className="overflow-hidden rounded-xl border border-white/15 bg-[hsl(150_20%_8%)] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.75)] ring-1 ring-black/20 [transform:rotateY(-9deg)_rotateX(3deg)]">
+                    {/* Minimal title bar */}
+                    <div className="flex items-center gap-2 border-b border-white/10 bg-black/30 px-4 py-2.5">
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+                      <span className="ml-auto font-mono text-[10px] text-white/40">
+                        ~/coco — coco ui
+                      </span>
+                    </div>
+                    {/* The real workstation, animated */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/screenshots/demo-workstation-tour.gif"
+                      alt="coco terminal workstation — browsing history, status, branches and diffs by keyboard"
+                      className="block w-full"
+                    />
+                    {/* Faint scanline texture for CRT depth */}
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(255,255,255,0.5)_2px,rgba(255,255,255,0.5)_3px)]"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -79,6 +102,28 @@ export const HeroSection = () => {
       </section>
 
       {/* No gradient — clean edge between hero and dark green content below */}
+
+      <style jsx>{`
+        .hero-terminal-float {
+          animation: hero-float 7s ease-in-out infinite;
+          transform-style: preserve-3d;
+          will-change: transform;
+        }
+        @keyframes hero-float {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-12px);
+          }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-terminal-float {
+            animation: none;
+          }
+        }
+      `}</style>
     </>
   )
 }

@@ -1,27 +1,16 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import {
-  AlertTriangleIcon,
-  ArchiveIcon,
   BookOpenIcon,
   ChevronRightIcon,
-  CircleDotIcon,
-  ClockIcon,
   CodeIcon,
-  DiffIcon,
   FileEditIcon,
   FolderTreeIcon,
   GitBranchIcon,
   GitCompareIcon,
   GitPullRequestIcon,
-  GitPullRequestArrowIcon,
-  HistoryIcon,
   MonitorIcon,
-  PackageIcon,
-  PenToolIcon,
   SearchIcon,
-  TagIcon,
-  TreesIcon,
 } from "lucide-react"
 
 import { Header } from "@/components/Header"
@@ -32,11 +21,11 @@ import { TerminalAtmosphere } from "@/components/TerminalAtmosphere"
 import { KbdBadge } from "@/components/KbdBadge"
 import { CopyCommand } from "@/components/CopyCommand"
 import { TrackedLink } from "@/components/TrackedLink"
-import { ScreenshotPlaceholder } from "@/components/ScreenshotPlaceholder"
-import { ThemeCarousel } from "@/components/ThemeCarousel"
+import { ThemeWall } from "@/components/ThemeWall"
 import { siteConfig } from "@/config/site"
 import { WorkflowsAccordion } from "./WorkflowsAccordion"
 import { GifHero } from "./GifHero"
+import { ViewExplorer } from "./ViewExplorer"
 import { GifDemo } from "@/components/GifDemo"
 
 /* ------------------------------------------------------------------ */
@@ -80,121 +69,6 @@ export function generateMetadata(): Metadata {
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
 /* ------------------------------------------------------------------ */
-
-const tuiViews = [
-  {
-    icon: ClockIcon,
-    name: "History",
-    chord: ["g", "h"],
-    description: "Browse commit history with graph visualization",
-    screenshot: "/screenshots/view-history.png",
-  },
-  {
-    icon: FileEditIcon,
-    name: "Status",
-    chord: ["g", "s"],
-    description: "View working tree status and stage changes",
-    screenshot: "/screenshots/view-status.png",
-  },
-  {
-    icon: DiffIcon,
-    name: "Diff",
-    chord: ["g", "d"],
-    description: "Side-by-side diff viewer for any commit or file",
-    screenshot: "/screenshots/view-diff.png",
-  },
-  {
-    icon: PenToolIcon,
-    name: "Compose",
-    chord: ["g", "c"],
-    description: "Draft and edit commit messages with optional AI assistance",
-    screenshot: "/screenshots/view-compose.png",
-  },
-  {
-    icon: GitBranchIcon,
-    name: "Branches",
-    chord: ["g", "b"],
-    description: "Manage local and remote branches",
-    screenshot: "/screenshots/view-branches.png",
-  },
-  {
-    icon: TagIcon,
-    name: "Tags",
-    chord: ["g", "t"],
-    description: "Browse and create tags",
-    screenshot: "/screenshots/view-tags.png",
-  },
-  {
-    icon: ArchiveIcon,
-    name: "Stash",
-    chord: ["g", "z"],
-    description: "Manage stash entries",
-    screenshot: "/screenshots/view-stash.png",
-  },
-  {
-    icon: TreesIcon,
-    name: "Worktrees",
-    chord: ["g", "w"],
-    description: "Manage git worktrees",
-    screenshot: "/screenshots/view-worktrees.png",
-  },
-  {
-    icon: GitPullRequestIcon,
-    name: "Pull Request",
-    chord: ["g", "p"],
-    description: "Review, approve, merge, and comment on the current branch's PR",
-    screenshot: "/screenshots/view-pull-request.png",
-  },
-  {
-    icon: GitPullRequestArrowIcon,
-    name: "PR Triage",
-    chord: ["g", "P"],
-    description: "Multi-PR triage list with filter cycling, body / reviews / checks in the inspector, and the full action panel by-number",
-    screenshot: "/screenshots/view-pr-triage.png",
-  },
-  {
-    icon: CircleDotIcon,
-    name: "Issues",
-    chord: ["g", "i"],
-    description: "Issue triage list with filter cycling, body / comments in the inspector, and per-row comment / label / assign / close / reopen",
-    screenshot: "/screenshots/view-issues.png",
-  },
-  {
-    icon: AlertTriangleIcon,
-    name: "Conflicts",
-    chord: ["g", "x"],
-    description: "Resolve merge / rebase / cherry-pick / revert conflicts inline",
-    screenshot: "/screenshots/view-conflicts.png",
-  },
-  {
-    icon: HistoryIcon,
-    name: "Reflog",
-    chord: ["g", "r"],
-    description: "Chronological recovery log — every HEAD movement, one keystroke away",
-    screenshot: "/screenshots/view-reflog.png",
-  },
-  {
-    icon: SearchIcon,
-    name: "Bisect",
-    chord: ["g", "B"],
-    description: "Binary-search through history to find regressions — good / bad / skip / reset",
-    screenshot: "/screenshots/view-bisect.png",
-  },
-  {
-    icon: PackageIcon,
-    name: "Submodules",
-    chord: ["g", "M"],
-    description: "Registered submodules with pinned sha, tracking branch, and clean / modified / uninitialized state. Enter drills into the cursored submodule.",
-    screenshot: "/screenshots/view-submodules.png",
-  },
-  {
-    icon: GitBranchIcon,
-    name: "Changelog",
-    chord: ["L"],
-    description: "Full-screen AI-generated changelog for the current branch — yank, edit, or seed a PR from it",
-    screenshot: "/screenshots/view-changelog.png",
-  },
-]
 
 const chordKeys = [
   { key: "h", label: "History" },
@@ -270,69 +144,6 @@ const crossViewWorkflows = [
     chord: ["Enter"],
     description:
       "Press `Enter` on a submodule row (`g M`) or on a submodule file in a commit diff to drill in. Every view re-scopes to the submodule's working directory — like running `coco ui` from inside it. `Esc` or `<` walks back out; the title bar shows `coco › vendor/lib   ← esc` so you always know where you are. Frames stack.",
-  },
-]
-
-const themePresets = [
-  {
-    name: "Default",
-    description: "Terminal green on dark",
-    colors: ["#121418", "#1a1d24", "#4d9e6d", "#6bc490"],
-  },
-  {
-    name: "Catppuccin",
-    description: "Pastel colors on dark",
-    colors: ["#1e1e2e", "#313244", "#cba6f7", "#f5c2e7"],
-  },
-  {
-    name: "Gruvbox",
-    description: "Warm retro palette",
-    colors: ["#282828", "#3c3836", "#b8bb26", "#fabd2f"],
-  },
-  {
-    name: "Dracula",
-    description: "Purple-accented dark",
-    colors: ["#282a36", "#44475a", "#bd93f9", "#ff79c6"],
-  },
-  {
-    name: "Nord",
-    description: "Arctic blue palette",
-    colors: ["#2e3440", "#3b4252", "#88c0d0", "#81a1c1"],
-  },
-  {
-    name: "Tokyo Night",
-    description: "Neon city lights",
-    colors: ["#1a1b26", "#3b4261", "#7aa2f7", "#7dcfff"],
-  },
-  {
-    name: "One Dark",
-    description: "Atom-inspired",
-    colors: ["#282c34", "#3e4452", "#61afef", "#56b6c2"],
-  },
-  {
-    name: "Rosé Pine",
-    description: "Muted pastels",
-    colors: ["#191724", "#26233a", "#c4a7e7", "#9ccfd8"],
-  },
-  {
-    name: "Kanagawa",
-    description: "Japanese wave palette",
-    colors: ["#1f1f28", "#2a2a37", "#7e9cd8", "#7fb4ca"],
-  },
-  {
-    name: "Everforest",
-    description: "Forest greens",
-    colors: ["#2d353b", "#374145", "#a7c080", "#83c092"],
-  },
-  {
-    name: "Solarized Dark",
-    description: "Precision contrast",
-    colors: ["#002b36", "#073642", "#268bd2", "#2aa198"],
-  },
-  {
-    name: "Monochrome",
-    description: "Grayscale palette",
-    colors: ["#121418", "#1a1d24", "#888888", "#cccccc"],
   },
 ]
 
@@ -475,37 +286,7 @@ export default function WorkstationPage() {
               subtitle="Each view is purpose-built for a specific Git workflow. Switch between them instantly with chord navigation."
             />
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {tuiViews.map(({ icon: Icon, name, chord, description, screenshot }) => (
-                <div
-                  key={name}
-                  className="group rounded-lg border border-border bg-bg-surface/30 p-5 transition-colors hover:border-terminal-green/30 hover:bg-bg-elevated"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-bg-elevated">
-                      <Icon className="h-4 w-4 text-terminal-green" />
-                    </div>
-                    <KbdBadge keys={chord} />
-                  </div>
-
-                  {/* Screenshot for this view */}
-                  <div className="mt-3">
-                    <ScreenshotPlaceholder
-                      src={screenshot}
-                      alt={`${name} view screenshot`}
-                      aspect="aspect-[4/3]"
-                    />
-                  </div>
-
-                  <h3 className="mt-3 font-mono text-sm font-semibold text-foreground">
-                    {name}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                    {description}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <ViewExplorer />
           </div>
         </Section>
 
@@ -647,77 +428,21 @@ export default function WorkstationPage() {
         {/* ============================================================ */}
         {/*  THEMING                                                     */}
         {/* ============================================================ */}
-        <Section id="theming">
+        <Section id="theming" className="relative overflow-hidden">
           <div className="container">
             <SectionHeader
               prompt="~/coco $ ui --theme"
-              title="Make it yours"
-              subtitle="Four built-in theme presets, plus full NO_COLOR support for minimal environments."
+              title="Thirty-one ways to make it yours"
+              subtitle="From Catppuccin to Gruvbox to Synthwave — every preset is a complete palette, surface and all. Plus full NO_COLOR support for minimal environments."
             />
+          </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {themePresets.map(({ name, description, colors }) => (
-                <div
-                  key={name}
-                  className="rounded-lg border border-border bg-bg-surface/30 p-5 transition-colors hover:border-terminal-green/30"
-                >
-                  <div className="mb-4 flex gap-2">
-                    {colors.map((color, i) => (
-                      <div
-                        key={i}
-                        className="h-8 w-8 rounded-md border border-border"
-                        style={{ backgroundColor: color }}
-                        aria-label={`${name} theme color ${i + 1}`}
-                      />
-                    ))}
-                  </div>
-                  <h3 className="font-mono text-sm font-semibold text-foreground">
-                    {name}
-                  </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{description}</p>
-                </div>
-              ))}
-            </div>
+          {/* Full-bleed kinetic theme wall — breaks out of the container */}
+          <ThemeWall className="mt-2" />
 
-            {/* Theme carousel — cycle through all presets */}
-            <div className="mt-8">
-              <ThemeCarousel
-                slides={[
-                  { name: "Default", description: "Terminal green on dark — the classic", src: "/screenshots/workstation-history.png" },
-                  { name: "Catppuccin", description: "Pastel colors on dark — easy on the eyes", src: "/screenshots/theme-catppuccin.png" },
-                  { name: "Gruvbox", description: "Warm retro palette — cozy and readable", src: "/screenshots/theme-gruvbox.png" },
-                  { name: "Dracula", description: "Purple-accented — bold and vibrant", src: "/screenshots/theme-dracula.png" },
-                  { name: "Nord", description: "Arctic blue — calm and focused", src: "/screenshots/theme-nord.png" },
-                  { name: "Tokyo Night", description: "Neon city lights — modern and sharp", src: "/screenshots/theme-tokyo-night.png" },
-                  { name: "One Dark", description: "Atom-inspired — familiar and balanced", src: "/screenshots/theme-one-dark.png" },
-                  { name: "Rosé Pine", description: "Muted pastels — gentle and elegant", src: "/screenshots/theme-rose-pine.png" },
-                  { name: "Kanagawa", description: "Japanese wave — serene and distinctive", src: "/screenshots/theme-kanagawa.png" },
-                  { name: "Everforest", description: "Forest greens — natural and restful", src: "/screenshots/theme-everforest.png" },
-                  { name: "Monokai", description: "Sublime classic — vibrant syntax", src: "/screenshots/theme-monokai.png" },
-                  { name: "Synthwave", description: "Retro neon — cyberpunk vibes", src: "/screenshots/theme-synthwave.png" },
-                  { name: "Ayu Dark", description: "Golden accent — clean and minimal", src: "/screenshots/theme-ayu-dark.png" },
-                  { name: "Palenight", description: "Material-inspired — soft and refined", src: "/screenshots/theme-palenight.png" },
-                  { name: "GitHub Dark", description: "Familiar — professional and clean", src: "/screenshots/theme-github-dark.png" },
-                  { name: "Horizon", description: "Warm sunset tones — inviting", src: "/screenshots/theme-horizon.png" },
-                  { name: "Nightfox", description: "Deep blue — focused and calm", src: "/screenshots/theme-nightfox.png" },
-                  { name: "Carbonfox", description: "IBM Carbon — professional edge", src: "/screenshots/theme-carbonfox.png" },
-                  { name: "Tokyonight Storm", description: "Stormy variant — deeper contrast", src: "/screenshots/theme-tokyonight-storm.png" },
-                  { name: "Iceberg", description: "Cool blue-gray — Japanese minimalism", src: "/screenshots/theme-iceberg.png" },
-                  { name: "Material Ocean", description: "Deep ocean blues — immersive", src: "/screenshots/theme-material-ocean.png" },
-                  { name: "Moonlight", description: "Soft moonlit blues — dreamy", src: "/screenshots/theme-moonlight.png" },
-                  { name: "Poimandres", description: "Teal + lavender — modern dev", src: "/screenshots/theme-poimandres.png" },
-                  { name: "Vitesse Dark", description: "Muted green — understated", src: "/screenshots/theme-vitesse-dark.png" },
-                  { name: "Vesper", description: "Warm amber + teal — cozy evening", src: "/screenshots/theme-vesper.png" },
-                  { name: "Flexoki", description: "Ink-inspired — organic warmth", src: "/screenshots/theme-flexoki.png" },
-                  { name: "Mellow", description: "Soft pastels — gentle on the eyes", src: "/screenshots/theme-mellow.png" },
-                  { name: "Solarized Dark", description: "Precision contrast — timeless", src: "/screenshots/theme-solarized-dark.png" },
-                  { name: "Monochrome", description: "Grayscale — distraction-free", src: "/screenshots/theme-monochrome.png" },
-                ]}
-              />
-            </div>
-
+          <div className="container">
             {/* NO_COLOR callout */}
-            <div className="mt-8 rounded-lg border border-border bg-[hsl(var(--code-bg))] px-5 py-4">
+            <div className="mt-12 rounded-lg border border-border bg-[hsl(var(--code-bg))] px-5 py-4">
               <div className="flex items-start gap-3">
                 <MonitorIcon className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
                 <div>
