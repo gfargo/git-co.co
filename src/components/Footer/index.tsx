@@ -4,7 +4,9 @@ import {
     PackageIcon,
     TerminalIcon
 } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
+import cocoCover from "@/assets/coco-cover.png"
 import { siteConfig } from "@/config/site"
 
 const productLinks = [
@@ -98,6 +100,20 @@ export const Footer: React.FC = () => {
             <p className="text-sm leading-relaxed text-muted-foreground">
               AI-powered Git tools for developers who live in the terminal.
             </p>
+            {/* The original coco cover illustration — kept as a wink in the
+                footer now that the hero shows the real workstation. */}
+            <Link
+              href="/"
+              aria-label="coco home"
+              className="group mt-1 block overflow-hidden rounded-lg border border-border/60 transition-colors hover:border-terminal-green/40"
+            >
+              <Image
+                src={cocoCover}
+                alt="coco — AI-powered git assistant"
+                className="h-auto w-full opacity-90 transition-opacity group-hover:opacity-100"
+                sizes="(max-width: 640px) 100vw, 280px"
+              />
+            </Link>
           </div>
 
           {/* Product */}
