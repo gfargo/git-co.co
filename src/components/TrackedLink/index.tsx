@@ -28,8 +28,15 @@ export const TrackedLink = ({
     })
   }
 
+  // Harden links that open a new tab: prevent the opened page from
+  // reaching back through window.opener (reverse tabnabbing) and trim
+  // referrer leakage. Respect an explicit `rel` if the caller set one.
+  const rel =
+    (props.rel as string | undefined) ??
+    (props.target === "_blank" ? "noopener noreferrer" : undefined)
+
   return (
-    <Link className={className} {...props} onClick={handleClick}>
+    <Link className={className} {...props} rel={rel} onClick={handleClick}>
       {children}
     </Link>
   )
