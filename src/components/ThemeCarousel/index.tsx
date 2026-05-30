@@ -28,6 +28,7 @@ export function ThemeCarousel({ slides, className }: ThemeCarouselProps) {
   const next = () => setActiveIndex((i) => (i === slides.length - 1 ? 0 : i + 1))
 
   const active = slides[activeIndex]
+  if (!active) return null
 
   return (
     <div className={cn("relative", className)}>
