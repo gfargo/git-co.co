@@ -1,27 +1,16 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import {
-  AlertTriangleIcon,
-  ArchiveIcon,
   BookOpenIcon,
   ChevronRightIcon,
-  CircleDotIcon,
-  ClockIcon,
   CodeIcon,
-  DiffIcon,
   FileEditIcon,
   FolderTreeIcon,
   GitBranchIcon,
   GitCompareIcon,
   GitPullRequestIcon,
-  GitPullRequestArrowIcon,
-  HistoryIcon,
   MonitorIcon,
-  PackageIcon,
-  PenToolIcon,
   SearchIcon,
-  TagIcon,
-  TreesIcon,
 } from "lucide-react"
 
 import { Header } from "@/components/Header"
@@ -32,11 +21,11 @@ import { TerminalAtmosphere } from "@/components/TerminalAtmosphere"
 import { KbdBadge } from "@/components/KbdBadge"
 import { CopyCommand } from "@/components/CopyCommand"
 import { TrackedLink } from "@/components/TrackedLink"
-import { ScreenshotPlaceholder } from "@/components/ScreenshotPlaceholder"
 import { ThemeWall } from "@/components/ThemeWall"
 import { siteConfig } from "@/config/site"
 import { WorkflowsAccordion } from "./WorkflowsAccordion"
 import { GifHero } from "./GifHero"
+import { ViewExplorer } from "./ViewExplorer"
 import { GifDemo } from "@/components/GifDemo"
 
 /* ------------------------------------------------------------------ */
@@ -80,121 +69,6 @@ export function generateMetadata(): Metadata {
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
 /* ------------------------------------------------------------------ */
-
-const tuiViews = [
-  {
-    icon: ClockIcon,
-    name: "History",
-    chord: ["g", "h"],
-    description: "Browse commit history with graph visualization",
-    screenshot: "/screenshots/view-history.png",
-  },
-  {
-    icon: FileEditIcon,
-    name: "Status",
-    chord: ["g", "s"],
-    description: "View working tree status and stage changes",
-    screenshot: "/screenshots/view-status.png",
-  },
-  {
-    icon: DiffIcon,
-    name: "Diff",
-    chord: ["g", "d"],
-    description: "Side-by-side diff viewer for any commit or file",
-    screenshot: "/screenshots/view-diff.png",
-  },
-  {
-    icon: PenToolIcon,
-    name: "Compose",
-    chord: ["g", "c"],
-    description: "Draft and edit commit messages with optional AI assistance",
-    screenshot: "/screenshots/view-compose.png",
-  },
-  {
-    icon: GitBranchIcon,
-    name: "Branches",
-    chord: ["g", "b"],
-    description: "Manage local and remote branches",
-    screenshot: "/screenshots/view-branches.png",
-  },
-  {
-    icon: TagIcon,
-    name: "Tags",
-    chord: ["g", "t"],
-    description: "Browse and create tags",
-    screenshot: "/screenshots/view-tags.png",
-  },
-  {
-    icon: ArchiveIcon,
-    name: "Stash",
-    chord: ["g", "z"],
-    description: "Manage stash entries",
-    screenshot: "/screenshots/view-stash.png",
-  },
-  {
-    icon: TreesIcon,
-    name: "Worktrees",
-    chord: ["g", "w"],
-    description: "Manage git worktrees",
-    screenshot: "/screenshots/view-worktrees.png",
-  },
-  {
-    icon: GitPullRequestIcon,
-    name: "Pull Request",
-    chord: ["g", "p"],
-    description: "Review, approve, merge, and comment on the current branch's PR",
-    screenshot: "/screenshots/view-pull-request.png",
-  },
-  {
-    icon: GitPullRequestArrowIcon,
-    name: "PR Triage",
-    chord: ["g", "P"],
-    description: "Multi-PR triage list with filter cycling, body / reviews / checks in the inspector, and the full action panel by-number",
-    screenshot: "/screenshots/view-pr-triage.png",
-  },
-  {
-    icon: CircleDotIcon,
-    name: "Issues",
-    chord: ["g", "i"],
-    description: "Issue triage list with filter cycling, body / comments in the inspector, and per-row comment / label / assign / close / reopen",
-    screenshot: "/screenshots/view-issues.png",
-  },
-  {
-    icon: AlertTriangleIcon,
-    name: "Conflicts",
-    chord: ["g", "x"],
-    description: "Resolve merge / rebase / cherry-pick / revert conflicts inline",
-    screenshot: "/screenshots/view-conflicts.png",
-  },
-  {
-    icon: HistoryIcon,
-    name: "Reflog",
-    chord: ["g", "r"],
-    description: "Chronological recovery log — every HEAD movement, one keystroke away",
-    screenshot: "/screenshots/view-reflog.png",
-  },
-  {
-    icon: SearchIcon,
-    name: "Bisect",
-    chord: ["g", "B"],
-    description: "Binary-search through history to find regressions — good / bad / skip / reset",
-    screenshot: "/screenshots/view-bisect.png",
-  },
-  {
-    icon: PackageIcon,
-    name: "Submodules",
-    chord: ["g", "M"],
-    description: "Registered submodules with pinned sha, tracking branch, and clean / modified / uninitialized state. Enter drills into the cursored submodule.",
-    screenshot: "/screenshots/view-submodules.png",
-  },
-  {
-    icon: GitBranchIcon,
-    name: "Changelog",
-    chord: ["L"],
-    description: "Full-screen AI-generated changelog for the current branch — yank, edit, or seed a PR from it",
-    screenshot: "/screenshots/view-changelog.png",
-  },
-]
 
 const chordKeys = [
   { key: "h", label: "History" },
@@ -412,37 +286,7 @@ export default function WorkstationPage() {
               subtitle="Each view is purpose-built for a specific Git workflow. Switch between them instantly with chord navigation."
             />
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {tuiViews.map(({ icon: Icon, name, chord, description, screenshot }) => (
-                <div
-                  key={name}
-                  className="group rounded-lg border border-border bg-bg-surface/30 p-5 transition-colors hover:border-terminal-green/30 hover:bg-bg-elevated"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-bg-elevated">
-                      <Icon className="h-4 w-4 text-terminal-green" />
-                    </div>
-                    <KbdBadge keys={chord} />
-                  </div>
-
-                  {/* Screenshot for this view */}
-                  <div className="mt-3">
-                    <ScreenshotPlaceholder
-                      src={screenshot}
-                      alt={`${name} view screenshot`}
-                      aspect="aspect-[4/3]"
-                    />
-                  </div>
-
-                  <h3 className="mt-3 font-mono text-sm font-semibold text-foreground">
-                    {name}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                    {description}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <ViewExplorer />
           </div>
         </Section>
 
