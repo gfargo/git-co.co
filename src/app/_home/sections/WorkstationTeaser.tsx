@@ -67,23 +67,34 @@ export function WorkstationTeaser() {
 
         {/* Asymmetric 60/40 layout */}
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[3fr_2fr] lg:gap-14">
-          {/* Left — animated GIF demo */}
-          <div className="overflow-hidden rounded-lg border border-border/60 shadow-lg shadow-black/30">
-            {/* macOS title bar */}
-            <div className="flex items-center gap-2 bg-bg-elevated/80 px-4 py-2 border-b border-border/40">
-              <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-              <span className="ml-3 font-mono text-[10px] text-muted-foreground/50">
-                coco ui
+          {/* Left — animated GIF demo, chrome-less and glowing.
+              Deliberately *not* wrapped in the macOS title-bar frame used
+              elsewhere — the screen bleeds straight into the page with a
+              terminal-green halo so it reads as live, not a framed picture. */}
+          <div className="group relative self-center">
+            {/* Green halo bleeding from the screen */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -inset-4 -z-10 rounded-2xl bg-terminal-green/10 opacity-70 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
+            />
+            <div className="overflow-hidden rounded-lg ring-1 ring-terminal-green/20 shadow-2xl shadow-black/40">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/screenshots/demo-ui-view-switching.gif"
+                alt="coco ui — switching between history, status, branches, and diff views via chord navigation"
+                className="w-full h-auto"
+              />
+            </div>
+            {/* LIVE chip — small, kinetic, signals motion */}
+            <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/70 px-2.5 py-1 backdrop-blur-sm">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-terminal-green opacity-75" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-terminal-green" />
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-wider text-white/70">
+                chord nav
               </span>
             </div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/screenshots/demo-ui-view-switching.gif"
-              alt="coco ui — switching between history, status, branches, and diff views via chord navigation"
-              className="w-full h-auto"
-            />
           </div>
 
           {/* Right — feature bullets */}
