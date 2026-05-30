@@ -64,14 +64,16 @@ function Tile({
   theme,
   onHover,
   active,
+  onLightbox,
 }: {
   theme: ThemeTile
   onHover: (t: ThemeTile | null) => void
   active: boolean
+  onLightbox: (open: boolean) => void
 }) {
   const src = `/screenshots/theme-${theme.slug}.png`
   return (
-    <Lightbox src={src} alt={`coco ui — ${theme.name} theme`}>
+    <Lightbox src={src} alt={`coco ui — ${theme.name} theme`} onOpenChange={onLightbox}>
       <figure
         onMouseEnter={() => onHover(theme)}
         onMouseLeave={() => onHover(null)}
@@ -113,17 +115,30 @@ interface MarqueeRowProps {
   reverse?: boolean
   onHover: (t: ThemeTile | null) => void
   activeSlug: string | null
+  paused: boolean
+  onLightbox: (open: boolean) => void
 }
 
-function MarqueeRow({ themes, duration, reverse, onHover, activeSlug }: MarqueeRowProps) {
+function MarqueeRow({ themes, duration, reverse, onHover, activeSlug, paused, onLightbox }: MarqueeRowProps) {
   // Duplicate the row so the translateX loop is seamless.
   const doubled = [...themes, ...themes]
   return (
     <div className="group/row relative flex overflow-hidden">
       <div
-        className="flex shrink-0 gap-4 pr-4 group-hover/row:[animation-play-state:paused]"
+        className={cn(
+          "flex shrink-0 gap-4 pr-4 group-hover/row:[animation-play-state:paused]",
+          // Freeze every row while the lightbox is open so the zoomed
+          // tile isn't yanked out from under the cursor.
+          paused && "[animation-play-state:paused]"
+        )}
+        // Use the animation *longhands* (not the `animation` shorthand) so we
+        // never set animation-play-state inline — otherwise the inline value
+        // would beat the hover/paused utility classes and they'd never apply.
         style={{
-          animation: `theme-marquee ${duration}s linear infinite`,
+          animationName: "theme-marquee",
+          animationDuration: `${duration}s`,
+          animationTimingFunction: "linear",
+          animationIterationCount: "infinite",
           animationDirection: reverse ? "reverse" : "normal",
         }}
       >
@@ -133,6 +148,7 @@ function MarqueeRow({ themes, duration, reverse, onHover, activeSlug }: MarqueeR
             theme={theme}
             onHover={onHover}
             active={activeSlug === theme.slug}
+            onLightbox={onLightbox}
           />
         ))}
       </div>
@@ -149,6 +165,7 @@ function MarqueeRow({ themes, duration, reverse, onHover, activeSlug }: MarqueeR
  */
 export function ThemeWall({ className }: { className?: string }) {
   const [active, setActive] = useState<ThemeTile | null>(null)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
   const rows = intoRows(THEMES, 3)
 
   return (
@@ -170,9 +187,9 @@ export function ThemeWall({ className }: { className?: string }) {
       <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-background to-transparent sm:w-28" />
 
       <div className="flex flex-col gap-4">
-        <MarqueeRow themes={rows[0]!} duration={64} onHover={setActive} activeSlug={active?.slug ?? null} />
-        <MarqueeRow themes={rows[1]!} duration={78} reverse onHover={setActive} activeSlug={active?.slug ?? null} />
-        <MarqueeRow themes={rows[2]!} duration={70} onHover={setActive} activeSlug={active?.slug ?? null} />
+        <MarqueeRow themes={rows[0]!} duration={64} onHover={setActive} activeSlug={active?.slug ?? null} paused={lightboxOpen} onLightbox={setLightboxOpen} />
+        <MarqueeRow themes={rows[1]!} duration={78} reverse onHover={setActive} activeSlug={active?.slug ?? null} paused={lightboxOpen} onLightbox={setLightboxOpen} />
+        <MarqueeRow themes={rows[2]!} duration={70} onHover={setActive} activeSlug={active?.slug ?? null} paused={lightboxOpen} onLightbox={setLightboxOpen} />
       </div>
 
       {/* Live caption — name of whatever you're pointing at */}
