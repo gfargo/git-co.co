@@ -4,13 +4,7 @@ import {
   BookOpenIcon,
   ChevronRightIcon,
   CodeIcon,
-  FileEditIcon,
-  FolderTreeIcon,
-  GitBranchIcon,
-  GitCompareIcon,
-  GitPullRequestIcon,
   MonitorIcon,
-  SearchIcon,
 } from "lucide-react"
 
 import { Header } from "@/components/Header"
@@ -18,13 +12,13 @@ import { Footer } from "@/components/Footer"
 import { Section } from "@/components/Section"
 import { SectionHeader } from "@/components/SectionHeader"
 import { TerminalAtmosphere } from "@/components/TerminalAtmosphere"
-import { KbdBadge } from "@/components/KbdBadge"
 import { CopyCommand } from "@/components/CopyCommand"
 import { TrackedLink } from "@/components/TrackedLink"
 import { ThemeWall } from "@/components/ThemeWall"
 import { siteConfig } from "@/config/site"
 import { WorkflowsAccordion } from "./WorkflowsAccordion"
 import { GifHero } from "./GifHero"
+import { CrossViewShowcase } from "./CrossViewShowcase"
 import { ViewExplorer } from "./ViewExplorer"
 import { GifDemo } from "@/components/GifDemo"
 
@@ -87,64 +81,6 @@ const chordKeys = [
   { key: "B", label: "Bisect" },
   { key: "M", label: "Submodules" },
   { key: "L", label: "Changelog" },
-]
-
-/**
- * Cross-view workflows that span multiple views (#779, #784).
- * Surfaced as a distinct section because the keys are scoped to the
- * source view but the action lands on a *second* view — they're not
- * top-level destinations like the entries above.
- */
-const crossViewWorkflows = [
-  {
-    icon: GitCompareIcon,
-    name: "Compare two refs",
-    chord: ["m"],
-    description:
-      "Mark a ref on branches / tags / history with `m`, then `Enter` on a second ref to open `git diff base..head`. Cleared automatically when the diff is popped.",
-  },
-  {
-    icon: SearchIcon,
-    name: "Bisect (in-view actions)",
-    chord: ["g", "b", "s", "x"],
-    description:
-      "Inside the bisect view: `g` good · `b` bad · `s` skip · `x` reset. The title bar shows a BISECTING badge whenever a bisect is in progress.",
-  },
-  {
-    icon: GitPullRequestIcon,
-    name: "Create a pull request",
-    chord: ["C"],
-    description:
-      "From history or branches, `C` generates a PR title + body from `coco changelog` against the default branch, then opens a multi-line review prompt. Auto-detects head + base; surfaces a pointer if a PR is already open.",
-  },
-  {
-    icon: GitBranchIcon,
-    name: "Generate a changelog",
-    chord: ["L"],
-    description:
-      "From history or branches, `L` opens a full-screen changelog view. Per-branch cache for instant re-entry; `r` regenerates, `y` yanks to clipboard, `E` opens in $EDITOR, `c` kicks off create-PR seeded with this content.",
-  },
-  {
-    icon: FileEditIcon,
-    name: "Split commits",
-    chord: ["S"],
-    description:
-      "From compose, `S` opens an overlay with an LLM-generated multi-commit plan. Each group's title respects your conventional-commits + commitlint config. `y` apply / `r` regenerate / `<` cancel.",
-  },
-  {
-    icon: FileEditIcon,
-    name: "Edit in $EDITOR",
-    chord: ["E"],
-    description:
-      "From compose / status / diff, `E` opens the current commit draft in $EDITOR or $VISUAL. Round-trips through a temp file with `.md` extension for markdown highlighting. Companion to lowercase `e` (inline edit).",
-  },
-  {
-    icon: FolderTreeIcon,
-    name: "Submodule drill-in",
-    chord: ["Enter"],
-    description:
-      "Press `Enter` on a submodule row (`g M`) or on a submodule file in a commit diff to drill in. Every view re-scopes to the submodule's working directory — like running `coco ui` from inside it. `Esc` or `<` walks back out; the title bar shows `coco › vendor/lib   ← esc` so you always know where you are. Frames stack.",
-  },
 ]
 
 /**
@@ -420,27 +356,7 @@ export default function WorkstationPage() {
               subtitle="Some flows span multiple views — mark a state on one surface, act on it from another. Footer hints adapt so the override is always discoverable."
             />
 
-            <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 md:grid-cols-2">
-              {crossViewWorkflows.map(({ icon: Icon, name, chord, description }) => (
-                <div
-                  key={name}
-                  className="group rounded-lg border border-border bg-bg-surface/30 p-5 transition-colors hover:border-terminal-green/30 hover:bg-bg-elevated"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-bg-elevated">
-                      <Icon className="h-4 w-4 text-terminal-green" />
-                    </div>
-                    <KbdBadge keys={chord} />
-                  </div>
-                  <h3 className="mt-3 font-mono text-sm font-semibold text-foreground">
-                    {name}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                    {description}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <CrossViewShowcase />
           </div>
         </Section>
 
