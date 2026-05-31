@@ -8,7 +8,8 @@ export function GifHero() {
       src="/screenshots/demo-workstation-tour.gif"
       alt="coco ui workstation demo — navigating between history, status, branches, and diff views"
     >
-      <div className="overflow-hidden">
+      {/* leading-[0] removes the inline-image baseline gap below the GIF. */}
+      <div className="overflow-hidden leading-[0]">
         {/* Native img for GIF animation — Next.js Image optimizes GIFs into stills */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
