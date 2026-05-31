@@ -28,9 +28,10 @@ export function GifDemo({ src, alt, caption, className }: GifDemoProps) {
           </span>
         </div>
 
-        {/* GIF with lightbox */}
+        {/* GIF with lightbox. leading-[0] kills the inline-image baseline
+            gap that would otherwise pad the bottom of the terminal pane. */}
         <Lightbox src={src} alt={alt}>
-          <div className="overflow-hidden bg-[hsl(var(--code-bg))]">
+          <div className="overflow-hidden bg-[hsl(var(--code-bg))] leading-[0]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={src}
