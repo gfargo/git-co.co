@@ -52,6 +52,18 @@ export const THEMES: ThemeMeta[] = [
   { name: "Catppuccin Macchiato", slug: "catppuccin-macchiato", accent: "#8aadf4", mode: "dark", blurb: "The warmer mid-dark Catppuccin flavor — soft pastels, deeper base." },
   { name: "Gruvbox Light", slug: "gruvbox-light", accent: "#076678", mode: "light", blurb: "Gruvbox on warm cream — retro warmth for daylight." },
   { name: "Tokyo Night Day", slug: "tokyo-night-day", accent: "#2e7de9", mode: "light", blurb: "The daylight Tokyo Night — crisp blues on a soft gray canvas." },
+  { name: "One Light", slug: "one-light", accent: "#4078f2", mode: "light", blurb: "Atom's light classic — crisp, neutral, and familiar." },
+  { name: "Ayu Light", slug: "ayu-light", accent: "#fa8d3e", mode: "light", blurb: "Warm orange accents on soft white — clean and bright." },
+  { name: "Rosé Pine Dawn", slug: "rose-pine-dawn", accent: "#907aa9", mode: "light", blurb: "The Rosé Pine dawn variant — muted rose and iris on cream." },
+  { name: "Everforest Light", slug: "everforest-light", accent: "#8da101", mode: "light", blurb: "Soft forest greens on parchment — calm and easy." },
+  { name: "Vitesse Light", slug: "vitesse-light", accent: "#1e754f", mode: "light", blurb: "Antfu's muted light palette — understated and gentle." },
+  { name: "Dayfox", slug: "dayfox", accent: "#2848a9", mode: "light", blurb: "The Nightfox family's daylight member — warm and quiet." },
+  { name: "Night Owl Light", slug: "night-owl-light", accent: "#288ed7", mode: "light", blurb: "Night Owl's light counterpart — teal and blue on white." },
+  { name: "Flexoki Light", slug: "flexoki-light", accent: "#205ea6", mode: "light", blurb: "Ink-on-paper warmth — organic and easy on the eyes." },
+  { name: "Material Lighter", slug: "material-lighter", accent: "#39adb5", mode: "light", blurb: "Material Design's light theme — teal-accented and tidy." },
+  { name: "PaperColor Light", slug: "papercolor-light", accent: "#0087af", mode: "light", blurb: "A vim classic — bold, high-contrast light palette." },
+  { name: "Modus Operandi", slug: "modus-operandi", accent: "#0031a9", mode: "light", blurb: "Maximum-contrast light theme — built for accessibility." },
+  { name: "Quiet Light", slug: "quiet-light", accent: "#4b83cd", mode: "light", blurb: "VS Code's calm light theme — soft and low-key." },
 ]
 
 export const THEME_COUNT = THEMES.length

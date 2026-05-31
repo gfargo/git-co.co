@@ -118,7 +118,7 @@ function MarqueeRow({ themes, duration, reverse, onHover, activeSlug, paused, on
  * alternating directions and pause on hover; hovering a tile lifts it,
  * rings it in the theme's accent, and bleeds that hue into the section.
  * Click any tile for a full-size lightbox. Replaces the old one-at-a-time
- * arrow carousel — 37 palettes shown at once instead of one every click.
+ * arrow carousel — 49 palettes shown at once instead of one every click.
  */
 export function ThemeWall({ className }: { className?: string }) {
   const [active, setActive] = useState<ThemeTile | null>(null)

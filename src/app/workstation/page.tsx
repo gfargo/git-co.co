@@ -160,7 +160,7 @@ export default function WorkstationPage() {
       "Bisect workflow with single-keystroke decisions",
       "Reflog browser with one-key drill-in to any HEAD movement",
       "Conflict resolution helper for merge / rebase / cherry-pick / revert",
-      "37 built-in theme presets",
+      "49 built-in theme presets",
       "NO_COLOR support",
     ],
     softwareVersion: "latest",
@@ -213,7 +213,7 @@ export default function WorkstationPage() {
                 <dl className="mt-8 grid w-full max-w-md grid-cols-4 gap-3 border-t border-border/60 pt-6">
                   {[
                     { value: "16", label: "views" },
-                    { value: "37", label: "themes" },
+                    { value: "49", label: "themes" },
                     { value: "<100ms", label: "boot" },
                     { value: "0", label: "mouse" },
                   ].map(({ value, label }) => (
@@ -394,7 +394,7 @@ export default function WorkstationPage() {
           <div className="container">
             <SectionHeader
               prompt="~/coco $ ui --theme"
-              title="Thirty-seven ways to make it yours"
+              title="Forty-nine ways to make it yours"
               subtitle="From Catppuccin to Gruvbox to Synthwave — every preset is a complete palette, surface and all. Plus full NO_COLOR support for minimal environments."
             />
           </div>
