@@ -46,6 +46,12 @@ export const THEMES: ThemeMeta[] = [
   { name: "Catppuccin Latte", slug: "catppuccin-latte", accent: "#1e66f5", mode: "light", blurb: "The light Catppuccin flavor — soft and airy." },
   { name: "GitHub Light", slug: "github-light", accent: "#0969da", mode: "light", blurb: "GitHub's light palette — clean, neutral, familiar." },
   { name: "Monochrome", slug: "monochrome", accent: "#9ca3af", mode: "dark", blurb: "Pure grayscale — distraction-free, and the NO_COLOR baseline." },
+  { name: "Night Owl", slug: "night-owl", accent: "#82aaff", mode: "dark", blurb: "Deep teal-navy with soft blues — tuned for late-night coding." },
+  { name: "Cobalt2", slug: "cobalt2", accent: "#ffc600", mode: "dark", blurb: "Vivid cobalt blue with a signature yellow accent — bold and bright." },
+  { name: "Oceanic Next", slug: "oceanic-next", accent: "#6699cc", mode: "dark", blurb: "Muted ocean blues and greens — calm and balanced." },
+  { name: "Catppuccin Macchiato", slug: "catppuccin-macchiato", accent: "#8aadf4", mode: "dark", blurb: "The warmer mid-dark Catppuccin flavor — soft pastels, deeper base." },
+  { name: "Gruvbox Light", slug: "gruvbox-light", accent: "#076678", mode: "light", blurb: "Gruvbox on warm cream — retro warmth for daylight." },
+  { name: "Tokyo Night Day", slug: "tokyo-night-day", accent: "#2e7de9", mode: "light", blurb: "The daylight Tokyo Night — crisp blues on a soft gray canvas." },
 ]
 
 export const THEME_COUNT = THEMES.length
