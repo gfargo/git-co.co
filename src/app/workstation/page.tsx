@@ -4,13 +4,7 @@ import {
   BookOpenIcon,
   ChevronRightIcon,
   CodeIcon,
-  FileEditIcon,
-  FolderTreeIcon,
-  GitBranchIcon,
-  GitCompareIcon,
-  GitPullRequestIcon,
   MonitorIcon,
-  SearchIcon,
 } from "lucide-react"
 
 import { Header } from "@/components/Header"
@@ -18,13 +12,13 @@ import { Footer } from "@/components/Footer"
 import { Section } from "@/components/Section"
 import { SectionHeader } from "@/components/SectionHeader"
 import { TerminalAtmosphere } from "@/components/TerminalAtmosphere"
-import { KbdBadge } from "@/components/KbdBadge"
 import { CopyCommand } from "@/components/CopyCommand"
 import { TrackedLink } from "@/components/TrackedLink"
 import { ThemeWall } from "@/components/ThemeWall"
 import { siteConfig } from "@/config/site"
 import { WorkflowsAccordion } from "./WorkflowsAccordion"
 import { GifHero } from "./GifHero"
+import { CrossViewShowcase } from "./CrossViewShowcase"
 import { ViewExplorer } from "./ViewExplorer"
 import { GifDemo } from "@/components/GifDemo"
 
@@ -90,80 +84,42 @@ const chordKeys = [
 ]
 
 /**
- * Cross-view workflows that span multiple views (#779, #784).
- * Surfaced as a distinct section because the keys are scoped to the
- * source view but the action lands on a *second* view — they're not
- * top-level destinations like the entries above.
+ * Feature comparison across popular Git clients. `coco` is highlighted.
+ * Competitor values are a fair-faith snapshot — partial (`~`) covers
+ * "possible but not first-class". Keyed by client so a row can never
+ * silently drift out of sync with the column count.
  */
-const crossViewWorkflows = [
-  {
-    icon: GitCompareIcon,
-    name: "Compare two refs",
-    chord: ["m"],
-    description:
-      "Mark a ref on branches / tags / history with `m`, then `Enter` on a second ref to open `git diff base..head`. Cleared automatically when the diff is popped.",
-  },
-  {
-    icon: SearchIcon,
-    name: "Bisect (in-view actions)",
-    chord: ["g", "b", "s", "x"],
-    description:
-      "Inside the bisect view: `g` good · `b` bad · `s` skip · `x` reset. The title bar shows a BISECTING badge whenever a bisect is in progress.",
-  },
-  {
-    icon: GitPullRequestIcon,
-    name: "Create a pull request",
-    chord: ["C"],
-    description:
-      "From history or branches, `C` generates a PR title + body from `coco changelog` against the default branch, then opens a multi-line review prompt. Auto-detects head + base; surfaces a pointer if a PR is already open.",
-  },
-  {
-    icon: GitBranchIcon,
-    name: "Generate a changelog",
-    chord: ["L"],
-    description:
-      "From history or branches, `L` opens a full-screen changelog view. Per-branch cache for instant re-entry; `r` regenerates, `y` yanks to clipboard, `E` opens in $EDITOR, `c` kicks off create-PR seeded with this content.",
-  },
-  {
-    icon: FileEditIcon,
-    name: "Split commits",
-    chord: ["S"],
-    description:
-      "From compose, `S` opens an overlay with an LLM-generated multi-commit plan. Each group's title respects your conventional-commits + commitlint config. `y` apply / `r` regenerate / `<` cancel.",
-  },
-  {
-    icon: FileEditIcon,
-    name: "Edit in $EDITOR",
-    chord: ["E"],
-    description:
-      "From compose / status / diff, `E` opens the current commit draft in $EDITOR or $VISUAL. Round-trips through a temp file with `.md` extension for markdown highlighting. Companion to lowercase `e` (inline edit).",
-  },
-  {
-    icon: FolderTreeIcon,
-    name: "Submodule drill-in",
-    chord: ["Enter"],
-    description:
-      "Press `Enter` on a submodule row (`g M`) or on a submodule file in a commit diff to drill in. Every view re-scopes to the submodule's working directory — like running `coco ui` from inside it. `Esc` or `<` walks back out; the title bar shows `coco › vendor/lib   ← esc` so you always know where you are. Frames stack.",
-  },
+type Support = "yes" | "partial" | "no"
+
+const comparisonClients = [
+  { key: "coco", name: "coco ui", highlight: true },
+  { key: "gitkraken", name: "GitKraken", highlight: false },
+  { key: "lazygit", name: "lazygit", highlight: false },
+  { key: "gitui", name: "gitui", highlight: false },
+  { key: "tig", name: "tig", highlight: false },
+] as const
+
+type ClientKey = (typeof comparisonClients)[number]["key"]
+
+const comparisonRows: Array<{ feature: string } & Record<ClientKey, Support>> = [
+  { feature: "Terminal-native (no Electron)", coco: "yes", gitkraken: "no", lazygit: "yes", gitui: "yes", tig: "yes" },
+  { feature: "Keyboard-first navigation", coco: "yes", gitkraken: "partial", lazygit: "yes", gitui: "yes", tig: "yes" },
+  { feature: "Hunk-level staging", coco: "yes", gitkraken: "yes", lazygit: "yes", gitui: "yes", tig: "no" },
+  { feature: "AI commit messages", coco: "yes", gitkraken: "partial", lazygit: "no", gitui: "no", tig: "no" },
+  { feature: "AI code review", coco: "yes", gitkraken: "no", lazygit: "no", gitui: "no", tig: "no" },
+  { feature: "AI changelog generation", coco: "yes", gitkraken: "no", lazygit: "no", gitui: "no", tig: "no" },
+  { feature: "AI commit splitting", coco: "yes", gitkraken: "no", lazygit: "partial", gitui: "no", tig: "no" },
+  { feature: "Multi-provider / local AI", coco: "yes", gitkraken: "no", lazygit: "no", gitui: "no", tig: "no" },
+  { feature: "One-keystroke PR creation", coco: "yes", gitkraken: "yes", lazygit: "no", gitui: "no", tig: "no" },
+  { feature: "GitHub issue / PR triage", coco: "yes", gitkraken: "yes", lazygit: "no", gitui: "no", tig: "no" },
+  { feature: "Conflict resolution helper", coco: "yes", gitkraken: "yes", lazygit: "partial", gitui: "partial", tig: "no" },
+  { feature: "Bisect & reflog recovery", coco: "yes", gitkraken: "partial", lazygit: "partial", gitui: "no", tig: "partial" },
+  { feature: "Recursive submodule drill-in", coco: "yes", gitkraken: "partial", lazygit: "partial", gitui: "no", tig: "no" },
+  { feature: "Theming + NO_COLOR", coco: "yes", gitkraken: "partial", lazygit: "partial", gitui: "partial", tig: "partial" },
+  { feature: "Free & open source", coco: "yes", gitkraken: "no", lazygit: "yes", gitui: "yes", tig: "yes" },
 ]
 
-const migrationFeatures = [
-  "Terminal-native (no Electron)",
-  "AI-powered commits & reviews",
-  "Keyboard-first chord navigation",
-  "16 specialized views",
-  "PR workflows in terminal",
-  "One-keystroke split / changelog / PR creation",
-  "Theming + NO_COLOR",
-  "Free & open source",
-]
-
-const competitors = [
-  { name: "GitKraken", values: ["✗", "✗", "✗", "~", "✓", "✗", "✗"] },
-  { name: "lazygit", values: ["✓", "✗", "~", "~", "✗", "✓", "✓"] },
-  { name: "gitui", values: ["✓", "✗", "✗", "~", "✗", "✓", "✓"] },
-  { name: "coco ui", values: ["✓", "✓", "✓", "✓", "✓", "✓", "✓"] },
-]
+const supportGlyph: Record<Support, string> = { yes: "✓", partial: "~", no: "✗" }
 
 /* ------------------------------------------------------------------ */
 /*  Page Component (Server Component)                                  */
@@ -226,50 +182,70 @@ export default function WorkstationPage() {
         {/* ============================================================ */}
         {/*  HERO                                                        */}
         {/* ============================================================ */}
-        {/* ============================================================ */}
-        {/*  HERO                                                        */}
-        {/* ============================================================ */}
-        <Section id="workstation-hero" className="relative overflow-hidden pt-8 pb-0 md:pt-12 lg:pt-16">
+        <Section id="workstation-hero" className="relative overflow-hidden pt-10 pb-12 md:pt-16 md:pb-20">
           <TerminalAtmosphere variant="hero" />
 
           <div className="container relative z-10">
-            {/* Tight header — title + CTA on one line */}
-            <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div>
+            <div className="grid items-center gap-10 lg:grid-cols-[5fr_7fr] lg:gap-14">
+              {/* Left — copy + CTA + stats */}
+              <div className="flex flex-col items-start">
                 <span className="font-mono text-xs tracking-widest uppercase text-terminal-green/70">
                   coco workstation
                 </span>
-                <h1 className="mt-1 font-mono text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
+                <h1 className="mt-2 font-mono text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
                   Git, keyboard-first
                   <span
                     className="ml-1 inline-block h-[0.8em] w-[0.45ch] translate-y-[0.05em] bg-terminal-green animate-cursor-blink"
                     aria-hidden="true"
                   />
                 </h1>
-              </div>
-              <CopyCommand command="npx git-coco@latest ui" />
-            </div>
-          </div>
+                <p className="mt-4 max-w-md text-base leading-7 text-muted-foreground">
+                  One terminal surface for every Git workflow — 16 views, chord
+                  navigation, AI commits, and PR triage. No Electron, no mouse.
+                </p>
 
-          {/* Full-bleed GIF — breaks out of container, edge to edge */}
-          <div className="relative mt-2">
-            {/* Subtle glow behind */}
-            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-terminal-green/5 to-transparent pointer-events-none" />
-
-            <div className="mx-auto max-w-[1600px] px-2 sm:px-4">
-              <div className="overflow-hidden rounded-t-xl border border-b-0 border-border/40 shadow-2xl shadow-black/60">
-                {/* Minimal title bar */}
-                <div className="flex items-center gap-2 bg-[hsl(150_20%_8%)] px-4 py-2 border-b border-border/30">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]/80" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]/80" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]/80" />
-                  <span className="ml-auto font-mono text-[10px] text-muted-foreground/40">
-                    workspace → repo → history
-                  </span>
+                <div className="mt-6">
+                  <CopyCommand command="npx git-coco@latest ui" />
                 </div>
 
-                {/* The GIF */}
-                <GifHero />
+                {/* Quick stats */}
+                <dl className="mt-8 grid w-full max-w-md grid-cols-4 gap-3 border-t border-border/60 pt-6">
+                  {[
+                    { value: "16", label: "views" },
+                    { value: "31", label: "themes" },
+                    { value: "<100ms", label: "boot" },
+                    { value: "0", label: "mouse" },
+                  ].map(({ value, label }) => (
+                    <div key={label} className="flex flex-col">
+                      <dt className="font-mono text-lg font-bold text-terminal-green sm:text-xl">
+                        {value}
+                      </dt>
+                      <dd className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                        {label}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+
+              {/* Right — framed, contained demo */}
+              <div className="relative">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -inset-6 -z-10 rounded-3xl bg-terminal-green/5 blur-3xl"
+                />
+                <div className="overflow-hidden rounded-xl border border-border/40 shadow-2xl shadow-black/50 ring-1 ring-black/20">
+                  {/* Minimal title bar */}
+                  <div className="flex items-center gap-2 border-b border-border/30 bg-[hsl(150_20%_8%)] px-4 py-2.5">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]/80" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]/80" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]/80" />
+                    <span className="ml-auto font-mono text-[10px] text-muted-foreground/40">
+                      workspace → repo → history
+                    </span>
+                  </div>
+                  <GifHero />
+                </div>
               </div>
             </div>
           </div>
@@ -322,9 +298,11 @@ export default function WorkstationPage() {
               subtitle="Press g to enter navigation mode, then a second key to jump to any view. Muscle memory replaces mouse clicks."
             />
 
-            <div className="mx-auto max-w-2xl">
+            {/* Reference + live demo, side by side */}
+            <div className="grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-12">
+              {/* Left — chord key reference */}
               <div className="rounded-lg border border-border bg-[hsl(var(--code-bg))] p-6 sm:p-8">
-                <div className="mb-6 flex items-center justify-center gap-3">
+                <div className="mb-6 flex items-center gap-3">
                   <kbd className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-terminal-green/40 bg-bg-elevated font-mono text-lg text-terminal-green">
                     g
                   </kbd>
@@ -346,7 +324,7 @@ export default function WorkstationPage() {
                   ))}
                 </div>
 
-                <p className="mt-6 text-center text-xs text-muted-foreground">
+                <p className="mt-6 text-xs text-muted-foreground">
                   Press{" "}
                   <kbd className="rounded border border-border bg-bg-elevated px-1 font-mono text-[10px]">
                     ?
@@ -354,15 +332,15 @@ export default function WorkstationPage() {
                   anywhere for the full keymap reference
                 </p>
               </div>
-            </div>
 
-            {/* View-switching GIF demo */}
-            <div className="mt-10">
-              <GifDemo
-                src="/screenshots/demo-ui-view-switching.gif"
-                alt="Chord navigation in action — switching between history, status, branches, and diff"
-                caption="g + key — instant view switching without leaving the keyboard"
-              />
+              {/* Right — chord navigation in action */}
+              <div className="lg:sticky lg:top-24">
+                <GifDemo
+                  src="/screenshots/demo-ui-view-switching.gif"
+                  alt="Chord navigation in action — switching between history, status, branches, and diff"
+                  caption="g + key — instant view switching without leaving the keyboard"
+                />
+              </div>
             </div>
           </div>
         </Section>
@@ -378,27 +356,7 @@ export default function WorkstationPage() {
               subtitle="Some flows span multiple views — mark a state on one surface, act on it from another. Footer hints adapt so the override is always discoverable."
             />
 
-            <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 md:grid-cols-2">
-              {crossViewWorkflows.map(({ icon: Icon, name, chord, description }) => (
-                <div
-                  key={name}
-                  className="group rounded-lg border border-border bg-bg-surface/30 p-5 transition-colors hover:border-terminal-green/30 hover:bg-bg-elevated"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-bg-elevated">
-                      <Icon className="h-4 w-4 text-terminal-green" />
-                    </div>
-                    <KbdBadge keys={chord} />
-                  </div>
-                  <h3 className="mt-3 font-mono text-sm font-semibold text-foreground">
-                    {name}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                    {description}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <CrossViewShowcase />
           </div>
         </Section>
 
@@ -481,18 +439,18 @@ export default function WorkstationPage() {
             />
 
             <div className="sm:max-w-4xl sm:mx-auto overflow-x-auto">
-              <table className="w-full min-w-[600px] border-collapse font-mono text-sm">
+              <table className="w-full min-w-[640px] border-collapse font-mono text-sm">
                 <thead>
                   <tr className="border-b border-border">
                     <th className="py-3 pr-4 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
                       Feature
                     </th>
-                    {competitors.map(({ name }) => (
+                    {comparisonClients.map(({ key, name, highlight }) => (
                       <th
-                        key={name}
+                        key={key}
                         className={`px-3 py-3 text-center text-xs font-medium uppercase tracking-wider ${
-                          name === "coco ui"
-                            ? "text-terminal-green"
+                          highlight
+                            ? "rounded-t-md bg-terminal-green/10 text-terminal-green"
                             : "text-muted-foreground"
                         }`}
                       >
@@ -502,29 +460,40 @@ export default function WorkstationPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {migrationFeatures.map((feature, i) => (
-                    <tr key={feature} className="border-b border-border/50 last:border-0">
-                      <td className="py-3 pr-4 text-foreground/80">{feature}</td>
-                      {competitors.map(({ name, values }) => (
-                        <td
-                          key={name}
-                          className={`px-3 py-3 text-center ${
-                            values[i] === "✓"
-                              ? name === "coco ui"
-                                ? "text-terminal-green"
-                                : "text-foreground/70"
-                              : values[i] === "~"
-                                ? "text-muted-foreground"
-                                : "text-muted-foreground/50"
-                          }`}
-                        >
-                          {values[i]}
-                        </td>
-                      ))}
+                  {comparisonRows.map((row) => (
+                    <tr key={row.feature} className="border-b border-border/50 last:border-0">
+                      <td className="py-3 pr-4 text-foreground/80">{row.feature}</td>
+                      {comparisonClients.map(({ key, highlight }) => {
+                        const support = row[key]
+                        return (
+                          <td
+                            key={key}
+                            className={`px-3 py-3 text-center ${highlight ? "bg-terminal-green/5" : ""} ${
+                              support === "yes"
+                                ? highlight
+                                  ? "text-terminal-green"
+                                  : "text-foreground/70"
+                                : support === "partial"
+                                  ? "text-muted-foreground"
+                                  : "text-muted-foreground/40"
+                            }`}
+                          >
+                            {supportGlyph[support]}
+                          </td>
+                        )
+                      })}
                     </tr>
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            {/* Legend */}
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-xs text-muted-foreground">
+              <span><span className="text-terminal-green">✓</span> first-class</span>
+              <span><span className="text-muted-foreground">~</span> partial / possible</span>
+              <span><span className="text-muted-foreground/40">✗</span> not available</span>
+              <span className="text-muted-foreground/50">Comparison is a fair-faith snapshot; corrections welcome.</span>
             </div>
           </div>
         </Section>
