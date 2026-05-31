@@ -77,7 +77,7 @@ export function WorkstationTeaser() {
               aria-hidden="true"
               className="pointer-events-none absolute -inset-4 -z-10 rounded-2xl bg-terminal-green/10 opacity-70 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
             />
-            <div className="overflow-hidden rounded-lg ring-1 ring-terminal-green/20 shadow-2xl shadow-black/40">
+            <div className="overflow-hidden rounded-lg ring-1 ring-terminal-green/20 shadow-2xl shadow-black/40 leading-[0]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/screenshots/demo-ui-view-switching.gif"
