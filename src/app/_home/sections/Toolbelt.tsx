@@ -110,7 +110,7 @@ const commands: (CommandCardProps & { id: string })[] = [
     icon: MonitorIcon,
     flags: [
       { flag: "--view", description: "Open a specific view on launch" },
-      { flag: "--theme", description: "Set color theme (default, monochrome, catppuccin, gruvbox)" },
+      { flag: "--theme", description: "Set color theme — one of 49 built-in presets (see /docs/themes)" },
       { flag: "--all", description: "Show all branches in history" },
       { flag: "--branch", description: "Filter to a specific branch" },
       { flag: "--path", description: "Filter history to a file path" },
