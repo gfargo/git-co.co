@@ -18,8 +18,7 @@ import { ThemeWall } from "@/components/ThemeWall"
 import { siteConfig } from "@/config/site"
 import { WorkflowsAccordion } from "./WorkflowsAccordion"
 import { GifHero } from "./GifHero"
-import { CrossViewShowcase } from "./CrossViewShowcase"
-import { ViewExplorer } from "./ViewExplorer"
+import { WorkstationShowcase } from "./WorkstationShowcase"
 import { GifDemo } from "@/components/GifDemo"
 
 /* ------------------------------------------------------------------ */
@@ -193,15 +192,17 @@ export default function WorkstationPage() {
                   coco workstation
                 </span>
                 <h1 className="mt-2 font-mono text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
-                  Git, keyboard-first
+                  Your whole Git workflow,
+                  <br className="hidden sm:block" /> keyboard-first
                   <span
                     className="ml-1 inline-block h-[0.8em] w-[0.45ch] translate-y-[0.05em] bg-terminal-green animate-cursor-blink"
                     aria-hidden="true"
                   />
                 </h1>
                 <p className="mt-4 max-w-md text-base leading-7 text-muted-foreground">
-                  One terminal surface for every Git workflow — 16 views, chord
-                  navigation, AI commits, and PR triage. No Electron, no mouse.
+                  Stop juggling a Git GUI, your terminal, and the browser. coco ui
+                  puts history, diffs, staging, PRs, and issues behind muscle-memory
+                  keystrokes — one fast surface, sharpened by AI.
                 </p>
 
                 <div className="mt-6">
@@ -258,44 +259,23 @@ export default function WorkstationPage() {
           <div className="container">
             <SectionHeader
               prompt="~/coco $ ui --view"
-              title="16 specialized views"
-              subtitle="Each view is purpose-built for a specific Git workflow. Switch between them instantly with chord navigation."
+              title="Explore every surface"
+              subtitle="Sixteen specialized views, plus the cross-view actions that span them — each purpose-built for a specific Git workflow. Toggle between them and hover to preview."
             />
 
-            <ViewExplorer />
+            <WorkstationShowcase />
           </div>
         </Section>
 
         {/* ============================================================ */}
-        {/*  SEARCH & FILTER — live demo                                 */}
-        {/* ============================================================ */}
-        <Section id="search">
-          <div className="container">
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[2fr_3fr] lg:gap-12 items-center">
-              <div>
-                <SectionHeader
-                  prompt="~/coco $ /"
-                  title="Find anything instantly"
-                  subtitle="Press / to filter commits, branches, or files in real time. Results narrow as you type — no waiting, no separate search UI."
-                />
-              </div>
-              <GifDemo
-                src="/screenshots/demo-search-filter.gif"
-                alt="Live search filter narrowing commits as you type"
-              />
-            </div>
-          </div>
-        </Section>
-
-        {/* ============================================================ */}
-        {/*  NAVIGATION REFERENCE — Chord Map                            */}
+        {/*  KEYBOARD-FIRST — chord navigation + live filter            */}
         {/* ============================================================ */}
         <Section id="navigation">
           <div className="container">
             <SectionHeader
               prompt="~/coco $ help navigation"
-              title="Chord navigation"
-              subtitle="Press g to enter navigation mode, then a second key to jump to any view. Muscle memory replaces mouse clicks."
+              title="Keyboard-first, mouse-free"
+              subtitle="Press g then a key to jump to any view, or / to filter commits, branches, and files in real time. Muscle memory replaces mouse clicks."
             />
 
             {/* Reference + live demo, side by side */}
@@ -333,30 +313,15 @@ export default function WorkstationPage() {
                 </p>
               </div>
 
-              {/* Right — chord navigation in action */}
+              {/* Right — live filter demo */}
               <div className="lg:sticky lg:top-24">
                 <GifDemo
-                  src="/screenshots/demo-ui-view-switching.gif"
-                  alt="Chord navigation in action — switching between history, status, branches, and diff"
-                  caption="g + key — instant view switching without leaving the keyboard"
+                  src="/screenshots/demo-search-filter.gif"
+                  alt="Live filter narrowing commits, branches, and files as you type"
+                  caption="/ — filter commits, branches, and files in real time"
                 />
               </div>
             </div>
-          </div>
-        </Section>
-
-        {/* ============================================================ */}
-        {/*  CROSS-VIEW WORKFLOWS — multi-step flows                     */}
-        {/* ============================================================ */}
-        <Section id="cross-view-workflows">
-          <div className="container">
-            <SectionHeader
-              prompt="~/coco $ help workflows"
-              title="Cross-view workflows"
-              subtitle="Some flows span multiple views — mark a state on one surface, act on it from another. Footer hints adapt so the override is always discoverable."
-            />
-
-            <CrossViewShowcase />
           </div>
         </Section>
 
