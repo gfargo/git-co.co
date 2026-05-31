@@ -16,7 +16,7 @@ import { CopyCommand } from "@/components/CopyCommand"
 import { TrackedLink } from "@/components/TrackedLink"
 import { ThemeWall } from "@/components/ThemeWall"
 import { siteConfig } from "@/config/site"
-import { WorkflowsAccordion } from "./WorkflowsAccordion"
+import { KeyWorkflows } from "./KeyWorkflows"
 import { GifHero } from "./GifHero"
 import { WorkstationShowcase } from "./WorkstationShowcase"
 import { GifDemo } from "@/components/GifDemo"
@@ -335,16 +335,7 @@ export default function WorkstationPage() {
               title="Key workflows"
               subtitle="Real Git operations, not just a viewer. Stage hunks, compose commits, review PRs, and rewrite history — all from the keyboard."
             />
-            <WorkflowsAccordion />
-
-            {/* Full-width workflow GIF demo */}
-            <div className="mt-12">
-              <GifDemo
-                src="/screenshots/demo-hunk-staging.gif"
-                alt="Staging individual files from the status view"
-                caption="Stage files one by one with Space — precise control over every commit"
-              />
-            </div>
+            <KeyWorkflows />
           </div>
         </Section>
 
