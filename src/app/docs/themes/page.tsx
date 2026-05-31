@@ -3,6 +3,7 @@ import Image from "next/image"
 import { PaletteIcon } from "lucide-react"
 
 import { Lightbox } from "@/components/Lightbox"
+import { ThemeSlideshow } from "@/components/ThemeSlideshow"
 import { THEMES, THEME_COUNT, type ThemeMeta } from "@/config/themes"
 import { siteConfig } from "@/config/site"
 
@@ -118,6 +119,19 @@ export default function ThemesDocsPage() {
           </p>
         </div>
       </div>
+
+      {/* Slideshow — flip through every theme one at a time */}
+      <section className="space-y-5">
+        <div className="flex items-baseline gap-3">
+          <h2 className="font-mono text-lg font-semibold text-foreground">
+            Flip through them
+          </h2>
+          <span className="font-mono text-xs text-muted-foreground">
+            ← → to navigate
+          </span>
+        </div>
+        <ThemeSlideshow />
+      </section>
 
       {/* Dark themes */}
       <section className="space-y-5">

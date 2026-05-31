@@ -397,12 +397,34 @@ export default function WorkstationPage() {
               title="Forty-nine ways to make it yours"
               subtitle="From Catppuccin to Gruvbox to Synthwave — every preset is a complete palette, surface and all. Plus full NO_COLOR support for minimal environments."
             />
+            <Link
+              href="/docs/themes"
+              className="group -mt-6 inline-flex items-center gap-1.5 rounded-sm font-mono text-sm text-terminal-green underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              Browse all themes
+              <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
+                →
+              </span>
+            </Link>
           </div>
 
           {/* Full-bleed kinetic theme wall — breaks out of the container */}
           <ThemeWall className="mt-2" />
 
           <div className="container">
+            {/* Jump to the full gallery */}
+            <div className="mt-10 flex justify-center">
+              <Link
+                href="/docs/themes"
+                className="group inline-flex items-center gap-2 rounded-md border border-border bg-bg-elevated px-5 py-2.5 font-mono text-sm text-foreground transition-colors hover:border-terminal-green-dim hover:text-terminal-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                See all themes side by side
+                <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
+              </Link>
+            </div>
+
             {/* NO_COLOR callout */}
             <div className="mt-12 rounded-lg border border-border bg-[hsl(var(--code-bg))] px-5 py-4">
               <div className="flex items-start gap-3">
