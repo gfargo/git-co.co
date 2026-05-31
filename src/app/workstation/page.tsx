@@ -16,7 +16,7 @@ import { CopyCommand } from "@/components/CopyCommand"
 import { TrackedLink } from "@/components/TrackedLink"
 import { ThemeWall } from "@/components/ThemeWall"
 import { siteConfig } from "@/config/site"
-import { WorkflowsAccordion } from "./WorkflowsAccordion"
+import { KeyWorkflows } from "./KeyWorkflows"
 import { GifHero } from "./GifHero"
 import { WorkstationShowcase } from "./WorkstationShowcase"
 import { GifDemo } from "@/components/GifDemo"
@@ -335,15 +335,54 @@ export default function WorkstationPage() {
               title="Key workflows"
               subtitle="Real Git operations, not just a viewer. Stage hunks, compose commits, review PRs, and rewrite history — all from the keyboard."
             />
-            <WorkflowsAccordion />
+            <KeyWorkflows />
+          </div>
+        </Section>
 
-            {/* Full-width workflow GIF demo */}
-            <div className="mt-12">
-              <GifDemo
-                src="/screenshots/demo-hunk-staging.gif"
-                alt="Staging individual files from the status view"
-                caption="Stage files one by one with Space — precise control over every commit"
-              />
+        {/* ============================================================ */}
+        {/*  COMMAND-LINE DEMOS — commit / changelog / split            */}
+        {/* ============================================================ */}
+        <Section id="commands">
+          <div className="container">
+            <SectionHeader
+              prompt="~/coco $ commit · changelog · split"
+              title="Sharp commands, too"
+              subtitle="The workstation isn't the whole story. coco's standalone commands bring the same AI to your everyday flow — no TUI required."
+            />
+
+            <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
+              {[
+                {
+                  cmd: "coco commit",
+                  tagline: "AI-drafted Conventional Commit messages from your staged changes.",
+                  gif: "/screenshots/demo-commit-flow.gif",
+                  alt: "coco commit — AI drafting a Conventional Commit message",
+                },
+                {
+                  cmd: "coco changelog",
+                  tagline: "Release notes generated from any branch, range, or tag.",
+                  gif: "/screenshots/demo-changelog.gif",
+                  alt: "coco changelog — generating a changelog for a branch",
+                },
+                {
+                  cmd: "coco commit --split",
+                  tagline: "Break a messy staging area into clean, AI-planned commits.",
+                  gif: "/screenshots/demo-commit-split.gif",
+                  alt: "coco commit --split — an AI-planned multi-commit split",
+                },
+              ].map((d) => (
+                <div key={d.cmd} className="flex flex-col gap-3">
+                  <div>
+                    <code className="font-mono text-sm font-semibold text-terminal-green">
+                      {d.cmd}
+                    </code>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                      {d.tagline}
+                    </p>
+                  </div>
+                  <GifDemo src={d.gif} alt={d.alt} />
+                </div>
+              ))}
             </div>
           </div>
         </Section>
