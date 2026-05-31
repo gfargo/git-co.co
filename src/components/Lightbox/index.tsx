@@ -116,7 +116,10 @@ export function Lightbox({ src, alt, children, className, onOpenChange }: Lightb
       <button
         type="button"
         onClick={() => setOpenState(true)}
-        className={cn("cursor-zoom-in w-full text-left", className)}
+        // `block` is essential: a default inline-block button sits on the
+        // parent's text baseline, padding a gap below it (visible under GIF
+        // panes). Block-level removes that baseline gap.
+        className={cn("block w-full cursor-zoom-in text-left leading-[0]", className)}
         aria-label={`View ${alt} full size`}
       >
         {children}
