@@ -13,7 +13,9 @@ import {
     MonitorIcon,
     ExternalLink,
     SparklesIcon,
+    PaletteIcon,
 } from "lucide-react"
+import { THEME_COUNT } from "@/config/themes"
 import { siteConfig } from "@/config/site"
 
 export const metadata: Metadata = {
@@ -181,6 +183,28 @@ export default function DocsPage() {
         {allCards.map(({ page, category }) => (
           <PageCard key={page.slug} page={page} categoryName={category} />
         ))}
+
+        {/* Static: color themes reference */}
+        <Link
+          href="/docs/themes"
+          className="group relative flex flex-col overflow-hidden rounded-lg border border-border bg-[hsl(var(--bg-secondary))] p-5 sm:p-6 transition-all duration-300 hover:border-terminal-green-dim hover:bg-[hsl(var(--bg-elevated))] hover:shadow-[0_0_20px_-6px_hsl(154_40%_53%_/_0.1)]"
+        >
+          <div className="mb-3 flex items-center gap-1.5">
+            <PaletteIcon className="h-3 w-3 text-[hsl(var(--text-tertiary))]" />
+            <span className="font-mono text-[10px] uppercase tracking-wider text-[hsl(var(--text-tertiary))]">
+              Appearance
+            </span>
+          </div>
+          <h3 className="font-mono text-sm font-semibold text-foreground transition-colors group-hover:text-terminal-green sm:text-base">
+            Color themes
+          </h3>
+          <p className="mt-1.5 text-xs leading-relaxed text-[hsl(var(--text-tertiary))] sm:text-sm sm:text-[hsl(var(--text-secondary))]">
+            Browse all {THEME_COUNT} built-in palettes with live previews, from Catppuccin to Gruvbox to Synthwave.
+          </p>
+          <div className="mt-auto pt-4">
+            <ArrowRight className="h-3.5 w-3.5 text-terminal-green-dim opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100" />
+          </div>
+        </Link>
       </div>
 
       {/* External links */}

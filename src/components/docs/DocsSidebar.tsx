@@ -15,6 +15,7 @@ import {
     MonitorIcon,
     HelpCircle,
     FolderOpen,
+    PaletteIcon,
 } from "lucide-react"
 import { useState } from "react"
 
@@ -55,6 +56,32 @@ export function DocsSidebar({ className }: DocsSidebarProps) {
             currentPath={pathname}
           />
         ))}
+
+        {/* Static reference pages (not wiki-sourced) */}
+        <div className="space-y-1">
+          <div className="mb-1.5 flex items-center gap-2 px-2">
+            <PaletteIcon className="h-3.5 w-3.5 text-[hsl(var(--text-tertiary))]" />
+            <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-[hsl(var(--text-secondary))]">
+              Appearance
+            </h4>
+          </div>
+          <ul className="space-y-0.5">
+            <li>
+              <Link
+                href="/docs/themes"
+                className={cn(
+                  "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                  pathname === "/docs/themes"
+                    ? "border-l-2 border-terminal-green bg-[hsl(var(--bg-surface))] font-medium text-terminal-green"
+                    : "text-muted-foreground hover:bg-[hsl(var(--bg-elevated))] hover:text-foreground"
+                )}
+              >
+                {pathname === "/docs/themes" && <ChevronRight className="h-3 w-3 shrink-0" />}
+                <span className={cn(pathname !== "/docs/themes" && "ml-5")}>Color themes</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   )
