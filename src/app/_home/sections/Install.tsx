@@ -7,6 +7,7 @@ import { SectionHeader } from "@/components/SectionHeader"
 import Image from "next/image"
 
 const quickStartItems = [
+  { command: "coco", description: "Smart entry — opens the workstation in a repo, the setup wizard on a fresh install" },
   { command: "coco commit", description: "AI commit messages from your staged changes" },
   { command: "coco changelog", description: "Generate changelogs for any branch or range" },
   { command: "coco review", description: "Catch issues before you push" },
