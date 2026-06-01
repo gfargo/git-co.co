@@ -106,9 +106,9 @@ export default function ThemesDocsPage() {
             <span className="text-muted-foreground/60">$ </span>coco ui --theme gruvbox
           </code>
           <code className="block rounded-md bg-[hsl(var(--code-bg))] px-3 py-2 font-mono text-sm text-foreground/80">
-            <span className="text-muted-foreground/60"># .coco/config.json</span>
+            <span className="text-muted-foreground/60"># .coco.config.json</span>
             {"  "}
-            <span className="text-terminal-green">{`{ "ui": { "theme": "gruvbox" } }`}</span>
+            <span className="text-terminal-green">{`{ "logTui": { "theme": { "preset": "gruvbox" } } }`}</span>
           </code>
           <p className="text-xs text-muted-foreground">
             Prefer no color at all? Set{" "}
