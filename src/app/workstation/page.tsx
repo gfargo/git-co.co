@@ -268,6 +268,54 @@ export default function WorkstationPage() {
         </Section>
 
         {/* ============================================================ */}
+        {/*  WORKSPACE — clone / add / drive many repos                 */}
+        {/* ============================================================ */}
+        <Section id="workspace">
+          <div className="container">
+            <SectionHeader
+              prompt="~/coco $ ws"
+              title="Every repo, one keystroke away"
+              subtitle="coco ws scans your directory for repositories and gives you a sortable, filterable overview — dirty state, ahead/behind, open PRs. Clone a remote or add a repo by path without leaving the TUI, then press Enter to drive any of them as a full workstation."
+            />
+
+            <div className="grid gap-6 lg:grid-cols-3 lg:gap-8">
+              {[
+                {
+                  cmd: "c — clone",
+                  tagline: "Clone a remote straight into your launch directory; the destination auto-fills from the URL.",
+                  gif: "/screenshots/demo-workspace-clone.gif",
+                  alt: "Workspace clone prompt — typing a remote URL auto-derives the destination path",
+                },
+                {
+                  cmd: "a — add",
+                  tagline: "Register an existing repo by path, with tab completion as you type.",
+                  gif: "/screenshots/demo-workspace-add-repo.gif",
+                  alt: "Workspace add-a-repo prompt with tab path completion",
+                },
+                {
+                  cmd: "enter — drive it",
+                  tagline: "Drill into any repo as a full workstation — history, diffs, branches, and back.",
+                  gif: "/screenshots/demo-workstation-using.gif",
+                  alt: "Using the workstation — history, a syntax-highlighted diff, status, branches, and the help overlay",
+                },
+              ].map((d) => (
+                <div key={d.cmd} className="flex flex-col gap-3">
+                  <div>
+                    <code className="font-mono text-sm font-semibold text-terminal-green">
+                      {d.cmd}
+                    </code>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                      {d.tagline}
+                    </p>
+                  </div>
+                  <GifDemo src={d.gif} alt={d.alt} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </Section>
+
+        {/* ============================================================ */}
         {/*  KEYBOARD-FIRST — chord navigation + live filter            */}
         {/* ============================================================ */}
         <Section id="navigation">
@@ -423,6 +471,57 @@ export default function WorkstationPage() {
                   →
                 </span>
               </Link>
+            </div>
+
+            {/* Every surface, themed — diff + status across a curated set */}
+            <div className="mt-16">
+              <h3 className="font-mono text-lg font-semibold text-foreground">
+                Every surface, themed
+              </h3>
+              <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+                The history wall above is just the start. The syntax-highlighted diff
+                and the status surface recolor with your theme too — here are a few of
+                the presets, dark and light.
+              </p>
+
+              {[
+                { label: "Diff", prefix: "diff" },
+                { label: "Status", prefix: "status" },
+              ].map((group) => (
+                <div key={group.label} className="mt-8">
+                  <p className="mb-3 font-mono text-sm text-terminal-green">
+                    {group.label}
+                  </p>
+                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                    {[
+                      "catppuccin",
+                      "gruvbox",
+                      "dracula",
+                      "tokyo-night",
+                      "nord",
+                      "rose-pine",
+                      "github-light",
+                      "catppuccin-latte",
+                    ].map((theme) => (
+                      <figure
+                        key={theme}
+                        className="overflow-hidden rounded-lg border border-border bg-[hsl(var(--code-bg))]"
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={`/screenshots/${group.prefix}-theme-${theme}.png`}
+                          alt={`The ${group.label.toLowerCase()} view in the ${theme} theme`}
+                          loading="lazy"
+                          className="w-full"
+                        />
+                        <figcaption className="px-3 py-2 font-mono text-xs text-muted-foreground">
+                          {theme}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
 
             {/* NO_COLOR callout */}
