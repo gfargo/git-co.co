@@ -24,11 +24,11 @@ interface WorkflowRow {
 const WORKFLOWS: WorkflowRow[] = [
   {
     icon: LayoutGridIcon,
-    title: "Hunk-level staging",
+    title: "Tactile hunk staging",
     description:
-      "Stage individual hunks from the status view — navigate to a file, expand its hunks, and stage exactly the lines you want. No more committing a whole file when you only meant part of it.",
-    keys: ["g", "s", "Space"],
-    media: { src: "/screenshots/demo-hunk-staging.gif", animated: true },
+      "Open a changed file and stage it hunk by hunk. Each hunk carries a ● staged / ○ unstaged badge, the selected hunk is highlighted with an accent bar, and ↑/↓ walk between them — so you stage exactly what you mean, never the whole file by accident.",
+    keys: ["↵", "↑/↓", "Space"],
+    media: { src: "/screenshots/demo-staging-hunks.gif", animated: true },
   },
   {
     icon: SplitIcon,
