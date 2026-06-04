@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import {
+  ArchiveIcon,
   GitCommitIcon,
   GitPullRequestIcon,
   LayoutGridIcon,
@@ -29,6 +30,14 @@ const WORKFLOWS: WorkflowRow[] = [
       "Open a changed file and stage it hunk by hunk. Each hunk carries a ● staged / ○ unstaged badge, the selected hunk is highlighted with an accent bar, and ↑/↓ walk between them — so you stage exactly what you mean, never the whole file by accident.",
     keys: ["↵", "↑/↓", "Space"],
     media: { src: "/screenshots/demo-staging-hunks.gif", animated: true },
+  },
+  {
+    icon: ArchiveIcon,
+    title: "Stash like a pro",
+    description:
+      "Stash from any view with gZ — even mid-diff — then manage stashes that actually read: every entry shows its origin branch, file count, and age, with a live contents preview. Rename one, branch off it, apply keeping your index, or undo a drop, all without leaving the keyboard.",
+    keys: ["g", "Z", "R"],
+    media: { src: "/screenshots/demo-stash-workflow.gif", animated: true },
   },
   {
     icon: SplitIcon,
