@@ -31,8 +31,8 @@ const MOVES: PowerMove[] = [
     icon: CommandIcon,
     title: "Discover every key",
     description:
-      "Press g and a live which-key menu lists every view jump. The density that makes it fast never leaves you stuck — there's no cheat sheet to memorize.",
-    keys: ["g"],
+      "Press g for a live which-key menu of every view jump, or g? for the single-key actions in the view you're in. The density that makes it fast never leaves you stuck — there's no cheat sheet to memorize.",
+    keys: ["g", "g?"],
     src: "/screenshots/which-key.png",
   },
   {

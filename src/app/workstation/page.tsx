@@ -360,7 +360,11 @@ export default function WorkstationPage() {
                   <kbd className="rounded border border-border bg-bg-elevated px-1 font-mono text-[10px]">
                     ?
                   </kbd>{" "}
-                  anywhere for the full keymap reference
+                  anywhere for the full keymap, or{" "}
+                  <kbd className="rounded border border-border bg-bg-elevated px-1 font-mono text-[10px]">
+                    g?
+                  </kbd>{" "}
+                  for the single-key actions in your current view
                 </p>
               </div>
 
