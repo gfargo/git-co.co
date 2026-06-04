@@ -6,6 +6,7 @@ import {
   GitCommitIcon,
   GitPullRequestIcon,
   LayoutGridIcon,
+  RectangleHorizontalIcon,
   RotateCcwIcon,
   SplitIcon,
   type LucideIcon,
@@ -70,6 +71,14 @@ const WORKFLOWS: WorkflowRow[] = [
       "Revert, reset, rebase, and cherry-pick from the history view. Cursor to any commit and apply the operation with a single key — with reflog one keystroke away if you need to walk it back.",
     keys: ["g", "h"],
     media: { src: "/screenshots/view-reflog.png" },
+  },
+  {
+    icon: RectangleHorizontalIcon,
+    title: "Fits any terminal",
+    description:
+      "Down to an 80×24 tmux split, the three-pane IDE folds to a single full-width pane you Tab between — no feature locked behind screen real estate. Press v to peek the sidebar without losing your place, then snap right back.",
+    keys: ["Tab", "v"],
+    media: { src: "/screenshots/single-pane-narrow.png" },
   },
 ]
 
