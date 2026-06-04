@@ -4,6 +4,7 @@ import {
     KeyboardIcon,
     LayoutGridIcon,
     LayersIcon,
+    RectangleHorizontalIcon,
     SparklesIcon,
     GitPullRequestIcon,
 } from "lucide-react"
@@ -31,9 +32,9 @@ const features = [
   },
   {
     icon: LayersIcon,
-    title: "Hunk-level staging",
+    title: "Tactile hunk staging",
     description:
-      "Stage individual hunks, not just whole files. Precise control over every commit.",
+      "Stage hunk by hunk with ● / ○ badges and ↑/↓ navigation — precise control over every commit, never the whole file by accident.",
   },
   {
     icon: SparklesIcon,
@@ -46,6 +47,12 @@ const features = [
     title: "PR workflows",
     description:
       "Merge, approve, and comment on pull requests without leaving the terminal.",
+  },
+  {
+    icon: RectangleHorizontalIcon,
+    title: "Fits any terminal",
+    description:
+      "Down to an 80×24 tmux split, the panes fold to a single full-width view you Tab between — press v to peek the sidebar and snap back.",
   },
 ]
 

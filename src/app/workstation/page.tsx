@@ -28,7 +28,7 @@ import { GifDemo } from "@/components/GifDemo"
 export function generateMetadata(): Metadata {
   const title = "Workstation — Terminal Git Workstation"
   const description =
-    "A keyboard-driven terminal Git workstation with 16 specialized views — including GitHub issue and PR triage surfaces and recursive submodule navigation — chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, and customizable themes. No Electron, no mouse required."
+    "A keyboard-driven terminal Git workstation with 16 specialized views — including GitHub issue and PR triage, conflict resolution, bisect, recursive submodule navigation, and a full stash workflow — chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, tactile hunk-level staging, a single-pane fallback for narrow terminals (80×24 tmux-ready), and 49 customizable themes. No Electron, no mouse required."
 
   return {
     title,
@@ -133,7 +133,7 @@ export default function WorkstationPage() {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Linux, macOS, Windows",
     description:
-      "A keyboard-driven terminal Git workstation with 16 specialized views, recursive submodule navigation, chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, and customizable themes.",
+      "A keyboard-driven terminal Git workstation with 16 specialized views, a full stash workflow, conflict resolution, bisect, and recursive submodule navigation, with chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, tactile hunk-level staging, a single-pane fallback for narrow terminals, and 49 customizable themes.",
     url: `${siteConfig.url}/workstation`,
     offers: {
       "@type": "Offer",
@@ -148,7 +148,9 @@ export default function WorkstationPage() {
     featureList: [
       "16 specialized TUI views",
       "Chord-based keyboard navigation",
-      "Hunk-level staging",
+      "Tactile hunk-level staging",
+      "Stash workflow — rich rows, stash-from-anywhere (gZ), rename, branch, undo-drop, apply-index, quick WIP",
+      "Single-pane fallback for narrow terminals (<100 cols) with momentary sidebar peek",
       "AI-powered commit drafting",
       "One-keystroke PR creation seeded from AI changelog",
       "Full-screen AI changelog view with per-branch cache",

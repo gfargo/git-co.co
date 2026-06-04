@@ -43,7 +43,7 @@ const features: Feature[] = [
     icon: MonitorIcon,
     title: "Terminal Workstation",
     description:
-      "A keyboard-driven Git workstation with 16 views — including conflict resolution, reflog recovery, bisect, and recursive submodule drill-in — that brings every tool together in one surface.",
+      "A keyboard-driven Git workstation with 16 views — including a full stash workflow, tactile hunk staging, conflict resolution, reflog recovery, bisect, and recursive submodule drill-in — that works at any terminal width and brings every tool together in one surface.",
     layout: "tall",
     visual: () => <WorkstationVisual />,
   },
