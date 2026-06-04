@@ -6,6 +6,7 @@ import {
   GitCommitIcon,
   GitMergeIcon,
   GitPullRequestIcon,
+  KeyboardIcon,
   LayoutGridIcon,
   RectangleHorizontalIcon,
   RotateCcwIcon,
@@ -33,6 +34,14 @@ const WORKFLOWS: WorkflowRow[] = [
       "Open a changed file and stage it hunk by hunk. Each hunk carries a ● staged / ○ unstaged badge, the selected hunk is highlighted with an accent bar, and ↑/↓ walk between them — so you stage exactly what you mean, never the whole file by accident.",
     keys: ["↵", "↑/↓", "Space"],
     media: { src: "/screenshots/demo-staging-hunks.gif", animated: true },
+  },
+  {
+    icon: KeyboardIcon,
+    title: "Never memorize a key",
+    description:
+      "Press g? in any view for a live strip of its single-key actions — cherry-pick, revert, mark-compare, stage — sourced from that view's bindings, so the list changes as you move between views. It's the per-view sibling of the g-chord which-key menu: the same letter can mean different things in different views, and g? always tells you which.",
+    keys: ["g", "?"],
+    media: { src: "/screenshots/demo-view-keys.gif", animated: true },
   },
   {
     icon: ArchiveIcon,
