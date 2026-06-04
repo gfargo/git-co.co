@@ -17,6 +17,7 @@ import { TrackedLink } from "@/components/TrackedLink"
 import { ThemeWall } from "@/components/ThemeWall"
 import { siteConfig } from "@/config/site"
 import { KeyWorkflows } from "./KeyWorkflows"
+import { PowerMoves } from "./PowerMoves"
 import { GifHero } from "./GifHero"
 import { WorkstationShowcase } from "./WorkstationShowcase"
 import { GifDemo } from "@/components/GifDemo"
@@ -386,6 +387,20 @@ export default function WorkstationPage() {
               subtitle="Real Git operations, not just a viewer. Stage hunks, compose commits, review PRs, and rewrite history — all from the keyboard."
             />
             <KeyWorkflows />
+          </div>
+        </Section>
+
+        {/* ============================================================ */}
+        {/*  POWER MOVES — compare / which-key / bulk staging            */}
+        {/* ============================================================ */}
+        <Section id="power-moves">
+          <div className="container">
+            <SectionHeader
+              prompt="~/coco $ power-moves"
+              title="Power moves"
+              subtitle="The high-leverage gestures that reward discovery — diff any two refs, surface every key, and stage in bulk."
+            />
+            <PowerMoves />
           </div>
         </Section>
 

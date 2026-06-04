@@ -4,10 +4,12 @@ import Image from "next/image"
 import {
   ArchiveIcon,
   GitCommitIcon,
+  GitMergeIcon,
   GitPullRequestIcon,
   LayoutGridIcon,
   RectangleHorizontalIcon,
   RotateCcwIcon,
+  SearchIcon,
   SplitIcon,
   type LucideIcon,
 } from "lucide-react"
@@ -73,12 +75,28 @@ const WORKFLOWS: WorkflowRow[] = [
     media: { src: "/screenshots/view-reflog.png" },
   },
   {
+    icon: GitMergeIcon,
+    title: "Resolve conflicts in place",
+    description:
+      "When a merge, rebase, cherry-pick, or revert stops on conflicts, the conflicts view lists every file. Keep theirs (u) or keep ours (U) per file, or open it in your editor — then continue the operation (C) once it's clean, without dropping to the shell.",
+    keys: ["g", "x", "u/U"],
+    media: { src: "/screenshots/demo-conflicts.gif", animated: true },
+  },
+  {
+    icon: SearchIcon,
+    title: "Bisect a regression",
+    description:
+      "Drive git bisect from the workstation: mark the cursored commit good (g) or bad (b) and watch the range halve, with a running decision log and the revisions-left estimate — no remembering the bisect verb soup.",
+    keys: ["g", "B", "g/b"],
+    media: { src: "/screenshots/demo-bisect.gif", animated: true },
+  },
+  {
     icon: RectangleHorizontalIcon,
     title: "Fits any terminal",
     description:
       "Down to an 80×24 tmux split, the three-pane IDE folds to a single full-width pane you Tab between — no feature locked behind screen real estate. Press v to peek the sidebar without losing your place, then snap right back.",
     keys: ["Tab", "v"],
-    media: { src: "/screenshots/single-pane-narrow.png" },
+    media: { src: "/screenshots/demo-single-pane.gif", animated: true },
   },
 ]
 
