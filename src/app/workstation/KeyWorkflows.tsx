@@ -3,6 +3,7 @@
 import Image from "next/image"
 import {
   ArchiveIcon,
+  GitBranchIcon,
   GitCommitIcon,
   GitMergeIcon,
   GitPullRequestIcon,
@@ -50,6 +51,14 @@ const WORKFLOWS: WorkflowRow[] = [
       "Stash from any view with gZ — even mid-diff — then manage stashes that actually read: every entry shows its origin branch, file count, and age, with a live contents preview. Rename one, branch off it, apply keeping your index, or undo a drop, all without leaving the keyboard.",
     keys: ["g", "Z", "R"],
     media: { src: "/screenshots/demo-stash-workflow.gif", animated: true },
+  },
+  {
+    icon: GitBranchIcon,
+    title: "Worktree-aware checkout",
+    description:
+      "Check out a branch that's already checked out in another worktree and coco doesn't dead-end on git's error — it names the worktree holding it and offers a way forward: y to switch into that worktree (it opens as a nested frame), r to remove it and check out here, or x to remove it and delete the branch. Dirty worktrees are guarded.",
+    keys: ["↵", "y", "r", "x"],
+    media: { src: "/screenshots/demo-checkout-worktree-conflict.gif", animated: true },
   },
   {
     icon: SplitIcon,

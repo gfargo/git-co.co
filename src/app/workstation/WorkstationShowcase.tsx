@@ -55,7 +55,7 @@ const GROUPS: ShowcaseGroup[] = [
       { icon: GitBranchIcon, name: "Branches", chord: ["g", "b"], description: "Manage local and remote branches with live sync state.", screenshot: "/screenshots/view-branches.png" },
       { icon: TagIcon, name: "Tags", chord: ["g", "t"], description: "Browse and create tags across the repo.", screenshot: "/screenshots/view-tags.png" },
       { icon: ArchiveIcon, name: "Stash", chord: ["g", "z"], description: "Inspect, apply, and drop stash entries.", screenshot: "/screenshots/view-stash.png" },
-      { icon: TreesIcon, name: "Worktrees", chord: ["g", "w"], description: "Manage linked git worktrees on different branches.", screenshot: "/screenshots/view-worktrees.png" },
+      { icon: TreesIcon, name: "Worktrees", chord: ["g", "w"], description: "Manage linked git worktrees on different branches — and check out across them without dead-ending on git's conflict.", screenshot: "/screenshots/view-worktrees.png" },
       { icon: GitPullRequestIcon, name: "Pull Request", chord: ["g", "p"], description: "Review, approve, merge, and comment on the current branch's PR.", screenshot: "/screenshots/view-pull-request.png" },
       { icon: GitPullRequestArrowIcon, name: "PR Triage", chord: ["g", "P"], description: "Multi-PR triage with filter cycling, reviews/checks in the inspector, and the full action panel.", screenshot: "/screenshots/view-pr-triage.png" },
       { icon: CircleDotIcon, name: "Issues", chord: ["g", "i"], description: "Issue triage with filter cycling and per-row comment / label / assign / close / reopen.", screenshot: "/screenshots/view-issues.png" },
