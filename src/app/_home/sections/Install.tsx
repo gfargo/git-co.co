@@ -1,13 +1,20 @@
 "use client"
 
 import { CopyCommand } from "@/components/CopyCommand"
-import { Lightbox } from "@/components/Lightbox"
 import { Section } from "@/components/Section"
 import { SectionHeader } from "@/components/SectionHeader"
-import Image from "next/image"
 
-const quickStartItems = [
-  { command: "coco", description: "Smart entry — opens the workstation in a repo, the setup wizard on a fresh install" },
+/**
+ * The smart-entry command gets top billing — it's the one most people
+ * run first, and it adapts to where you are (repo → workstation, fresh
+ * install → wizard).
+ */
+const primaryCommand = {
+  command: "coco",
+  description: "opens the workstation in a repo, the setup wizard on a fresh install",
+}
+
+const commands = [
   { command: "coco commit", description: "AI commit messages from your staged changes" },
   { command: "coco changelog", description: "Generate changelogs for any branch or range" },
   { command: "coco review", description: "Catch issues before you push" },
@@ -39,23 +46,44 @@ export const InstallSection = () => {
                   then run any of these
                 </span>
               </div>
-              <ul className="divide-y divide-border/40">
-                {quickStartItems.map(({ command, description }) => (
-                  <li key={command} className="flex flex-col gap-1 px-4 py-3 sm:flex-row sm:items-baseline sm:gap-3">
-                    <code className="shrink-0 font-mono text-sm text-terminal-green">
-                      <span className="mr-1.5 text-muted-foreground/60">$</span>
-                      {command}
-                    </code>
-                    <span className="text-sm leading-6 text-muted-foreground">
-                      {description}
-                    </span>
-                  </li>
-                ))}
+
+              {/* Primary — smart entry, set apart with an accent rail + tint */}
+              <div className="flex flex-col gap-1 border-b border-border/40 border-l-2 border-l-terminal-green bg-terminal-green/5 px-4 py-3.5 sm:flex-row sm:items-baseline sm:gap-4">
+                <code className="shrink-0 font-mono text-sm font-semibold text-terminal-green sm:w-[8.5rem]">
+                  <span className="mr-1.5 text-muted-foreground/60">$</span>
+                  {primaryCommand.command}
+                </code>
+                <span className="text-sm leading-6 text-muted-foreground">
+                  <span className="font-medium text-foreground">Smart entry</span> — {primaryCommand.description}
+                </span>
+              </div>
+
+              {/* The rest of the toolbelt — aligned command / description columns.
+                  The shared `coco` prefix is dimmed so the subcommand reads first. */}
+              <ul className="divide-y divide-border/30">
+                {commands.map(({ command, description }) => {
+                  const subcommand = command.replace("coco ", "")
+                  return (
+                    <li
+                      key={command}
+                      className="grid grid-cols-1 gap-0.5 px-4 py-2.5 transition-colors hover:bg-foreground/5 sm:grid-cols-[8.5rem_1fr] sm:items-baseline sm:gap-4"
+                    >
+                      <code className="font-mono text-sm">
+                        <span className="mr-1.5 text-muted-foreground/50">$</span>
+                        <span className="text-muted-foreground/50">coco </span>
+                        <span className="text-terminal-green">{subcommand}</span>
+                      </code>
+                      <span className="text-sm leading-6 text-muted-foreground">
+                        {description}
+                      </span>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           </div>
 
-          {/* Right — a real `coco doctor` capture as visual proof */}
+          {/* Right — the workstation booting on a real repo, as live proof */}
           <div className="relative">
             <div
               aria-hidden="true"
@@ -67,25 +95,18 @@ export const InstallSection = () => {
                 <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]/80" />
                 <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]/80" />
                 <span className="ml-auto font-mono text-[10px] text-muted-foreground/40">
-                  coco doctor
+                  ~/coco — coco ui
                 </span>
               </div>
-              <Lightbox
-                src="/screenshots/docs-doctor.png"
-                alt="coco doctor — environment and configuration checks"
-              >
-                <Image
-                  src="/screenshots/docs-doctor.png"
-                  alt="coco doctor — environment and configuration checks"
-                  width={1260}
-                  height={800}
-                  className="h-auto w-full object-cover object-top"
-                  sizes="(max-width: 1024px) 100vw, 560px"
-                />
-              </Lightbox>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/screenshots/demo-boot-workstation.gif"
+                alt="coco ui booting up — the workstation loads a repo's history, branches and diffs the moment you launch it"
+                className="block w-full"
+              />
             </div>
             <p className="mt-3 text-center font-mono text-xs text-muted-foreground">
-              coco doctor — verify your setup any time
+              coco ui — your repo, the moment it boots
             </p>
           </div>
         </div>
