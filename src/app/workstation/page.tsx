@@ -150,7 +150,7 @@ export default function WorkstationPage() {
       "16 specialized TUI views",
       "Chord-based keyboard navigation",
       "Tactile hunk-level staging",
-      "Stash workflow — rich rows, stash-from-anywhere (gZ), rename, branch, undo-drop, apply-index, quick WIP",
+      "Stash workflow — aligned table, stash-from-anywhere (gZ), rename, branch, undo-drop, apply-index, quick WIP",
       "Single-pane fallback for narrow terminals (<100 cols) with momentary sidebar peek",
       "AI-powered commit drafting",
       "One-keystroke PR creation seeded from AI changelog",
