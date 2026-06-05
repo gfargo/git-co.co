@@ -17,6 +17,7 @@ import { Section } from "@/components/Section"
 import { SectionHeader } from "@/components/SectionHeader"
 import { CommandCard, type CommandCardProps } from "@/components/CommandCard"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { THEME_COUNT } from "@/config/themes"
 
 /* ------------------------------------------------------------------ */
 /*  Command data — one entry per tool in the coco toolbelt             */
@@ -110,7 +111,7 @@ const commands: (CommandCardProps & { id: string })[] = [
     icon: MonitorIcon,
     flags: [
       { flag: "--view", description: "Open a specific view on launch" },
-      { flag: "--theme", description: "Set color theme — one of 49 built-in presets (see /docs/themes)" },
+      { flag: "--theme", description: `Set color theme — one of ${THEME_COUNT} built-in presets (see /docs/themes)` },
       { flag: "--all", description: "Show all branches in history" },
       { flag: "--branch", description: "Filter to a specific branch" },
       { flag: "--path", description: "Filter history to a file path" },
