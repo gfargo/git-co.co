@@ -102,6 +102,11 @@ export default {
         "terminal-glow": {
           "0%, 100%": { boxShadow: "0 0 4px hsl(154 40% 53%)" },
           "50%": { boxShadow: "0 0 12px hsl(154 40% 53%)" }
+        },
+        // Skeleton shimmer: a highlight band sweeps left→right across the
+        // placeholder while media downloads (MediaFrame).
+        shimmer: {
+          "100%": { transform: "translateX(100%)" }
         }
       },
       animation: {
@@ -109,7 +114,8 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "cursor-blink": "cursor-blink 1s step-end infinite",
         "fade-in-up": "fade-in-up 0.5s ease-out",
-        "terminal-glow": "terminal-glow 2s ease-in-out infinite"
+        "terminal-glow": "terminal-glow 2s ease-in-out infinite",
+        shimmer: "shimmer 1.6s ease-in-out infinite"
       }
     }
   },

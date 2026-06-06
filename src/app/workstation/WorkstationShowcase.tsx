@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef, useState } from "react"
-import Image from "next/image"
+import { MediaFrame } from "@/components/MediaFrame"
 import {
   AlertTriangleIcon,
   ArchiveIcon,
@@ -191,18 +191,16 @@ export function WorkstationShowcase() {
               </span>
             </div>
             <Lightbox src={item.screenshot} alt={`${item.name} — coco ui`}>
-              <div className="bg-[hsl(var(--code-bg))] leading-[0]">
-                <Image
-                  key={`${group.id}-${item.screenshot}`}
-                  src={item.screenshot}
-                  alt={`${item.name} — coco ui`}
-                  width={1260}
-                  height={800}
-                  priority={groupIdx === 0 && active === 0}
-                  className="h-auto w-full animate-fade-in-up object-cover object-top"
-                  sizes="(max-width: 1024px) 100vw, 640px"
-                />
-              </div>
+              <MediaFrame
+                key={`${group.id}-${item.screenshot}`}
+                src={item.screenshot}
+                alt={`${item.name} — coco ui`}
+                width={1369}
+                height={722}
+                priority={groupIdx === 0 && active === 0}
+                objectPosition="top"
+                sizes="(max-width: 1024px) 100vw, 640px"
+              />
             </Lightbox>
           </div>
 

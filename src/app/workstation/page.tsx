@@ -22,6 +22,7 @@ import { PowerMoves } from "./PowerMoves"
 import { GifHero } from "./GifHero"
 import { WorkstationShowcase } from "./WorkstationShowcase"
 import { GifDemo } from "@/components/GifDemo"
+import { MediaFrame } from "@/components/MediaFrame"
 
 /* ------------------------------------------------------------------ */
 /*  SEO Metadata                                                       */
@@ -529,12 +530,13 @@ export default function WorkstationPage() {
                         key={theme}
                         className="overflow-hidden rounded-lg border border-border bg-[hsl(var(--code-bg))]"
                       >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
+                        <MediaFrame
                           src={`/screenshots/${group.prefix}-theme-${theme}.png`}
                           alt={`The ${group.label.toLowerCase()} view in the ${theme} theme`}
-                          loading="lazy"
-                          className="w-full"
+                          width={1369}
+                          height={722}
+                          objectPosition="top"
+                          sizes="(max-width: 768px) 100vw, 33vw"
                         />
                         <figcaption className="px-3 py-2 font-mono text-xs text-muted-foreground">
                           {theme}

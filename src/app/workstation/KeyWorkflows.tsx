@@ -1,6 +1,6 @@
 "use client"
 
-import Image from "next/image"
+import { MediaFrame } from "@/components/MediaFrame"
 import {
   ArchiveIcon,
   GitBranchIcon,
@@ -130,21 +130,18 @@ function FramedMedia({ title, media }: { title: string; media: WorkflowRow["medi
         </span>
       </div>
       <Lightbox src={media.src} alt={title}>
-        <div className="bg-[hsl(var(--code-bg))]">
-          {media.animated ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={media.src} alt={title} className="block w-full" loading="lazy" />
-          ) : (
-            <Image
-              src={media.src}
-              alt={title}
-              width={1260}
-              height={800}
-              className="block h-auto w-full object-cover object-top"
-              sizes="(max-width: 1024px) 100vw, 600px"
-            />
-          )}
-        </div>
+        {media.animated ? (
+          <MediaFrame kind="gif" src={media.src} alt={title} width={1463} height={689} />
+        ) : (
+          <MediaFrame
+            src={media.src}
+            alt={title}
+            width={1369}
+            height={722}
+            objectPosition="top"
+            sizes="(max-width: 1024px) 100vw, 600px"
+          />
+        )}
       </Lightbox>
     </div>
   )

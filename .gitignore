@@ -42,3 +42,5 @@ local
 AGENTS.md
 CLAUDE.md
 GEMINI.md
+# Claude session artifacts
+.claude/

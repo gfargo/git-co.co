@@ -1,6 +1,7 @@
 "use client"
 
 import { Lightbox } from "@/components/Lightbox"
+import { MediaFrame } from "@/components/MediaFrame"
 
 export function GifHero() {
   return (
@@ -8,16 +9,16 @@ export function GifHero() {
       src="/screenshots/demo-workstation-tour.gif"
       alt="coco ui workstation demo — navigating between history, status, branches, and diff views"
     >
-      {/* leading-[0] removes the inline-image baseline gap below the GIF. */}
-      <div className="overflow-hidden leading-[0]">
-        {/* Native img for GIF animation — Next.js Image optimizes GIFs into stills */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/screenshots/demo-workstation-tour.gif"
-          alt="coco ui workstation demo — navigating between history, status, branches, and diff views"
-          className="w-full h-auto"
-        />
-      </div>
+      {/* Native GIF (Next.js Image would optimize it into a still) with a
+          loading skeleton + reserved aspect box. */}
+      <MediaFrame
+        kind="gif"
+        src="/screenshots/demo-workstation-tour.gif"
+        alt="coco ui workstation demo — navigating between history, status, branches, and diff views"
+        width={1463}
+        height={689}
+        priority
+      />
     </Lightbox>
   )
 }

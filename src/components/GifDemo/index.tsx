@@ -1,6 +1,7 @@
 "use client"
 
 import { Lightbox } from "@/components/Lightbox"
+import { MediaFrame } from "@/components/MediaFrame"
 import { cn } from "@/lib/utils"
 
 interface GifDemoProps {
@@ -8,13 +9,16 @@ interface GifDemoProps {
   alt: string
   caption?: string
   className?: string
+  /** Intrinsic GIF dimensions (capture default 1463×689). */
+  width?: number
+  height?: number
 }
 
 /**
  * Animated GIF demo with terminal chrome wrapper and lightbox.
  * Used for workflow demonstrations throughout the marketing site.
  */
-export function GifDemo({ src, alt, caption, className }: GifDemoProps) {
+export function GifDemo({ src, alt, caption, className, width = 1463, height = 689 }: GifDemoProps) {
   return (
     <figure className={cn("overflow-hidden", className)}>
       <div className="overflow-hidden rounded-lg border border-border/60 shadow-lg shadow-black/30">
@@ -28,18 +32,10 @@ export function GifDemo({ src, alt, caption, className }: GifDemoProps) {
           </span>
         </div>
 
-        {/* GIF with lightbox. leading-[0] kills the inline-image baseline
-            gap that would otherwise pad the bottom of the terminal pane. */}
+        {/* GIF with lightbox + loading skeleton. The aspect-ratio box
+            reserves space so the page doesn't shift as the GIF streams in. */}
         <Lightbox src={src} alt={alt}>
-          <div className="overflow-hidden bg-[hsl(var(--code-bg))] leading-[0]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={src}
-              alt={alt}
-              className="w-full h-auto"
-              loading="lazy"
-            />
-          </div>
+          <MediaFrame kind="gif" src={src} alt={alt} width={width} height={height} />
         </Lightbox>
       </div>
 
