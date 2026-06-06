@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import {
   CommandIcon,
   GitCompareIcon,
@@ -9,6 +8,7 @@ import {
 } from "lucide-react"
 
 import { Lightbox } from "@/components/Lightbox"
+import { MediaFrame } from "@/components/MediaFrame"
 
 interface PowerMove {
   icon: LucideIcon
@@ -57,16 +57,14 @@ function Frame({ title, src }: { title: string; src: string }) {
         </span>
       </div>
       <Lightbox src={src} alt={title}>
-        <div className="bg-[hsl(var(--code-bg))]">
-          <Image
-            src={src}
-            alt={title}
-            width={1260}
-            height={800}
-            className="block h-auto w-full object-cover object-top"
-            sizes="(max-width: 1024px) 100vw, 400px"
-          />
-        </div>
+        <MediaFrame
+          src={src}
+          alt={title}
+          width={1369}
+          height={722}
+          objectPosition="top"
+          sizes="(max-width: 1024px) 100vw, 400px"
+        />
       </Lightbox>
     </div>
   )
