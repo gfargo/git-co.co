@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 import { CopyCommand } from "@/components/CopyCommand"
+import { MediaFrame } from "@/components/MediaFrame"
 
 const commands = ["commit", "changelog", "recap", "review", "commit split"]
 
@@ -82,11 +83,13 @@ export const HeroSection = () => {
                       </span>
                     </div>
                     {/* The real workstation, animated */}
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <MediaFrame
+                      kind="gif"
                       src="/screenshots/demo-workstation-tour.gif"
                       alt="coco terminal workstation — browsing history, status, branches and diffs by keyboard"
-                      className="block w-full"
+                      width={1463}
+                      height={689}
+                      priority
                     />
                     {/* Faint scanline texture for CRT depth */}
                     <div

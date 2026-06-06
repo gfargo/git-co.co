@@ -9,6 +9,7 @@ import {
     GitPullRequestIcon,
 } from "lucide-react"
 
+import { MediaFrame } from "@/components/MediaFrame"
 import { Section } from "@/components/Section"
 import { SectionHeader } from "@/components/SectionHeader"
 import { TerminalAtmosphere } from "@/components/TerminalAtmosphere"
@@ -85,11 +86,12 @@ export function WorkstationTeaser() {
               className="pointer-events-none absolute -inset-4 -z-10 rounded-2xl bg-terminal-green/10 opacity-70 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
             />
             <div className="overflow-hidden rounded-lg ring-1 ring-terminal-green/20 shadow-2xl shadow-black/40 leading-[0]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <MediaFrame
+                kind="gif"
                 src="/screenshots/demo-ui-view-switching.gif"
                 alt="coco ui — switching between history, status, branches, and diff views via chord navigation"
-                className="w-full h-auto"
+                width={1463}
+                height={689}
               />
             </div>
             {/* LIVE chip — small, kinetic, signals motion */}

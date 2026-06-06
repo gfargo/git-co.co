@@ -1,6 +1,7 @@
 "use client"
 
 import { CopyCommand } from "@/components/CopyCommand"
+import { MediaFrame } from "@/components/MediaFrame"
 import { Section } from "@/components/Section"
 import { SectionHeader } from "@/components/SectionHeader"
 
@@ -98,11 +99,12 @@ export const InstallSection = () => {
                   ~/coco — coco ui
                 </span>
               </div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <MediaFrame
+                kind="gif"
                 src="/screenshots/demo-boot-workstation.gif"
                 alt="coco ui booting up — the workstation loads a repo's history, branches and diffs the moment you launch it"
-                className="block w-full"
+                width={1463}
+                height={689}
               />
             </div>
             <p className="mt-3 text-center font-mono text-xs text-muted-foreground">

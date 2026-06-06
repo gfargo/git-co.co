@@ -1,7 +1,6 @@
 "use client"
 
-import Image from "next/image"
-
+import { MediaFrame } from "@/components/MediaFrame"
 import { Section } from "@/components/Section"
 import { SectionHeader } from "@/components/SectionHeader"
 import { TerminalAtmosphere } from "@/components/TerminalAtmosphere"
@@ -124,12 +123,12 @@ function WorkstationVisual() {
           coco ui
         </span>
       </div>
-      <Image
+      <MediaFrame
         src="/screenshots/view-history.png"
         alt="coco workstation — history view with commit graph and inspector"
-        width={1260}
-        height={800}
-        className="h-auto w-full object-cover object-top"
+        width={1369}
+        height={722}
+        objectPosition="top"
         sizes="(max-width: 1024px) 100vw, 380px"
       />
     </div>
