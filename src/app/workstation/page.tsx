@@ -16,6 +16,7 @@ import { CopyCommand } from "@/components/CopyCommand"
 import { TrackedLink } from "@/components/TrackedLink"
 import { ThemeWall } from "@/components/ThemeWall"
 import { siteConfig } from "@/config/site"
+import { THEME_COUNT } from "@/config/themes"
 import { KeyWorkflows } from "./KeyWorkflows"
 import { PowerMoves } from "./PowerMoves"
 import { GifHero } from "./GifHero"
@@ -29,7 +30,7 @@ import { GifDemo } from "@/components/GifDemo"
 export function generateMetadata(): Metadata {
   const title = "Workstation — Terminal Git Workstation"
   const description =
-    "A keyboard-driven terminal Git workstation with 16 specialized views — including GitHub issue and PR triage, conflict resolution, bisect, recursive submodule navigation, and a full stash workflow — chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, tactile hunk-level staging, a single-pane fallback for narrow terminals (80×24 tmux-ready), and 49 customizable themes. No Electron, no mouse required."
+    `A keyboard-driven terminal Git workstation with 16 specialized views — including GitHub issue and PR triage, conflict resolution, bisect, recursive submodule navigation, and a full stash workflow — chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, tactile hunk-level staging, a single-pane fallback for narrow terminals (80×24 tmux-ready), and ${THEME_COUNT} customizable themes. No Electron, no mouse required.`
 
   return {
     title,
@@ -134,7 +135,7 @@ export default function WorkstationPage() {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Linux, macOS, Windows",
     description:
-      "A keyboard-driven terminal Git workstation with 16 specialized views, a full stash workflow, conflict resolution, bisect, and recursive submodule navigation, with chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, tactile hunk-level staging, a single-pane fallback for narrow terminals, and 49 customizable themes.",
+      `A keyboard-driven terminal Git workstation with 16 specialized views, a full stash workflow, conflict resolution, bisect, and recursive submodule navigation, with chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, tactile hunk-level staging, a single-pane fallback for narrow terminals, and ${THEME_COUNT} customizable themes.`,
     url: `${siteConfig.url}/workstation`,
     offers: {
       "@type": "Offer",
@@ -163,7 +164,7 @@ export default function WorkstationPage() {
       "Bisect workflow with single-keystroke decisions",
       "Reflog browser with one-key drill-in to any HEAD movement",
       "Conflict resolution helper for merge / rebase / cherry-pick / revert",
-      "49 built-in theme presets",
+      `${THEME_COUNT} built-in theme presets`,
       "NO_COLOR support",
     ],
     softwareVersion: "latest",
@@ -216,7 +217,7 @@ export default function WorkstationPage() {
                 <dl className="mt-8 grid w-full max-w-md grid-cols-4 gap-3 border-t border-border/60 pt-6">
                   {[
                     { value: "16", label: "views" },
-                    { value: "49", label: "themes" },
+                    { value: String(THEME_COUNT), label: "themes" },
                     { value: "<100ms", label: "boot" },
                     { value: "0", label: "mouse" },
                   ].map(({ value, label }) => (
