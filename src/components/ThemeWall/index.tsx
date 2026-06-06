@@ -35,7 +35,7 @@ function Tile({
         onMouseEnter={() => onHover(theme)}
         onMouseLeave={() => onHover(null)}
         className={cn(
-          "group/tile relative w-[260px] shrink-0 overflow-hidden rounded-md border bg-bg-elevated transition-all duration-300 sm:w-[300px]",
+          "group/tile relative w-[180px] shrink-0 overflow-hidden rounded-md border bg-bg-elevated transition-all duration-300 sm:w-[210px]",
           "border-border/60 hover:z-10 hover:scale-[1.04]"
         )}
         style={{
@@ -49,7 +49,7 @@ function Tile({
           width={1260}
           height={800}
           className="h-auto w-full object-cover object-top"
-          sizes="300px"
+          sizes="210px"
         />
         {/* Name badge — slides up on hover */}
         <figcaption
@@ -114,16 +114,17 @@ function MarqueeRow({ themes, duration, reverse, onHover, activeSlug, paused, on
 }
 
 /**
- * Kinetic wall of every coco theme. Three marquee rows scroll in
+ * Kinetic wall of every coco theme. Five marquee rows scroll slowly in
  * alternating directions and pause on hover; hovering a tile lifts it,
  * rings it in the theme's accent, and bleeds that hue into the section.
  * Click any tile for a full-size lightbox. Replaces the old one-at-a-time
- * arrow carousel — 49 palettes shown at once instead of one every click.
+ * arrow carousel — the whole palette shown at once instead of one every
+ * click.
  */
 export function ThemeWall({ className }: { className?: string }) {
   const [active, setActive] = useState<ThemeTile | null>(null)
   const [lightboxOpen, setLightboxOpen] = useState(false)
-  const rows = intoRows(THEMES, 3)
+  const rows = intoRows(THEMES, 5)
 
   return (
     <div className={cn("relative", className)}>
@@ -143,10 +144,15 @@ export function ThemeWall({ className }: { className?: string }) {
       <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 bg-gradient-to-r from-background to-transparent sm:w-28" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 bg-gradient-to-l from-background to-transparent sm:w-28" />
 
-      <div className="flex flex-col gap-4">
-        <MarqueeRow themes={rows[0]!} duration={64} onHover={setActive} activeSlug={active?.slug ?? null} paused={lightboxOpen} onLightbox={setLightboxOpen} />
-        <MarqueeRow themes={rows[1]!} duration={78} reverse onHover={setActive} activeSlug={active?.slug ?? null} paused={lightboxOpen} onLightbox={setLightboxOpen} />
-        <MarqueeRow themes={rows[2]!} duration={70} onHover={setActive} activeSlug={active?.slug ?? null} paused={lightboxOpen} onLightbox={setLightboxOpen} />
+      {/* Five rows, each scrolling slowly at a slightly different cadence so
+          the wall never reads as a single synchronized belt. Durations are
+          long (≈30–40 px/s) so the eye can actually rest on a palette. */}
+      <div className="flex flex-col gap-3">
+        <MarqueeRow themes={rows[0]!} duration={120} onHover={setActive} activeSlug={active?.slug ?? null} paused={lightboxOpen} onLightbox={setLightboxOpen} />
+        <MarqueeRow themes={rows[1]!} duration={145} reverse onHover={setActive} activeSlug={active?.slug ?? null} paused={lightboxOpen} onLightbox={setLightboxOpen} />
+        <MarqueeRow themes={rows[2]!} duration={130} onHover={setActive} activeSlug={active?.slug ?? null} paused={lightboxOpen} onLightbox={setLightboxOpen} />
+        <MarqueeRow themes={rows[3]!} duration={160} reverse onHover={setActive} activeSlug={active?.slug ?? null} paused={lightboxOpen} onLightbox={setLightboxOpen} />
+        <MarqueeRow themes={rows[4]!} duration={138} onHover={setActive} activeSlug={active?.slug ?? null} paused={lightboxOpen} onLightbox={setLightboxOpen} />
       </div>
 
       {/* Live caption — name of whatever you're pointing at */}

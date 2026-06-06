@@ -465,7 +465,7 @@ export default function WorkstationPage() {
           <div className="container">
             <SectionHeader
               prompt="~/coco $ ui --theme"
-              title="Forty-nine ways to make it yours"
+              title={`${THEME_COUNT} ways to make it yours`}
               subtitle="From Catppuccin to Gruvbox to Synthwave — every preset is a complete palette, surface and all. Plus full NO_COLOR support for minimal environments."
             />
             <Link
