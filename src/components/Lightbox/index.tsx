@@ -5,6 +5,7 @@ import { createPortal } from "react-dom"
 import Image from "next/image"
 import { XIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { versionedAsset } from "@/lib/assetVersion"
 
 interface LightboxProps {
   src: string
@@ -86,7 +87,7 @@ export function Lightbox({ src, alt, children, className, onOpenChange }: Lightb
               onClick={(e) => e.stopPropagation()}
             >
               <Image
-                src={src}
+                src={versionedAsset(src)}
                 alt={alt}
                 width={2520}
                 height={1600}

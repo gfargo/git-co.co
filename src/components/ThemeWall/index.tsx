@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { Lightbox } from "@/components/Lightbox"
+import { versionedAsset } from "@/lib/assetVersion"
 import { THEMES, type ThemeMeta } from "@/config/themes"
 
 /* Theme tiles read from the shared catalog (src/config/themes.ts), the
@@ -28,7 +29,7 @@ function Tile({
   active: boolean
   onLightbox: (open: boolean) => void
 }) {
-  const src = `/screenshots/theme-${theme.slug}.png`
+  const src = versionedAsset(`/screenshots/theme-${theme.slug}.png`)
   return (
     <Lightbox src={src} alt={`coco ui — ${theme.name} theme`} onOpenChange={onLightbox}>
       <figure

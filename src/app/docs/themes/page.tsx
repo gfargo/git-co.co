@@ -4,6 +4,7 @@ import { PaletteIcon } from "lucide-react"
 
 import { Lightbox } from "@/components/Lightbox"
 import { ThemeSlideshow } from "@/components/ThemeSlideshow"
+import { versionedAsset } from "@/lib/assetVersion"
 import { THEMES, THEME_COUNT, type ThemeMeta } from "@/config/themes"
 import { siteConfig } from "@/config/site"
 
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 function ThemeCard({ theme }: { theme: ThemeMeta }) {
-  const src = `/screenshots/theme-${theme.slug}.png`
+  const src = versionedAsset(`/screenshots/theme-${theme.slug}.png`)
   return (
     <div className="group overflow-hidden rounded-lg border border-border bg-[hsl(var(--bg-secondary))] transition-colors hover:border-terminal-green-dim">
       {/* Screenshot */}

@@ -6,6 +6,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 
 import { Lightbox } from "@/components/Lightbox"
 import { cn } from "@/lib/utils"
+import { versionedAsset } from "@/lib/assetVersion"
 import { THEMES } from "@/config/themes"
 
 /**
@@ -68,7 +69,7 @@ export function ThemeSlideshow() {
     })
   }, [index])
 
-  const src = `/screenshots/theme-${theme.slug}.png`
+  const src = versionedAsset(`/screenshots/theme-${theme.slug}.png`)
 
   return (
     <div
@@ -189,7 +190,7 @@ export function ThemeSlideshow() {
               }
             >
               <Image
-                src={`/screenshots/theme-${t.slug}.png`}
+                src={versionedAsset(`/screenshots/theme-${t.slug}.png`)}
                 alt=""
                 width={160}
                 height={100}

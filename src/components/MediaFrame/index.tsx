@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
+import { versionedAsset } from "@/lib/assetVersion"
 
 interface MediaFrameProps {
   src: string
@@ -47,6 +48,7 @@ export function MediaFrame({
   className,
 }: MediaFrameProps) {
   const [loaded, setLoaded] = useState(false)
+  const url = versionedAsset(src)
   const fit = objectFit === "contain" ? "object-contain" : "object-cover"
   const fade = cn(
     "transition-opacity duration-500 ease-out",
@@ -67,7 +69,7 @@ export function MediaFrame({
       {kind === "gif" ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={src}
+          src={url}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
           onLoad={() => setLoaded(true)}
@@ -76,7 +78,7 @@ export function MediaFrame({
         />
       ) : (
         <Image
-          src={src}
+          src={url}
           alt={alt}
           fill
           priority={priority}
