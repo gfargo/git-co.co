@@ -22,7 +22,6 @@ import { PowerMoves } from "./PowerMoves"
 import { GifHero } from "./GifHero"
 import { WorkstationShowcase } from "./WorkstationShowcase"
 import { GifDemo } from "@/components/GifDemo"
-import { MediaFrame } from "@/components/MediaFrame"
 
 /* ------------------------------------------------------------------ */
 /*  SEO Metadata                                                       */
@@ -494,58 +493,6 @@ export default function WorkstationPage() {
                   →
                 </span>
               </Link>
-            </div>
-
-            {/* Every surface, themed — diff + status across a curated set */}
-            <div className="mt-16">
-              <h3 className="font-mono text-lg font-semibold text-foreground">
-                Every surface, themed
-              </h3>
-              <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-                The history wall above is just the start. The syntax-highlighted diff
-                and the status surface recolor with your theme too — here are a few of
-                the presets, dark and light.
-              </p>
-
-              {[
-                { label: "Diff", prefix: "diff" },
-                { label: "Status", prefix: "status" },
-              ].map((group) => (
-                <div key={group.label} className="mt-8">
-                  <p className="mb-3 font-mono text-sm text-terminal-green">
-                    {group.label}
-                  </p>
-                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-                    {[
-                      "catppuccin",
-                      "gruvbox",
-                      "dracula",
-                      "tokyo-night",
-                      "nord",
-                      "rose-pine",
-                      "github-light",
-                      "catppuccin-latte",
-                    ].map((theme) => (
-                      <figure
-                        key={theme}
-                        className="overflow-hidden rounded-lg border border-border bg-[hsl(var(--code-bg))]"
-                      >
-                        <MediaFrame
-                          src={`/screenshots/${group.prefix}-theme-${theme}.png`}
-                          alt={`The ${group.label.toLowerCase()} view in the ${theme} theme`}
-                          width={1369}
-                          height={722}
-                          objectPosition="top"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                        />
-                        <figcaption className="px-3 py-2 font-mono text-xs text-muted-foreground">
-                          {theme}
-                        </figcaption>
-                      </figure>
-                    ))}
-                  </div>
-                </div>
-              ))}
             </div>
 
             {/* NO_COLOR callout */}
