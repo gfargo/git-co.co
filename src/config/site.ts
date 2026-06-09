@@ -3,7 +3,7 @@ export const siteConfig = {
   url: "https://coco.griffen.codes",
   ogImage: "https://coco.griffen.codes/og-image.png",
   description:
-    "A suite of AI-powered Git tools — smart commits, automated changelogs, code reviews, commit splitting, and recaps — plus a keyboard-driven terminal workstation that brings them all together. Supports OpenAI, Anthropic, and Ollama for local/private operation.",
+    "A suite of AI-powered Git tools — smart commits, automated changelogs, code reviews, commit splitting, and recaps — plus a keyboard-driven terminal workstation that brings them all together. Supports OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI, AWS Bedrock, and Ollama for local/private operation.",
   keywords: [
     "git",
     "cli tool",

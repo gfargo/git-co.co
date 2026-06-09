@@ -49,7 +49,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Coco — AI-Powered Git Toolbelt & Terminal Workstation",
     description:
-      "Smart commits, automated changelogs, code reviews, commit splitting — plus a keyboard-driven terminal workstation. Supports OpenAI, Anthropic, and Ollama.",
+      "Smart commits, automated changelogs, code reviews, commit splitting — plus a keyboard-driven terminal workstation. Supports OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI, AWS Bedrock, and Ollama.",
     images: [siteConfig.ogImage],
     creator: siteConfig.author.twitter
   },

@@ -229,8 +229,8 @@ export const ToolbeltSection = () => {
             <code className="font-mono text-terminal-green">dynamic</code>{" "}
             model routing which selects the best model per task — a fast model
             for commits, a thorough one for changelogs and reviews. Works across
-            providers: OpenAI, Anthropic, and Ollama for fully local, private
-            operation.
+            seven providers: OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI,
+            AWS Bedrock, and Ollama for fully local, private operation.
           </p>
         </div>
       </div>

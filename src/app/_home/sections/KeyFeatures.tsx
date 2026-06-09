@@ -58,7 +58,7 @@ const features: Feature[] = [
     icon: ServerIcon,
     title: "Multi-Provider AI",
     description:
-      "OpenAI, Anthropic, and Ollama. Run fully local for complete privacy and zero API costs.",
+      "Seven providers: OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI, AWS Bedrock, and Ollama. Run fully local for complete privacy and zero API costs.",
     layout: "default",
     visual: () => <ProvidersVisual />,
   },
@@ -170,6 +170,10 @@ function ProvidersVisual() {
   const providers = [
     { name: "OpenAI", status: "connected" },
     { name: "Anthropic", status: "connected" },
+    { name: "Gemini", status: "connected" },
+    { name: "Mistral", status: "connected" },
+    { name: "Azure OpenAI", status: "connected" },
+    { name: "AWS Bedrock", status: "connected" },
     { name: "Ollama", status: "local" },
   ]
   return (
