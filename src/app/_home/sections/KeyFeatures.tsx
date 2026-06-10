@@ -58,7 +58,7 @@ const features: Feature[] = [
     icon: ServerIcon,
     title: "Multi-Provider AI",
     description:
-      "Seven providers: OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI, AWS Bedrock, and Ollama. Run fully local for complete privacy and zero API costs.",
+      "Seven providers: OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI, AWS Bedrock, and Ollama. Run fully local for complete privacy and zero API costs. coco itself collects no telemetry, and any usage stats it keeps stay local on your machine.",
     layout: "default",
     visual: () => <ProvidersVisual />,
   },
