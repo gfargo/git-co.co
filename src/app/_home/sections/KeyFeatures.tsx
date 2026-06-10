@@ -6,6 +6,7 @@ import { SectionHeader } from "@/components/SectionHeader"
 import { TerminalAtmosphere } from "@/components/TerminalAtmosphere"
 import { cn } from "@/lib/utils"
 import {
+    GitForkIcon,
     MonitorIcon,
     RouteIcon,
     ServerIcon,
@@ -61,6 +62,14 @@ const features: Feature[] = [
       "Seven providers: OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI, AWS Bedrock, and Ollama. Run fully local for complete privacy and zero API costs. coco itself collects no telemetry, and any usage stats it keeps stay local on your machine.",
     layout: "default",
     visual: () => <ProvidersVisual />,
+  },
+  {
+    icon: GitForkIcon,
+    title: "Multi-forge (GitHub + GitLab)",
+    description:
+      "PRs, issues, and the triage workstation work across GitHub, GitHub Enterprise, and GitLab. coco detects your forge and drives gh or glab — same commands, same TUI.",
+    layout: "default",
+    visual: () => <ForgesVisual />,
   },
   {
     icon: ShieldCheckIcon,
@@ -194,6 +203,30 @@ function ProvidersVisual() {
           >
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-current" />
             {p.status}
+          </span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ForgesVisual() {
+  const forges = [
+    { name: "GitHub", cli: "gh" },
+    { name: "GitHub Enterprise", cli: "gh" },
+    { name: "GitLab", cli: "glab" },
+  ]
+  return (
+    <div className="space-y-1.5">
+      {forges.map((f) => (
+        <div
+          key={f.name}
+          className="flex items-center justify-between rounded border border-border bg-bg-elevated/50 px-2.5 py-1.5 font-mono text-[11px]"
+        >
+          <span className="text-foreground/80">{f.name}</span>
+          <span className="flex items-center gap-1.5 text-terminal-green-dim">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-current" />
+            {f.cli}
           </span>
         </div>
       ))}

@@ -3,7 +3,7 @@ export const siteConfig = {
   url: "https://coco.griffen.codes",
   ogImage: "https://coco.griffen.codes/og-image.png",
   description:
-    "A suite of AI-powered Git tools — smart commits, automated changelogs, code reviews, commit splitting, and recaps — plus a keyboard-driven terminal workstation that brings them all together. Supports OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI, AWS Bedrock, and Ollama for local/private operation.",
+    "A suite of AI-powered Git tools — smart commits, automated changelogs, code reviews, commit splitting, and recaps — plus a keyboard-driven terminal workstation that brings them all together. PR/MR and issue triage works across GitHub, GitHub Enterprise, and GitLab. Supports OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI, AWS Bedrock, and Ollama for local/private operation.",
   keywords: [
     "git",
     "cli tool",
@@ -21,6 +21,12 @@ export const siteConfig = {
     "coco ui",
     "commit messages",
     "changelog generator",
+    "github",
+    "github enterprise",
+    "gitlab",
+    "multi-forge",
+    "pull requests",
+    "merge requests",
     "ollama",
     "openai",
     "anthropic",

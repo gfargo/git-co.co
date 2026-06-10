@@ -4,6 +4,7 @@ import { Header } from "@/components/Header"
 import { CommunitySection } from "./_home/sections/Community"
 import { HeroSection } from "./_home/sections/Hero"
 import { KeyFeaturesSection } from "./_home/sections/KeyFeatures"
+import { ForgeSupportSection } from "./_home/sections/ForgeSupport"
 import { InstallSection } from "./_home/sections/Install"
 import { DocumentationSection } from "./_home/sections/Documentation"
 import { ToolbeltSection } from "./_home/sections/Toolbelt"
@@ -18,6 +19,7 @@ export default function HomePage() {
         <ToolbeltSection />
         <WorkstationTeaser />
         <KeyFeaturesSection />
+        <ForgeSupportSection />
         <InstallSection />
         <DocumentationSection />
         <CommunitySection />
