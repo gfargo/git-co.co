@@ -24,7 +24,7 @@ interface WorkflowRow {
   title: string
   description: string
   keys: string[]
-  media: { src: string; animated?: boolean }
+  media: { src: string; animated?: boolean; width?: number; height?: number }
 }
 
 const WORKFLOWS: WorkflowRow[] = [
@@ -70,19 +70,19 @@ const WORKFLOWS: WorkflowRow[] = [
   },
   {
     icon: GitCommitIcon,
-    title: "Compose with AI draft",
+    title: "Stage, draft, ship — the inner loop",
     description:
-      "Open the compose view, draft a message from your staged changes with one keystroke, edit it to taste, and commit — Conventional Commits and commitlint respected.",
-    keys: ["g", "c"],
-    media: { src: "/screenshots/view-compose.png" },
+      "The whole everyday loop without leaving the keyboard: open a changed file, stage the hunks you mean, jump to compose, and let coco draft a Conventional Commit message from exactly what's staged — ready to review, edit, and commit. commitlint respected.",
+    keys: ["Space", "g c", "I"],
+    media: { src: "/screenshots/demo-tour-ship-change.gif", animated: true, width: 1463, height: 722 },
   },
   {
     icon: GitPullRequestIcon,
-    title: "Pull-request actions",
+    title: "Review a PR end to end",
     description:
-      "Merge, approve, request changes, and comment on PRs straight from the PR view. Review the diff, check CI status, and act — no browser round-trip.",
-    keys: ["g", "p"],
-    media: { src: "/screenshots/view-pull-request.png" },
+      "Open the current branch's pull request — body, CI checks, and reviews right in the inspector — then cross to the multi-PR triage list and cycle filters. Merge, approve, request changes, and comment without a browser round-trip.",
+    keys: ["g p", "g P", "f"],
+    media: { src: "/screenshots/demo-tour-review-pr.gif", animated: true, width: 1463, height: 722 },
   },
   {
     icon: RotateCcwIcon,
@@ -104,9 +104,9 @@ const WORKFLOWS: WorkflowRow[] = [
     icon: SearchIcon,
     title: "Bisect a regression",
     description:
-      "Drive git bisect from the workstation: mark the cursored commit good (g) or bad (b) and watch the range halve, with a running decision log and the revisions-left estimate — no remembering the bisect verb soup.",
+      "Drive git bisect from the workstation: mark the cursored commit good (g) or bad (b) and watch the candidate range collapse toward the culprit, with a running decision log and the revisions-left estimate — no remembering the bisect verb soup.",
     keys: ["g", "B", "g/b"],
-    media: { src: "/screenshots/demo-bisect.gif", animated: true },
+    media: { src: "/screenshots/demo-tour-find-regression.gif", animated: true, width: 1463, height: 722 },
   },
   {
     icon: RectangleHorizontalIcon,
@@ -131,7 +131,7 @@ function FramedMedia({ title, media }: { title: string; media: WorkflowRow["medi
       </div>
       <Lightbox src={media.src} alt={title}>
         {media.animated ? (
-          <MediaFrame kind="gif" src={media.src} alt={title} width={1463} height={689} />
+          <MediaFrame kind="gif" src={media.src} alt={title} width={media.width ?? 1463} height={media.height ?? 689} />
         ) : (
           <MediaFrame
             src={media.src}

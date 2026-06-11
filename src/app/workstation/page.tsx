@@ -299,9 +299,9 @@ export default function WorkstationPage() {
                 },
                 {
                   cmd: "enter — drive it",
-                  tagline: "Drill into any repo as a full workstation — history, diffs, branches, and back.",
-                  gif: "/screenshots/demo-workstation-using.gif",
-                  alt: "Using the workstation — history, a syntax-highlighted diff, status, branches, and the help overlay",
+                  tagline: "Browse the multi-repo overview — dirty state, ahead/behind, open PRs — then Enter any repo to drive it as a full workstation.",
+                  gif: "/screenshots/demo-tour-workspace.gif",
+                  alt: "Workspace tour — browsing the multi-repo overview, then driving into a repo's history",
                 },
               ].map((d) => (
                 <div key={d.cmd} className="flex flex-col gap-3">
