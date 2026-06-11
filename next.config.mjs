@@ -2,7 +2,19 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
+import { readFileSync } from "node:fs"
+
 await import("./src/env.mjs")
+
+/**
+ * Read ASSET_VERSION straight from src/lib/assetVersion.ts at config load so the
+ * image `localPatterns` below always matches the `?v=<ASSET_VERSION>` query that
+ * `versionedAsset()` appends — bumping ASSET_VERSION needs no config edit.
+ */
+const ASSET_VERSION =
+  readFileSync(new URL("./src/lib/assetVersion.ts", import.meta.url), "utf8").match(
+    /ASSET_VERSION\s*=\s*"([^"]+)"/,
+  )?.[1] ?? ""
 
 /**
  * Baseline security response headers, applied to every route.
@@ -36,6 +48,15 @@ const securityHeaders = [
 
 /** @type {import("next").NextConfig} */
 const config = {
+  images: {
+    // Next 16 rejects query strings on local images unless allow-listed here.
+    // `versionedAsset()` appends `?v=<ASSET_VERSION>` to /public media for
+    // cache-busting, so allow both the versioned and unversioned forms.
+    localPatterns: [
+      { pathname: "/**", search: `v=${ASSET_VERSION}` },
+      { pathname: "/**", search: "" },
+    ],
+  },
   async headers() {
     return [
       {
