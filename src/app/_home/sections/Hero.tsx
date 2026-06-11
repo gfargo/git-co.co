@@ -47,7 +47,7 @@ export const HeroSection = () => {
                       </span>
                     ))}
                   </span>
-                  {" "}— plus a full terminal workstation that brings them all together.
+                  {" "}— plus a full terminal workstation that brings them all together, on GitHub or GitLab.
                 </p>
 
                 {/* CTA row */}

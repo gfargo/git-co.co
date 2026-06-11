@@ -177,8 +177,9 @@ export const ForgeSupportSection = () => {
               </span>
             </div>
             <MediaFrame
-              src="/screenshots/gitlab-mr-triage.png"
-              alt="coco ui GitLab merge-request triage — three MRs with draft, pipeline, and approval state, plus a live inspector showing pipeline checks, approvals, and comments"
+              kind="gif"
+              src="/screenshots/gitlab-mr-triage.gif"
+              alt="coco ui GitLab merge-request triage — browsing merge requests with a live inspector showing pipeline checks, approvals, and comments"
               width={1463}
               height={689}
               sizes="(max-width: 1024px) 100vw, 1024px"
