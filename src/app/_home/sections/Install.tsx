@@ -34,53 +34,60 @@ export const InstallSection = () => {
         />
 
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
-          {/* Left — install command + the toolbelt as a terminal session */}
+          {/* Left — install command + the first commands to run.
+              Deliberately *not* dressed as a fake terminal window: the
+              right column is the real terminal, so this reads as a clean,
+              scannable command reference instead of competing chrome. */}
           <div>
             <CopyCommand command="npx git-coco@latest init" />
 
-            <div className="mt-8 overflow-hidden rounded-lg border border-border bg-[hsl(var(--code-bg))]">
-              <div className="flex items-center gap-2 border-b border-border/40 bg-bg-elevated/60 px-4 py-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]/80" />
-                <span className="ml-2 font-mono text-[10px] text-muted-foreground/50">
-                  then run any of these
-                </span>
-              </div>
+            <div className="mt-10">
+              <h3 className="font-mono text-sm font-semibold text-foreground">
+                Then run any of these
+              </h3>
+              <p className="mb-5 mt-1 text-sm text-muted-foreground">
+                One smart entry point, plus a sharp tool for each job.
+              </p>
 
-              {/* Primary — smart entry, set apart with an accent rail + tint */}
-              <div className="flex flex-col gap-1 border-b border-border/40 border-l-2 border-l-terminal-green bg-terminal-green/5 px-4 py-3.5 sm:flex-row sm:items-baseline sm:gap-4">
-                <code className="shrink-0 font-mono text-sm font-semibold text-terminal-green sm:w-[8.5rem]">
-                  <span className="mr-1.5 text-muted-foreground/60">$</span>
-                  {primaryCommand.command}
-                </code>
-                <span className="text-sm leading-6 text-muted-foreground">
-                  <span className="font-medium text-foreground">Smart entry</span> — {primaryCommand.description}
-                </span>
-              </div>
+              <div className="flex flex-col gap-1.5">
+                {/* Smart entry — the one most people run first, set apart
+                    with an accent rail + faint tint. */}
+                <div className="group relative overflow-hidden rounded-lg border border-terminal-green/30 bg-terminal-green/[0.06] px-4 py-3.5 transition-colors hover:border-terminal-green/50 sm:flex sm:items-baseline sm:gap-4">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-y-0 left-0 w-0.5 bg-terminal-green"
+                  />
+                  <code className="block shrink-0 font-mono text-sm font-semibold text-terminal-green sm:w-[7.5rem]">
+                    <span className="mr-1.5 text-terminal-green/50">$</span>
+                    {primaryCommand.command}
+                  </code>
+                  <span className="mt-1 block text-sm leading-6 text-muted-foreground sm:mt-0">
+                    <span className="font-medium text-foreground">Smart entry</span> — {primaryCommand.description}
+                  </span>
+                </div>
 
-              {/* The rest of the toolbelt — aligned command / description columns.
-                  The shared `coco` prefix is dimmed so the subcommand reads first. */}
-              <ul className="divide-y divide-border/30">
+                {/* The focused tools — the shared `coco` prefix is dimmed
+                    so the subcommand reads first; the whole row lifts on
+                    hover and the prompt glyph greens up. */}
                 {commands.map(({ command, description }) => {
                   const subcommand = command.replace("coco ", "")
                   return (
-                    <li
+                    <div
                       key={command}
-                      className="grid grid-cols-1 gap-0.5 px-4 py-2.5 transition-colors hover:bg-foreground/5 sm:grid-cols-[8.5rem_1fr] sm:items-baseline sm:gap-4"
+                      className="group rounded-lg px-4 py-2.5 transition-colors hover:bg-foreground/[0.04] sm:flex sm:items-baseline sm:gap-4"
                     >
-                      <code className="font-mono text-sm">
-                        <span className="mr-1.5 text-muted-foreground/50">$</span>
+                      <code className="block shrink-0 font-mono text-sm sm:w-[7.5rem]">
+                        <span className="mr-1.5 text-muted-foreground/40 transition-colors group-hover:text-terminal-green/70">$</span>
                         <span className="text-muted-foreground/50">coco </span>
                         <span className="text-terminal-green">{subcommand}</span>
                       </code>
-                      <span className="text-sm leading-6 text-muted-foreground">
+                      <span className="mt-0.5 block text-sm leading-6 text-muted-foreground sm:mt-0">
                         {description}
                       </span>
-                    </li>
+                    </div>
                   )
                 })}
-              </ul>
+              </div>
             </div>
           </div>
 
