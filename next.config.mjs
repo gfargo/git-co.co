@@ -3,6 +3,7 @@
  * for Docker builds.
  */
 import { readFileSync } from "node:fs"
+import { fileURLToPath } from "node:url"
 
 await import("./src/env.mjs")
 
@@ -48,6 +49,12 @@ const securityHeaders = [
 
 /** @type {import("next").NextConfig} */
 const config = {
+  // Pin the workspace root so Turbopack doesn't infer it from a sibling
+  // lockfile (the monorepo has lockfiles above this dir). Silences the
+  // "inferred your workspace root" warning.
+  turbopack: {
+    root: fileURLToPath(new URL(".", import.meta.url)),
+  },
   images: {
     // Next 16 rejects query strings on local images unless allow-listed here.
     // `versionedAsset()` appends `?v=<ASSET_VERSION>` to /public media for
