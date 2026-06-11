@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 import { versionedAsset } from "@/lib/assetVersion"
 
@@ -48,7 +48,19 @@ export function MediaFrame({
   className,
 }: MediaFrameProps) {
   const [loaded, setLoaded] = useState(false)
+  const imgRef = useRef<HTMLImageElement | null>(null)
   const url = versionedAsset(src)
+
+  // A cached image can finish loading before React hydrates and attaches
+  // `onLoad` — so the load event is missed and the media would stay pinned at
+  // opacity-0 forever (most visible on the eager/priority hero, which loads
+  // fastest). Reconcile against the DOM on mount: if the <img> is already
+  // complete, treat it as loaded. Re-checks when the src changes.
+  useEffect(() => {
+    const img = imgRef.current
+    if (img?.complete && img.naturalWidth > 0) setLoaded(true)
+  }, [url])
+
   const fit = objectFit === "contain" ? "object-contain" : "object-cover"
   const fade = cn(
     "transition-opacity duration-500 ease-out",
@@ -69,21 +81,25 @@ export function MediaFrame({
       {kind === "gif" ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
+          ref={imgRef}
           src={url}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
           onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(true)}
           className={cn("absolute inset-0 h-full w-full", fit, fade)}
           style={{ objectPosition }}
         />
       ) : (
         <Image
+          ref={imgRef}
           src={url}
           alt={alt}
           fill
           priority={priority}
           sizes={sizes}
           onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(true)}
           className={cn(fit, fade)}
           style={{ objectPosition }}
         />
