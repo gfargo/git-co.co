@@ -81,6 +81,7 @@ const chordKeys = [
   { key: "r", label: "Reflog" },
   { key: "B", label: "Bisect" },
   { key: "M", label: "Submodules" },
+  { key: "n", label: "Remotes" },
   { key: "L", label: "Changelog" },
 ]
 
