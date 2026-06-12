@@ -30,7 +30,7 @@ import { GifDemo } from "@/components/GifDemo"
 export function generateMetadata(): Metadata {
   const title = "Workstation — Terminal Git Workstation"
   const description =
-    `A keyboard-driven terminal Git workstation with 16 specialized views — including GitHub issue and PR triage, conflict resolution, bisect, recursive submodule navigation, and a full stash workflow — chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, tactile hunk-level staging, a single-pane fallback for narrow terminals (80×24 tmux-ready), and ${THEME_COUNT} customizable themes. No Electron, no mouse required.`
+    `A keyboard-driven terminal Git workstation with 18 specialized views — including GitHub issue and PR triage, conflict resolution, bisect, recursive submodule navigation, and a full stash workflow — chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, tactile hunk-level staging, a single-pane fallback for narrow terminals (80×24 tmux-ready), and ${THEME_COUNT} customizable themes. No Electron, no mouse required.`
 
   return {
     title,
@@ -136,7 +136,7 @@ export default function WorkstationPage() {
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Linux, macOS, Windows",
     description:
-      `A keyboard-driven terminal Git workstation with 16 specialized views, a full stash workflow, conflict resolution, bisect, and recursive submodule navigation, with chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, tactile hunk-level staging, a single-pane fallback for narrow terminals, and ${THEME_COUNT} customizable themes.`,
+      `A keyboard-driven terminal Git workstation with 18 specialized views, a full stash workflow, conflict resolution, bisect, and recursive submodule navigation, with chord navigation, AI-powered commits, one-keystroke PR creation, full-screen changelog generation, tactile hunk-level staging, a single-pane fallback for narrow terminals, and ${THEME_COUNT} customizable themes.`,
     url: `${siteConfig.url}/workstation`,
     offers: {
       "@type": "Offer",
@@ -149,7 +149,7 @@ export default function WorkstationPage() {
       url: siteConfig.author.url,
     },
     featureList: [
-      "16 specialized TUI views",
+      "18 specialized TUI views",
       "Chord-based keyboard navigation",
       "Tactile hunk-level staging",
       "Stash workflow — aligned table, stash-from-anywhere (gZ), rename, branch, undo-drop, apply-index, quick WIP",
@@ -164,6 +164,10 @@ export default function WorkstationPage() {
       "Compare any two refs (branches / tags / commits)",
       "Bisect workflow with single-keystroke decisions",
       "Reflog browser with one-key drill-in to any HEAD movement",
+      "Remotes surface — add / remove / set-url / prune",
+      "Per-file git-blame drill-down",
+      "Submodule init / update / sync",
+      "Rebase the current branch onto any ref",
       "Conflict resolution helper for merge / rebase / cherry-pick / revert",
       `${THEME_COUNT} built-in theme presets`,
       "NO_COLOR support",
