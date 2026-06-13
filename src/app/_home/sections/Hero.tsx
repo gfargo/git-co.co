@@ -27,16 +27,20 @@ export const HeroSection = () => {
 
                 {/* Main heading with blinking cursor */}
                 <h1 className="font-mono text-3xl font-bold tracking-tighter text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
-                  Your git toolbelt, sharpened by AI.
+                  Write your git commits with AI.
                   <span
                     className="ml-1 inline-block h-[0.9em] w-[0.5ch] translate-y-[0.05em] bg-white animate-cursor-blink"
                     aria-hidden="true"
                   />
                 </h1>
 
-                {/* Subtext listing commands */}
+                {/* Subtext: lead with the wedge, then the broader toolbelt */}
                 <p className="max-w-2xl text-base leading-7 text-white/80 md:text-lg">
-                  Sharp, focused commands that each solve a real problem on their own.{" "}
+                  <code className="font-mono font-semibold text-white">coco commit</code>{" "}
+                  turns your staged diff into a clear, Conventional-Commits-ready
+                  message in one command — across seven AI providers, including{" "}
+                  <span className="text-white">fully local Ollama</span>. Then it grows
+                  into a toolbelt:{" "}
                   <span className="text-white">
                     {commands.map((cmd, i) => (
                       <span key={cmd}>
@@ -47,7 +51,7 @@ export const HeroSection = () => {
                       </span>
                     ))}
                   </span>
-                  {" "}— plus a full terminal workstation that brings them all together, on GitHub or GitLab.
+                  {" "}— plus a full terminal workstation, on GitHub or GitLab.
                 </p>
 
                 {/* CTA row */}

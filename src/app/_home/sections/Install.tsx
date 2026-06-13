@@ -39,7 +39,26 @@ export const InstallSection = () => {
               right column is the real terminal, so this reads as a clean,
               scannable command reference instead of competing chrome. */}
           <div>
-            <CopyCommand command="npx git-coco@latest init" />
+            <div className="flex flex-col gap-2.5">
+              <div>
+                <span className="mb-1 block font-mono text-xs text-muted-foreground/70">
+                  Homebrew — no prerequisites
+                </span>
+                <CopyCommand command="brew install gfargo/tap/coco" />
+              </div>
+              <div>
+                <span className="mb-1 block font-mono text-xs text-muted-foreground/70">
+                  curl
+                </span>
+                <CopyCommand command="curl -fsSL https://coco.griffen.codes/install.sh | sh" />
+              </div>
+              <div>
+                <span className="mb-1 block font-mono text-xs text-muted-foreground/70">
+                  npm — or try it with npx, no install
+                </span>
+                <CopyCommand command="npx git-coco@latest init" />
+              </div>
+            </div>
 
             <div className="mt-10">
               <h3 className="font-mono text-sm font-semibold text-foreground">
