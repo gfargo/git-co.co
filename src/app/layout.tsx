@@ -21,8 +21,8 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Coco — AI-Powered Git Toolbelt & Terminal Workstation",
-    template: "%s | Coco"
+    default: "git-coco — AI Git Commits, Review & Terminal Workstation (GitHub & GitLab)",
+    template: "%s | git-coco"
   },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
@@ -34,7 +34,7 @@ export const metadata = {
     locale: "en_US",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: "Coco — AI-Powered Git Toolbelt & Terminal Workstation",
+    title: "git-coco — AI Git Commits, Review & Terminal Workstation (GitHub & GitLab)",
     description: siteConfig.description,
     images: [
       {
@@ -47,7 +47,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Coco — AI-Powered Git Toolbelt & Terminal Workstation",
+    title: "git-coco — AI Git Commits, Review & Terminal Workstation (GitHub & GitLab)",
     description:
       "Smart commits, automated changelogs, code reviews, commit splitting — plus a keyboard-driven terminal workstation. Supports OpenAI, Anthropic, Gemini, Mistral, Azure OpenAI, AWS Bedrock, and Ollama.",
     images: [siteConfig.ogImage],

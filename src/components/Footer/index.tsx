@@ -12,6 +12,8 @@ import { siteConfig } from "@/config/site"
 const productLinks = [
   { href: "/", label: "Homepage" },
   { href: "/workstation", label: "Workstation" },
+  { href: "/gitlab", label: "For GitLab" },
+  { href: "/compare", label: "Compare" },
   { href: "/changelog", label: "Changelog" },
 ] as const
 
