@@ -31,6 +31,11 @@ interface MediaFrameProps {
  * terminal-tinted shimmer while the bytes download, then crossfades the
  * decoded media in. Works for both next/image stills and animated GIFs.
  *
+ * For `kind="image"` (stills), Next.js `<Image>` auto-serves WebP via
+ * the built-in image optimizer — no extra markup needed. For GIFs, we
+ * keep plain `<img>` (gifsicle-optimized GIFs beat animated WebP on
+ * terminal content).
+ *
  * The shimmer honours `prefers-reduced-motion` (it falls back to a
  * static dim block) and the skeleton is `aria-hidden` so it never reaches
  * assistive tech.
